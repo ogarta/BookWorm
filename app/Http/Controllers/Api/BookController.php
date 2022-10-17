@@ -76,4 +76,8 @@ class BookController extends Controller
     public function getTopRecommend(){
         return $this->bookRepository->getTopRecommend();
     }
+
+    public function getTopPopular(){
+        return $this->bookRepository->getTopPopular();
+    }
 }

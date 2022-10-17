@@ -49,4 +49,28 @@ class BookRepository{
         ->get();
         return $listTopRecommend;
     }
+
+    public function getTopPopular(){
+        $listTopPopular = Book::join('review', 'book.id', '=', 'review.book_id')
+        ->join('author', 'book.author_id', '=', 'author.id')
+        ->Leftjoin('discount','book.id', '=', 'discount.book_id')
+        ->select('book.id',
+            'book.book_title', 
+            'book.book_price',
+            'book.book_cover_photo',
+            'author.author_name', 
+            DB::raw('count(review.book_id) as count_review'),
+            DB::raw('case
+					when now() >= discount.discount_start_date 
+                    and (discount.discount_end_date is null
+                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
+					else book.book_price
+					end as final_price'))
+        ->groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price', 'author.author_name')
+        ->orderBy('count_review','DESC')
+        ->orderBy('final_price', 'ASC')
+        ->limit(env('LIMIT_TOP_POPULAR'))
+        ->get();
+        return $listTopPopular;
+    }
 }
