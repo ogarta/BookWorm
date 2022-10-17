@@ -72,4 +72,8 @@ class BookController extends Controller
     public function getTopDiscount(){
         return $this->bookRepository->getTopDisCount();
     }
+
+    public function getTopRecommend(){
+        return $this->bookRepository->getTopRecommend();
+    }
 }

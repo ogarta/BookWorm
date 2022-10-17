@@ -29,3 +29,4 @@ Route::prefix('auth')->group(function () {
 
 // Hom Page
 Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
+Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
