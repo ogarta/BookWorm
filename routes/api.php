@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,5 @@ Route::prefix('auth')->group(function () {
 		->name('login');
 });
 
-
+// Hom Page
+Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
