@@ -31,3 +31,5 @@ Route::prefix('auth')->group(function () {
 Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
 Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
 Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
+Route::apiResource('books', BookController::class);
+

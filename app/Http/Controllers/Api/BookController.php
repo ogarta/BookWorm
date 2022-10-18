@@ -21,7 +21,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return "get all";
     }
 
     /**
@@ -43,7 +43,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->bookRepository->detailBook($id);
     }
 
     /**
