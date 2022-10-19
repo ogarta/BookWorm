@@ -24,7 +24,10 @@ class ReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'id' => 'required|integer|min:0',
+            'sort' => 'string|nullable|in:asc,desc',
+            'rating' => 'integer|nullable|min:0|max:5',
+            'num_item' => 'integer|nullable|min:0|max:5',
         ];
     }
 }

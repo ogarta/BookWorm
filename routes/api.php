@@ -42,11 +42,14 @@ Route::prefix('shop')->group(function () {
 //Product Page
 Route::prefix('product')->group(function () {
 	Route::apiResource('books', BookController::class);
-	Route::prefix('review/{id}')->group(function () {
+	Route::prefix('{id}/review')->group(function () {
 		Route::get('/rating',[ReviewController::class,'getDetailRating']);
-		Route::get('/{sort_date?}{rating?}{num_item?}',[ReviewController::class,'getDetailReview']);
+		Route::get('/{sort?}{rating_star?}{num_item?}',[ReviewController::class,'getDetailReview']);
 	});
 });
+
+
+
 
 
 
