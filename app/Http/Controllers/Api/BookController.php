@@ -68,7 +68,7 @@ class BookController extends Controller
     {
         //
     }
-
+    
     public function getTopDiscount(){
         return $this->bookRepository->getTopDisCount();
     }

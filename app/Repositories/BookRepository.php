@@ -81,10 +81,8 @@ class BookRepository{
         ->Leftjoin('review', 'book.id', '=', 'review.book_id')
         ->Leftjoin('author', 'book.author_id', '=', 'author.id')
         ->Leftjoin('discount','book.id', '=', 'discount.book_id')
-        ->select('book.id',
-            'book.book_title', 
-            'book.book_price',
-            'book.book_cover_photo',
+        ->select(
+            'book.*',
             'category.category_name',
             'author.author_name', 
             DB::raw('avg(review.rating_start) as avg_rating_star'),

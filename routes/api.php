@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ShopController;
-
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,14 +30,23 @@ Route::prefix('auth')->group(function () {
 });
 
 // Hom Page
-//
 Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
 Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
 Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
-Route::apiResource('books', BookController::class);
 
 //Shop Page
 Route::prefix('shop')->group(function () {
 	Route::get('/{sort?}{order?}{category_id?}{author_id?}{num_rating?}{num_item?}', [ShopController::class, 'filterAndSortBookBy'])->name('filter_sort_book');
 });
+
+//Product Page
+Route::prefix('product')->group(function () {
+	Route::apiResource('books', BookController::class);
+	Route::prefix('review/{id}')->group(function () {
+		Route::get('/rating',[ReviewController::class,'getDetailRating']);
+		Route::get('/{sort_date?}{rating?}{num_item?}',[ReviewController::class,'getDetailReview']);
+	});
+});
+
+
 
