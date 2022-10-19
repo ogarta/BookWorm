@@ -45,6 +45,7 @@ Route::prefix('product')->group(function () {
 	Route::prefix('{id}/review')->group(function () {
 		Route::get('/rating',[ReviewController::class,'getDetailRating']);
 		Route::get('/{sort?}{rating_star?}{num_item?}',[ReviewController::class,'getDetailReview']);
+		Route::post('/create',[ReviewController::class,'createReview']);
 	});
 });
 

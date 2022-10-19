@@ -28,6 +28,20 @@ class ReviewRepository{
             return $query->where('review.rating_start', $request->rating_star);
         })
         ->orderBy('review.review_date',$request->sort ?? 'desc');
-        return $listReview->get();
+
+        return $listReview->paginate($request->num_item);
     } 
+
+    // create reivew book 
+    public function createReview($request){
+        $createReview = Review::create([
+            'book_id' => $request->id,
+            'review_title' => $request->title,
+            'review_details' => $request->details,
+            'rating_start' => $request->rating_start,
+            'review_date' => date('Y-m-d H:i:s'),
+        ]);
+        return $createReview;
+    }
+
 }

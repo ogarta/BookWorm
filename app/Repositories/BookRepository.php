@@ -85,6 +85,7 @@ class BookRepository{
             'book.*',
             'category.category_name',
             'author.author_name', 
+            DB::raw('avg(review.book_id) as count_review'),
             DB::raw('avg(review.rating_start) as avg_rating_star'),
             DB::raw('case
 					when now() >= discount.discount_start_date 
@@ -98,6 +99,7 @@ class BookRepository{
             'discount.discount_end_date',
             'discount.discount_price',
             'author.author_name',
+            'review.book_id',
             'category.category_name')
         ->get();
 
