@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\ProductController;
@@ -20,14 +20,10 @@ use App\Http\Controllers\Api\OrderController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // login User
 Route::prefix('auth')->group(function () {
 	Route::post('login', [AuthController::class, 'login'])
-		->name('login');
+	->name('login');
 });
 
 // Home Page
@@ -37,7 +33,8 @@ Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
 
 //Shop Page
 Route::prefix('shop')->group(function () {
-	Route::get('/{sort?}{order?}{category_id?}{author_id?}{num_rating?}{num_item?}', [ShopController::class, 'filterAndSortBookBy'])->name('filter_sort_book');
+	Route::get('/{sort?}{order?}{category_id?}{author_id?}{num_rating?}{num_item?}', [ShopController::class, 'filterAndSortBookBy'])
+	->name('filter_sort_book');
 });
 
 //Product Page
