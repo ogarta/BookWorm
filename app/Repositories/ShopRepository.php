@@ -37,7 +37,7 @@ class ShopRepository{
                     when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
                     or now() <= discount.discount_end_date) then book.book_price - discount.discount_price
-                    end as discount_price'),
+                    end as sub_price'),
             DB::raw('count(review.book_id) as count_review'));
                     
         // Fillter List Books
@@ -66,7 +66,7 @@ class ShopRepository{
         switch($order){
             // Sort by most discount price with descending mode and final price with ascending mode
             case 'on_sale':
-                $query = $query->orderBy('discount_price','DESC')->orderBy('final_price','ASC');
+                $query = $query->orderBy('sub_price','DESC')->orderBy('final_price','ASC');
                 break;
             // Sort by the most reviews with descending mode and final price with ascending mode
             case 'popularity':

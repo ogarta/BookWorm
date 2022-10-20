@@ -41,7 +41,7 @@ Route::prefix('shop')->group(function () {
 
 //Product Page
 Route::prefix('product')->group(function () {
-	Route::apiResource('books', BookController::class);
+	Route::apiResource('books', BookController::class)->only('show');
 	Route::prefix('{id}/review')->group(function () {
 		Route::get('/rating',[ReviewController::class,'getDetailRating']);
 		Route::get('/{sort?}{rating_star?}{num_item?}',[ReviewController::class,'getDetailReview']);
@@ -51,7 +51,7 @@ Route::prefix('product')->group(function () {
 
 // Cart Page
 Route::middleware('auth:sanctum')->prefix('cart')->group(function () {
-	Route::apiResource('order', OrderController::class)->only('index','store');
+	Route::apiResource('order', OrderController::class)->only('store');
 });
 
 

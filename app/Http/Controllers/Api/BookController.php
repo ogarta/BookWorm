@@ -42,8 +42,8 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return $this->bookRepository->detailBook($id);
+    {   
+        return $this->bookRepository->detailBook($id)->get();
     }
 
     /**
@@ -70,14 +70,17 @@ class BookController extends Controller
     }
     
     public function getTopDiscount(){   
-        return $this->bookRepository->getTopDiscount();
+        $listTopDiscount =  $this->bookRepository->getTopDiscount()->get();
+        return response()->json($listTopDiscount, 200);
     }
 
     public function getTopRecommend(){
-        return $this->bookRepository->getTopRecommend();
+        $listTopRecommend =  $this->bookRepository->getTopRecommend()->get();
+        return response()->json($listTopDiscount, 200);
     }
 
-    public function fillAndSortBookBy(){
-        return $this->bookRepository->getTopPopular();
+    public function getTopPopular(){
+        $listTopPopular =  $this->bookRepository->getTopPopular()->get();
+        return response()->json($listTopPopular, 200);
     }
 }
