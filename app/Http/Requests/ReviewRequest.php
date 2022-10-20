@@ -27,7 +27,7 @@ class ReviewRequest extends FormRequest
             'id' => 'required|integer|min:0',
             'sort' => 'string|nullable|in:asc,desc',
             'rating' => 'integer|nullable|min:0|max:5',
-            'num_item' => 'integer|nullable|min:0|max:5',
+            'num_item' => 'integer|nullable|in:5,10,15,20',
         ];
     }
 }
