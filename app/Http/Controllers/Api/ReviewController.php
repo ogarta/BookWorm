@@ -16,12 +16,12 @@ class ReviewController extends Controller
         $this->reviewRepository=$reviewRepository;
     }
     
-    public function getDetailRating(Request $request){
-        return $this->reviewRepository->validateIdBook($request->id);
+    public function getDetailRating(IdBookRequest $request){
+        return $this->reviewRepository->getDetailRating($request->id);
     }
 
-    public function getDetailReview(Request $request){
-        return $this->reviewRepository->getDetailReview($request);
+    public function getDetailReview(IdBookRequest $request){
+        return $this->reviewRepository->getDetailReview($request->id);
     }
 
     public function createReview(CreateReviewRequest $request){

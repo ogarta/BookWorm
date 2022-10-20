@@ -5,17 +5,8 @@ use DB;
 use Validator;
 
 class ReviewRepository{
-    public function validateIdBook($id){
-        $input = [
-            'id' => $id,
-        ];
-        
-        $validator = Validator::make($input,[
-            'email' => 'email address',
-        ]);
-        
-        return $validator;
-    }
+
+    // get detail a number of rating_start each star 
     public function getDetailRating($bookId){
         $listRatingStart = Review::Where('review.book_id',$bookId)
         ->select(
@@ -27,8 +18,8 @@ class ReviewRepository{
     }
     
     // get list review by book_id ,filter by rating_star and sort by review date
-    public function getDetailReview($request){
-        $listReview = Review::Where('review.book_id',$request->id)
+    public function getDetailReview($bookId){
+        $listReview = Review::Where('review.book_id',$bookId)
         ->select(
             'review.rating_start',
             'review.review_title',
