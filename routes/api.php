@@ -27,9 +27,11 @@ Route::prefix('auth')->group(function () {
 });
 
 // Home Page
-Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
-Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
-Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
+Route::prefix('home')->group(function () {
+	Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
+	Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
+	Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
+});
 
 //Shop Page
 Route::prefix('shop')->group(function () {
