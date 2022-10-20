@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\BookRepository;
+use App\Http\Requests\OrderRequest;
+use App\Repositories\OrderRepository;
 
-class BookController extends Controller
+class OrderController extends Controller
 {
-    private BookRepository $bookRepository;
-
-    public function __construct(BookRepository $bookRepository){
-        $this -> bookRepository = $bookRepository;
+    private OrderRepository $orderRepository;
+    function __construct(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return "get all";
+        //
     }
 
     /**
@@ -30,9 +30,9 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        //
+        return $this->orderRepository->createOrder($request);
     }
 
     /**
@@ -43,7 +43,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        return $this->bookRepository->detailBook($id);
+        //
     }
 
     /**
@@ -67,17 +67,5 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function getTopDiscount(){
-        return $this->bookRepository->getTopDiscount();
-    }
-
-    public function getTopRecommend(){
-        return $this->bookRepository->getTopRecommend();
-    }
-
-    public function fillAndSortBookBy(){
-        return $this->bookRepository->getTopPopular();
     }
 }

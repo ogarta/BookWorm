@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,7 +30,7 @@ Route::prefix('auth')->group(function () {
 		->name('login');
 });
 
-// Hom Page
+// Home Page
 Route::get('/books/top-discount',[BookController::class,'getTopDiscount']);
 Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
 Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
@@ -48,6 +49,12 @@ Route::prefix('product')->group(function () {
 		Route::post('/create',[ReviewController::class,'createReview']);
 	});
 });
+
+// Cart Page
+Route::middleware('auth:sanctum')->prefix('cart')->group(function () {
+	Route::apiResource('order', OrderController::class)->only('index','store');
+});
+
 
 
 

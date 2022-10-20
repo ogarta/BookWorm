@@ -17,7 +17,8 @@ class AuthRepository{
             return response(
                 [
                     'message' => 'Login successful',
-                    'user' => $user
+                    'user' => $user,
+                    'token' => $token
                 ],
                 200
             );

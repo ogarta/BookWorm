@@ -6,7 +6,7 @@ use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 
 class BookRepository{
-    public function getTopDisCount(){
+    public function getTopDiscount(){
         $listTopDisCount = Book::join('author', 'book.author_id', '=', 'author.id')
         ->Leftjoin('discount','book.id', '=', 'discount.book_id')
         ->select('book.id',
@@ -85,8 +85,7 @@ class BookRepository{
             'book.*',
             'category.category_name',
             'author.author_name', 
-            DB::raw('avg(review.book_id) as count_review'),
-            DB::raw('avg(review.rating_start) as avg_rating_star'),
+            DB::raw('count(review.book_id) as count_review'),
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
@@ -104,5 +103,18 @@ class BookRepository{
         ->get();
 
         return $detailBook;
+    }
+
+    public static function getFinalBookPrice($bookId){
+        $finalBookPrice = Book::leftJoin('discount','discount.book_id', '=', 'book.id')
+        ->selectRaw('case
+                    when now() >= discount.discount_start_date 
+                    and (discount.discount_end_date is null
+                    or now() <=discount.discount_end_date) then discount.discount_price
+                    else book.book_price
+                    end as final_price')
+        ->where('book.id', '=', $bookId)
+        ->first()->final_price;
+        return $finalBookPrice;
     }
 }
