@@ -17,7 +17,7 @@ class BookRepository{
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then discount.discount_price
+                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
 					else 0
 					end as discount'))
         ->groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price', 'author.author_name')
@@ -25,7 +25,7 @@ class BookRepository{
         ->limit(env('LIMIT_TOP_DISCOUNT'))
         ->get();
         return $listTopDisCount;
-
+    
     }
 
     public function getTopRecommend(){
@@ -41,7 +41,7 @@ class BookRepository{
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
+                    or now() <=discount.discount_end_date) then discount.discount_price
 					else book.book_price
 					end as final_price'))
         ->groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price', 'author.author_name')
@@ -65,7 +65,7 @@ class BookRepository{
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
+                    or now() <=discount.discount_end_date) then discount.discount_price
 					else book.book_price
 					end as final_price'))
         ->groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price', 'author.author_name')
@@ -89,7 +89,7 @@ class BookRepository{
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
+                    or now() <=discount.discount_end_date) then discount.discount_price
 					else book.book_price
 					end as final_price'))
         ->where('book.id','=','2')
@@ -115,6 +115,17 @@ class BookRepository{
                     end as final_price')
         ->where('book.id', '=', $bookId)
         ->first()->final_price;
+        return $finalBookPrice;
+    }
+
+    public function queryFinalPrice($querry){
+        $finalBookPrice = $querry->leftJoin('discount','discount.book_id', '=', 'book.id')
+        ->selectRaw('case
+                    when now() >= discount.discount_start_date 
+                    and (discount.discount_end_date is null
+                    or now() <=discount.discount_end_date) then discount.discount_price
+                    else book.book_price
+                    end as final_price');
         return $finalBookPrice;
     }
 }

@@ -2,10 +2,22 @@
 namespace App\Repositories;
 use App\Models\Review;
 use DB;
+use Validator;
 
 class ReviewRepository{
-    public function getDetailRating($book_id){
-        $listRatingStart = Review::Where('review.book_id',$book_id)
+    public function validateIdBook($id){
+        $input = [
+            'id' => $id,
+        ];
+        
+        $validator = Validator::make($input,[
+            'email' => 'email address',
+        ]);
+        
+        return $validator;
+    }
+    public function getDetailRating($bookId){
+        $listRatingStart = Review::Where('review.book_id',$bookId)
         ->select(
             'review.rating_start', 
             DB::raw('count(review.rating_start) as count_rating_star'),

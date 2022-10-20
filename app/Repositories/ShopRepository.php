@@ -30,13 +30,13 @@ class ShopRepository{
             DB::raw('case
 					when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
+                    or now() <=discount.discount_end_date) then discount.discount_price
 					else book.book_price
 					end as final_price'),
             DB::raw('case
                     when now() >= discount.discount_start_date 
                     and (discount.discount_end_date is null
-                    or now() <= discount.discount_end_date) then book.book_price
+                    or now() <= discount.discount_end_date) then book.book_price - discount.discount_price
                     end as discount_price'),
             DB::raw('count(review.book_id) as count_review'));
                     
