@@ -38,29 +38,27 @@ class ShopRepository{
                     and (discount.discount_end_date is null
                     or now() <= discount.discount_end_date) then book.book_price - discount.discount_price
                     end as sub_price'),
-            DB::raw('count(review.book_id) as count_review'));
-                    
-        // Fillter List Books
+            DB::raw('count(review.book_id) as count_review'))
+        
+            // Filter by Category use category id
+        ->when($category_id !== null, function ($query) use ($category_id) {
+            return $query->where('book.category_id', $category_id);
+        })
+
         // Filter by Author use author id
-        if($author_id){
-            $query = $query->where('book.author_id','=',$author_id);
-        }
-
-        // Filter by Category use category id
-        if($category_id){
-            $query = $query->where('book.category_id','=',$category_id);
-        }
-
-        $query = $query->groupBy('book.id', 
+        ->when($author_id !== null, function ($query) use ($author_id) {
+            return $query->where('book.author_id', $author_id);
+        })
+        ->groupBy('book.id', 
                 'discount.discount_start_date', 
                 'discount.discount_end_date', 
                 'discount.discount_price', 
-                'author.author_name');
+                'author.author_name')
 
         // Filter by Rating Review use num rating
-        if($num_rating){
-            $query = $query->havingRaw('avg(review.rating_start) >= ? ',[$num_rating]);
-        }
+        ->when($num_rating !== null, function ($query) use ($num_rating) {
+            return $query->havingRaw('avg(review.rating_start) >= ? ', [$num_rating]);
+        });
 
         // Sort List Books
         switch($order){
