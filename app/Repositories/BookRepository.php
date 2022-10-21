@@ -65,7 +65,6 @@ class BookRepository{
             'discount.discount_price',
             'author.author_name',
             'review.book_id',
-            'review.rating_start',
             'category.category_name');
         return $detailBook;
     }

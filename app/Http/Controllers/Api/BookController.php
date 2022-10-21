@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\BookRepository;
+use App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {
@@ -43,7 +44,8 @@ class BookController extends Controller
      */
     public function show($id)
     {   
-        return $this->bookRepository->detailBook($id)->get();
+        $detailBook = $this->bookRepository->detailBook($id)->get();
+        return response()->json(new BookCollection($detailBook),200);
     }
 
     /**
