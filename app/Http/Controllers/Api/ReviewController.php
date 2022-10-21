@@ -19,12 +19,16 @@ class ReviewController extends Controller
     
     public function getDetailRating(IdBookRequest $request){
         $listDetailRating =  $this->reviewRepository->getDetailRating($request->id);
-        return response()->json(new ReviewCollection($listDetailRating),200);
+        return $listDetailRating->isNotEmpty()? 
+        response()->json(new ReviewCollection($listDetailRating), 200) : 
+        response()->json(['message' => 'Not Rating For Book'], 404);
     }
 
     public function getDetailReview(ReviewRequest $request){
         $listDetailReview =  $this->reviewRepository->getDetailReview($request);
-        return response()->json(new ReviewCollection($listDetailReview),200);
+        return $listDetailReview->count() !== 0 ? 
+        response()->json(new ReviewCollection($listDetailReview), 200) : 
+        response()->json(['message' => 'Not found'], 404);
     }
 
     public function createReview(CreateReviewRequest $request){
