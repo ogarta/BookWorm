@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api\Book;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\AuthorRepository;
-use App\Http\Resources\Book\AuthorResource;
+use App\Repositories\CategoryRepository;
+use App\Http\Resources\Book\CategoryResource;
 
-class AuthorController extends Controller
+class CategoryController extends Controller
 {
-    private AuthorRepository $authorRepository;
+    private CategoryRepository $categoryRepository;
 
-    public function __construct(AuthorRepository $authorRepository){
-        $this -> authorRepository = $authorRepository;
+    public function __construct(CategoryRepository $categoryRepository){
+        $this -> categoryRepository = $categoryRepository;
     }
     /**
      * Display a listing of the resource.
@@ -21,9 +21,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $listAuthor = $this->authorRepository->getAuthor();
-        return $listAuthor !== null ? 
-            response()->json(AuthorResource::collection($listAuthor),200): 
+        $listCategory = $this->categoryRepository->getCategory();
+        return $listCategory !== null ? 
+            response()->json(CategoryResource::collection($listCategory),200): 
             response()->json(['message' => 'Not Found'], 404);
     }
 
