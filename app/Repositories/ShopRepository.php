@@ -6,8 +6,13 @@ use App\Http\Requests\FillterAndSortRequest;
 
 class ShopRepository{
 
-    // Handle paramester null before filter and sort
-    public function handleFilterAndSort(FillterAndSortRequest $request){
+    /**
+     * Handle paramester filter and sort book
+     *
+     * @param  \Illuminate\Http\FillterAndSortRequest  $request
+     * @return App\Repositories\filterAndSortBookBy array book filter and sort
+     */
+    public function handleFilterAndSort($request){
         $sort = $request->sort !== null?$request->num_item:'ASC';
         $order = $request->order;
         $category_id = $request->category_id;
@@ -16,6 +21,7 @@ class ShopRepository{
         $num_item = $request->num_item !== null?$request->num_item:env('DEFAULT_ITEM_PAGE');
         return $this-> filterAndSortBookBy($sort,$order,$category_id,$num_rating,$author_id,$num_item);
     }
+
 
     public function filterAndSortBookBy($sort,$order,$category_id,$num_rating,$author_id,$num_item){
         $query = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
