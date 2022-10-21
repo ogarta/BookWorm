@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\ShopRepository;
 use App\Http\Requests\FillterAndSortRequest;
 use App\Http\Resources\Shop\FilterSortCollection;
+use App\Http\Resources\Book\AuthorResource;
 
 class ShopController extends Controller
 {
@@ -17,7 +18,9 @@ class ShopController extends Controller
     }
 
     public function filterAndSortBookBy(FillterAndSortRequest $request){
+        // return $this->shopRepository->handleFilterAndSort($request)->lastPage();
         $listBook = $this->shopRepository->handleFilterAndSort($request);
-        return response()->json(new FilterSortCollection($listBook),200);
+        return response()->json($listBook,200);
     }
+
 }

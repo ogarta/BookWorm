@@ -81,6 +81,7 @@ class ShopRepository{
                 $query = $query->orderBy('final_price',$sort);
                 break;
         }
-        return $query->paginate($num_item);
+        
+        return [$query->paginate($num_item)];
     }
 }

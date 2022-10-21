@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\Book\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,6 +36,7 @@ Route::prefix('home')->group(function () {
 
 //Shop Page
 Route::prefix('shop')->group(function () {
+	Route::apiResource('author', AuthorController::class)->only('index');
 	Route::get('/{sort?}{order?}{category_id?}{author_id?}{num_rating?}{num_item?}', [ShopController::class, 'filterAndSortBookBy'])
 	->name('filter_sort_book');
 });
