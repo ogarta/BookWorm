@@ -24,6 +24,7 @@ class CreateReviewRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'required|integer|exists:book,id',
             'title' => 'required|string|max:255',
             'details' => 'required|string|max:255',
             'rating_start' => 'required|integer|min:0|max:5',
