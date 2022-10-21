@@ -9,8 +9,8 @@ use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\Book\AuthorController;
-use App\Http\Controllers\Api\Book\CategoryController;
+use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
