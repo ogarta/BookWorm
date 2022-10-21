@@ -8,7 +8,7 @@ use App\Http\Requests\IdBookRequest;
 use App\Http\Requests\ReviewRequest;
 use App\Http\Requests\CreateReviewRequest;
 use App\Repositories\ReviewRepository;
-use App\Http\Resources\ReviewCollection;
+use App\Http\Resources\Review\ReviewCollection;
 
 class ReviewController extends Controller
 {
