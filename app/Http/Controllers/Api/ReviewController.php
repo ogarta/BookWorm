@@ -8,6 +8,7 @@ use App\Http\Requests\IdBookRequest;
 use App\Http\Requests\ReviewRequest;
 use App\Http\Requests\CreateReviewRequest;
 use App\Repositories\ReviewRepository;
+use App\Http\Resources\ReviewCollection;
 
 class ReviewController extends Controller
 {
@@ -17,11 +18,13 @@ class ReviewController extends Controller
     }
     
     public function getDetailRating(IdBookRequest $request){
-        return $this->reviewRepository->getDetailRating($request->id);
+        $listDetailRating =  $this->reviewRepository->getDetailRating($request->id);
+        return response()->json(new ReviewCollection($listDetailRating),200);
     }
 
-    public function getDetailReview(IdBookRequest $request){
-        return $this->reviewRepository->getDetailReview($request->id);
+    public function getDetailReview(ReviewRequest $request){
+        $listDetailReview =  $this->reviewRepository->getDetailReview($request);
+        return response()->json(new ReviewCollection($listDetailReview),200);
     }
 
     public function createReview(CreateReviewRequest $request){

@@ -42,9 +42,9 @@ Route::prefix('shop')->group(function () {
 //Product Page
 Route::prefix('product')->group(function () {
 	Route::apiResource('books', BookController::class)->only('show');
-	Route::prefix('{id}/review')->group(function () {
-		Route::get('/rating',[ReviewController::class,'getDetailRating']);
-		Route::get('/{sort?}{rating_star?}{num_item?}',[ReviewController::class,'getDetailReview']);
+	Route::prefix('/review')->group(function () {
+		Route::get('/rating/{id?}',[ReviewController::class,'getDetailRating']);
+		Route::get('/{id?}{sort?}{rating_star?}{num_item?}',[ReviewController::class,'getDetailReview']);
 		Route::post('/create',[ReviewController::class,'createReview']);
 	});
 });

@@ -6,7 +6,12 @@ use Validator;
 
 class ReviewRepository{
 
-    // get detail a number of rating_start each star 
+    /**
+     * Get detail a number of rating_start each star.
+     *
+     * @param  int $id of book
+     * @return array of detail rating
+     */
     public function getDetailRating($bookId){
         $listRatingStart = Review::Where('review.book_id',$bookId)
         ->select(
@@ -16,10 +21,15 @@ class ReviewRepository{
         ->groupBy('review.rating_start');
         return $listRatingStart->get();
     }
-    
-    // get list review by book_id ,filter by rating_star and sort by review date
-    public function getDetailReview($bookId){
-        $listReview = Review::Where('review.book_id',$bookId)
+
+    /**
+     * Get list review by book_id ,filter by rating_star and sort by review date.
+     *
+     * @param  \Illuminate\Http\ReviewRequest  $request
+     * @return array Reviews sorted by ascending descending and filtered by number of stars. 
+     */
+    public function getDetailReview($request){
+        $listReview = Review::Where('review.book_id',$request->id)
         ->select(
             'review.rating_start',
             'review.review_title',
@@ -28,14 +38,19 @@ class ReviewRepository{
             'review.review_date'
         )
         ->when($request->rating_star !== null , function ($query) use ($request) {
-            return $query->where('review.rating_start', $request->rating_star);
+            return $query->where('review.rating_start', $request->rating);
         })
         ->orderBy('review.review_date',$request->sort ?? 'desc');
 
         return $listReview->paginate($request->num_item);
     } 
 
-    // create reivew book 
+    /**
+     * Add review of book.
+     *
+     * @param  \Illuminate\Http\CreateReviewRequest  $request
+     * @return array Details of the newly created book review. 
+     */
     public function createReview($request){
         $createReview = Review::create([
             'book_id' => $request->id,
