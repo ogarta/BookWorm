@@ -75,16 +75,22 @@ class BookController extends Controller
     
     public function getTopDiscount(){   
         $listTopDiscount =  $this->bookRepository->getTopDiscount()->get();
-        return response()->json(new BookCollection($listTopDiscount), 200);
+        return $listTopDiscount->isNotEmpty()?
+        response()->json(new BookCollection($listTopDiscount), 200) :
+        response()->json(['message' => 'Not Found Books Top Discount'], 404);
     }
 
     public function getTopRecommend(){
         $listTopRecommend =  $this->bookRepository->getTopRecommend()->get();
-        return response()->json(new BookCollection($listTopRecommend), 200);
+        return $listTopRecommend->isNotEmpty()?
+        response()->json(new BookCollection($listTopRecommend), 200) :
+        response()->json(['message' => 'Not Found Books Top Recommend'], 404);
     }
 
     public function getTopPopular(){
         $listTopPopular =  $this->bookRepository->getTopPopular()->get();
-        return response()->json($listTopPopular, 200);
+        return $listTopPopular->isNotEmpty()?
+        response()->json(new BookCollection($listTopPopular), 200) :
+        response()->json(['message' => 'Not Found Books Top Popular'], 404);
     }
 }
