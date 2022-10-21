@@ -1,11 +1,13 @@
 <?php
 namespace App\Repositories;
+
 use App\Models\Author;
-use DB;
 
-class AuthorRepository{
+class AuthorRepository
+{
 
-    public function getAuthor(){
+    public function getAuthor()
+    {
         $listAuthor = Author::all();
         return $listAuthor;
     }

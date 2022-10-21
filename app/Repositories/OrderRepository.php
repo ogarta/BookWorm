@@ -1,14 +1,15 @@
 <?php
 namespace App\Repositories;
-use Auth;
-use DB;
-use App\Models\Order;
-use App\Models\ItemOrder;
-use App\Models\Book;
-use App\Repositories\BookRepository;
 
-class OrderRepository{
-    public function createOrder($request){
+use App\Models\ItemOrder;
+use App\Models\Order;
+use App\Repositories\BookRepository;
+use DB;
+
+class OrderRepository
+{
+    public function createOrder($request)
+    {
         $userId = $request->user()->id;
         DB::beginTransaction();
         try {
@@ -27,7 +28,7 @@ class OrderRepository{
             }
             DB::commit();
             return $order;
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
             DB::rollback();
             return $e;
         }

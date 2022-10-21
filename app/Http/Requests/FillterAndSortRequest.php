@@ -24,8 +24,7 @@ class FillterAndSortRequest extends FormRequest
     public function rules()
     {
         return [
-            'sort' => 'string|nullable|in:asc,desc',
-            'order' => 'string|nullable|in:on_sale,popularity',
+            'sort' => 'string|nullable',
             'category_id' => 'string|nullable',
             'author_id' => 'string|nullable',
             'num_rating' => 'integer|min:0|max:5|nullable',

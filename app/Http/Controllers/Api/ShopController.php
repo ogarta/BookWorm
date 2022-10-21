@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Shop;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +18,6 @@ class ShopController extends Controller
     }
 
     public function filterAndSortBookBy(FillterAndSortRequest $request){
-        // return $this->shopRepository->handleFilterAndSort($request)->lastPage();
         $listBook = $this->shopRepository->handleFilterAndSort($request);
         return response()->json($listBook,200);
     }
