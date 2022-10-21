@@ -2,11 +2,14 @@
 namespace App\Repositories;
 use App\Models\Book;
 use DB;
-use App\Http\Resources\BookCollection;
-use App\Http\Resources\BookResource;
 
 class BookRepository{
 
+    /**
+     * Get list top discount.
+     *
+     * @return array top discount
+     */
     public function getTopDiscount(){
         $listTopDisCount = $this->detailBook()
         ->orderBy('sub_price', 'DESC')
@@ -14,6 +17,11 @@ class BookRepository{
         return $listTopDisCount;
     }
 
+    /**
+     * Get list top Recommend: most rating star.
+     *
+     * @return array top discount
+     */
     public function getTopRecommend(){
         $listTopRecommend = $this->detailBook()
         ->orderBy('avg_rating_star','DESC')
@@ -22,6 +30,11 @@ class BookRepository{
         return $listTopRecommend;
     }
 
+    /**
+     * Get list top Popular: most reviews - total number review of a book and lowest final price.
+     *
+     * @return array top discount
+     */
     public function getTopPopular(){
         $listTopPopular = $this->detailBook()
         ->orderBy('count_review','DESC')
@@ -30,6 +43,12 @@ class BookRepository{
         return $listTopPopular;
     }
 
+    /**
+     * Get Detail Book.
+     * 
+     * @param int $id of book
+     * @return query detail book
+     */
     public function detailBook($id=null){
         $detailBook = Book::Leftjoin('category', 'book.category_id', '=', 'category.id')
         ->Leftjoin('review', 'book.id', '=', 'review.book_id')

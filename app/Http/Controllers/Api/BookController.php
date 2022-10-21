@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\BookRepository;
-use App\Http\Resources\BookCollection;
+use App\Http\Resources\Book\BookCollection;
 
 class BookController extends Controller
 {
@@ -73,12 +73,12 @@ class BookController extends Controller
     
     public function getTopDiscount(){   
         $listTopDiscount =  $this->bookRepository->getTopDiscount()->get();
-        return response()->json($listTopDiscount, 200);
+        return response()->json(new BookCollection($listTopDiscount), 200);
     }
 
     public function getTopRecommend(){
         $listTopRecommend =  $this->bookRepository->getTopRecommend()->get();
-        return response()->json($listTopDiscount, 200);
+        return response()->json(new BookCollection($listTopRecommend), 200);
     }
 
     public function getTopPopular(){
