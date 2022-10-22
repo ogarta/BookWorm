@@ -4,12 +4,6 @@ namespace App\Http\Resources\Book;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\Book\BookResource;
-use App\Http\Resources\Book\AuthorResource;
-use App\Http\Resources\Book\CategoryResource;
-use App\Http\Resources\Book\ReviewResource;
-use App\Http\Resources\Book\DiscountResource;
-
 class BookResource extends JsonResource
 {
     /**
