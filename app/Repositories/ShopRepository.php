@@ -22,26 +22,15 @@ class ShopRepository
         $author_id = $request->author_id;
         $num_rating = $request->num_rating;
         $num_item = $request->num_item !== null ? $request->num_item : env('DEFAULT_ITEM_PAGE');
-        return $this->filterAndSortBookBy($sort, $order, $category_id, $num_rating, $author_id, $num_item);
+        return $this->filterAndSortBookBy($sort, $category_id, $num_rating, $author_id, $num_item);
     }
 
-    public function filterAndSortBookBy($sort, $order, $category_id, $num_rating, $author_id, $num_item)
+    public function filterAndSortBookBy($sort, $category_id, $num_rating, $author_id, $num_item)
     {
         $query = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
             ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
             ->select('book.*',
                 DB::raw('avg(review.rating_start) as avg_rating_star'),
-                DB::raw('case
-					when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then discount.discount_price
-					else book.book_price
-					end as final_price'),
-                DB::raw('case
-                    when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <= discount.discount_end_date) then book.book_price - discount.discount_price
-                    end as sub_price'),
                 DB::raw('count(review.book_id) as count_review'))
 
         // Filter by Category use category id
@@ -84,6 +73,9 @@ class ShopRepository
             default:
                 break;
         }
+
+        $query = Book::getFinalPrice($query);
+        $query = Book::getSubPrice($query);
 
         return $query->paginate($num_item);
     }

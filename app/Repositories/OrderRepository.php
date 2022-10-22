@@ -3,7 +3,7 @@ namespace App\Repositories;
 
 use App\Models\ItemOrder;
 use App\Models\Order;
-use App\Repositories\BookRepository;
+use App\Models\Book;
 use DB;
 
 class OrderRepository
@@ -23,7 +23,7 @@ class OrderRepository
                     'order_id' => $order->id,
                     'book_id' => $item['book_id'],
                     'quantity' => $item['quantity'],
-                    'price' => BookRepository::getFinalBookPrice($item['book_id']),
+                    'price' => Book::getFinalBookPrice($item['book_id']),
                 ]);
             }
             DB::commit();

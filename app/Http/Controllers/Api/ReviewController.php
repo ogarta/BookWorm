@@ -20,7 +20,7 @@ class ReviewController extends Controller
     public function getDetailRating(IdBookRequest $request){
         $listDetailRating =  $this->reviewRepository->getDetailRating($request->id);
         return $listDetailRating->isNotEmpty()? 
-        response()->json(new ReviewCollection($listDetailRating), 200) : 
+        response()->json(["data" =>$listDetailRating], 200) : 
         response()->json(['message' => 'Not Rating For Book'], 404);
     }
 

@@ -62,19 +62,7 @@ class BookRepository
             ->select(
                 'book.*',
                 DB::raw('avg(review.rating_start) as avg_rating_star'),
-                DB::raw('count(review.book_id) as count_review'),
-                DB::raw('case
-					when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then discount.discount_price
-					else book.book_price
-					end as final_price'),
-                DB::raw('case
-                    when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then book.book_price - discount.discount_price
-                    else 0
-                    end as sub_price'))
+                DB::raw('count(review.book_id) as count_review'))
             ->when($id !== null, function ($query) use ($id) {
                 return $query->where('book.id', $id);
             })
@@ -83,21 +71,9 @@ class BookRepository
                 'discount.discount_end_date',
                 'discount.discount_price',
                 'review.book_id',);
+
+        $detailBook = Book::getFinalPrice($detailBook);
+        $detailBook = Book::getSubPrice($detailBook);
         return $detailBook;
     }
-
-    public static function getFinalBookPrice($bookId)
-    {
-        $finalBookPrice = Book::leftJoin('discount', 'discount.book_id', '=', 'book.id')
-            ->selectRaw('case
-                    when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then discount.discount_price
-                    else book.book_price
-                    end as final_price')
-            ->where('book.id', '=', $bookId)
-            ->first()->final_price;
-        return $finalBookPrice;
-    }
-
 }
