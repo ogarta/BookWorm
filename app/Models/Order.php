@@ -18,4 +18,9 @@ class Order extends Model
         'order_amount',
         'order_date'
     ];
+
+    public function itemOrder()
+    {
+        return $this->hasMany(ItemOrder::class);
+    }
 }

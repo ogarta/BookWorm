@@ -16,4 +16,6 @@ class Discount extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    
 }

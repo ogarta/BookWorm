@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Book;
 use DB;
+use App\Http\Resources\Book\BookResource;
 
 class BookRepository
 {
@@ -15,7 +16,7 @@ class BookRepository
     public function getTopDiscount()
     {
         $listTopDisCount = $this->detailBook()
-            ->orderBy('sub_price', 'DESC')
+            ->orderBy('discount_price','DESC')
             ->limit(env('LIMIT_TOP_DISCOUNT'));
         return $listTopDisCount;
     }
@@ -28,7 +29,7 @@ class BookRepository
     public function getTopRecommend()
     {
         $listTopRecommend = $this->detailBook()
-            ->orderBy('avg_rating_star', 'DESC')
+            ->orderBy('avg_rating_star')
             ->orderBy('final_price', 'ASC')
             ->limit(env('LIMIT_TOP_RECOMMEND'));
         return $listTopRecommend;
@@ -56,17 +57,10 @@ class BookRepository
      */
     public function detailBook($id = null)
     {
-        $detailBook = Book::Leftjoin('category', 'book.category_id', '=', 'category.id')
-            ->Leftjoin('review', 'book.id', '=', 'review.book_id')
-            ->Leftjoin('author', 'book.author_id', '=', 'author.id')
+        $detailBook = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
             ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
             ->select(
-                'book.id',
-                'book.book_title',
-                'book.book_price',
-                'book.book_cover_photo',
-                'category.category_name',
-                'author.author_name',
+                'book.*',
                 DB::raw('avg(review.rating_start) as avg_rating_star'),
                 DB::raw('count(review.book_id) as count_review'),
                 DB::raw('case
@@ -88,9 +82,7 @@ class BookRepository
                 'discount.discount_start_date',
                 'discount.discount_end_date',
                 'discount.discount_price',
-                'author.author_name',
-                'review.book_id',
-                'category.category_name');
+                'review.book_id',);
         return $detailBook;
     }
 
@@ -107,4 +99,5 @@ class BookRepository
             ->first()->final_price;
         return $finalBookPrice;
     }
+
 }

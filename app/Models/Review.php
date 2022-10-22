@@ -19,4 +19,9 @@ class Review extends Model
         'rating_start',
         'review_date',
     ];
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

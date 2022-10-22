@@ -19,4 +19,14 @@ class ItemOrder extends Model
         'quantity',
         'price'
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

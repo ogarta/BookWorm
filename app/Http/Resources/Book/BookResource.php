@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Resources\Book;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+use App\Http\Resources\Book\BookResource;
+use App\Http\Resources\Book\AuthorResource;
+use App\Http\Resources\Book\CategoryResource;
+use App\Http\Resources\Book\ReviewResource;
+use App\Http\Resources\Book\DiscountResource;
+
+class BookResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'book_title' => $this->book_title,
+            'book_price' => $this->book_price,
+            'book_cover_photo' => $this->book_cover_photo,
+            'author_name' => $this->author->author_name,
+            'category_name' => $this->category->category_name,
+            'count_review' => $this->count_review,
+            'avg_rating_star' => $this->avg_rating_star,
+            'final_price' => $this->final_price,
+            'sub_price' => $this->sub_price,
+        ];
+    }
+}

@@ -45,8 +45,9 @@ class BookController extends Controller
     public function show($id)
     {   
         $detailBook = $this->bookRepository->detailBook($id)->get();
+        return new BookCollection($detailBook);
         return $detailBook->isNotEmpty()? 
-        response()->json(new BookCollection($detailBook), 200) : 
+        response()->json(BookCollection::collection($detailBook), 200) : 
         response()->json(['message' => 'Not Found Book'], 404);
     }
 

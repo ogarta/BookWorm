@@ -4,6 +4,8 @@ namespace App\Http\Resources\Book;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+use App\Http\Resources\Book\BookResource;
+
 class BookCollection extends ResourceCollection
 {
     /**
