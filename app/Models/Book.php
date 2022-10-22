@@ -59,7 +59,7 @@ class Book extends Model
         }
     }
 
-    public static function getSubPrice($query){
+    public static function selectSubPrice($query){
         return $query->
             selectRaw('case
                 when now() >= discount.discount_start_date

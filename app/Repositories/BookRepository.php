@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Book;
+use App\Models\Review;
 use DB;
 use App\Http\Resources\Book\BookResource;
 
@@ -60,20 +61,22 @@ class BookRepository
         $detailBook = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
             ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
             ->select(
-                'book.*',
-                DB::raw('avg(review.rating_start) as avg_rating_star'),
-                DB::raw('count(review.book_id) as count_review'))
+                'book.*')
             ->when($id !== null, function ($query) use ($id) {
                 return $query->where('book.id', $id);
             })
             ->groupBy('book.id',
                 'discount.discount_start_date',
                 'discount.discount_end_date',
-                'discount.discount_price',
-                'review.book_id',);
+                'discount.discount_price',);
+        
+        // Handle Select specific field
 
         $detailBook = Book::getFinalPrice($detailBook);
-        $detailBook = Book::getSubPrice($detailBook);
+        $detailBook = Book::selectSubPrice($detailBook);
+        $detailBook = Review::selectAvgRatingStar($detailBook);
+        $detailBook = Review::selectCountReview($detailBook);
+        
         return $detailBook;
     }
 }

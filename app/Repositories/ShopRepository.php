@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\FillterAndSortRequest;
 use App\Models\Book;
+use App\Models\Review;
 use DB;
 
 class ShopRepository
@@ -29,9 +30,7 @@ class ShopRepository
     {
         $query = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
             ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
-            ->select('book.*',
-                DB::raw('avg(review.rating_start) as avg_rating_star'),
-                DB::raw('count(review.book_id) as count_review'))
+            ->select('book.*',)
 
         // Filter by Category use category id
             ->when($category_id !== null, function ($query) use ($category_id) {
@@ -74,8 +73,11 @@ class ShopRepository
                 break;
         }
 
+        // Handle Select specific field
         $query = Book::getFinalPrice($query);
-        $query = Book::getSubPrice($query);
+        $query = Book::selectSubPrice($query);
+        $query = Review::selectAvgRatingStar($query);
+        $query = Review::selectCountReview($query);
 
         return $query->paginate($num_item);
     }

@@ -24,4 +24,12 @@ class Review extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    public static function selectAvgRatingStar($query){
+        return $query->selectRaw('avg(review.rating_start) as avg_rating_star');
+    }
+        
+    public static function selectCountReview($query){
+        return $query->selectRaw('count(review.book_id) as count_review');
+    }
 }
