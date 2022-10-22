@@ -74,7 +74,7 @@ class ShopRepository
         }
 
         // Handle Select specific field
-        $query = Book::getFinalPrice($query);
+        $query = Book::selecFinalPrice($query);
         $query = Book::selectSubPrice($query);
         $query = Review::selectAvgRatingStar($query);
         $query = Review::selectCountReview($query);

@@ -72,7 +72,7 @@ class BookRepository
         
         // Handle Select specific field
 
-        $detailBook = Book::getFinalPrice($detailBook);
+        $detailBook = Book::selecFinalPrice($detailBook);
         $detailBook = Book::selectSubPrice($detailBook);
         $detailBook = Review::selectAvgRatingStar($detailBook);
         $detailBook = Review::selectCountReview($detailBook);

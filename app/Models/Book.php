@@ -34,29 +34,22 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
-    public static function getFinalPrice($parameter){
-        if(is_int($parameter)){
-            $bookId = $parameter;
-            $finalBookPrice = Book::leftJoin('discount', 'discount.book_id', '=', 'book.id')
-            ->selectRaw('case
-                    when now() >= discount.discount_start_date
-                    and (discount.discount_end_date is null
-                    or now() <=discount.discount_end_date) then discount.discount_price
-                    else book.book_price
-                    end as final_price')
-            ->where('book.id', '=', $bookId)
-            ->first()->final_price;
-        return $finalBookPrice;
-        }else{
-            $query = $parameter;
-            return $query->
-            selectRaw('case
-                when now() >= discount.discount_start_date
-                and (discount.discount_end_date is null
-                or now() <=discount.discount_end_date) then discount.discount_price
-                else book.book_price
-                end as final_price');
-        }
+    public static function getFinalBookPrice($bookId){
+
+        $finalBookPrice = Book::leftJoin('discount', 'discount.book_id', '=', 'book.id')
+        ->where('book.id', '=', $bookId);
+        $finalBookPrice = Book::selecFinalPrice($finalBookPrice);
+        return $finalBookPrice->first()->final_price;
+    }
+
+    public static function selecFinalPrice($query){
+        return $query->
+        selectRaw('case
+            when now() >= discount.discount_start_date
+            and (discount.discount_end_date is null
+            or now() <=discount.discount_end_date) then discount.discount_price
+            else book.book_price
+            end as final_price');
     }
 
     public static function selectSubPrice($query){
