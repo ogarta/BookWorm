@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Repositories\ShopRepository;
 use App\Http\Requests\FillterAndSortRequest;
 use App\Http\Resources\Shop\FilterSortCollection;
-use App\Http\Resources\Book\AuthorResource;
 
 class ShopController extends Controller
 {
@@ -19,7 +18,9 @@ class ShopController extends Controller
 
     public function filterAndSortBookBy(FillterAndSortRequest $request){
         $listBook = $this->shopRepository->handleFilterAndSort($request);
-        return response()->json($listBook,200);
+        return $listBook->count() > 0?
+        response()->json(new FilterSortCollection($listBook), 200) :
+        response()->json(['message' => 'Not Found List Book'], 404);
     }
 
 }

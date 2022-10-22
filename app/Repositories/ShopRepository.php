@@ -28,13 +28,8 @@ class ShopRepository
     public function filterAndSortBookBy($sort, $order, $category_id, $num_rating, $author_id, $num_item)
     {
         $query = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
-            ->Leftjoin('author', 'book.author_id', '=', 'author.id')
             ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
-            ->select('book.id',
-                'book.book_title',
-                'book.book_price',
-                'book.book_cover_photo',
-                'author.author_name',
+            ->select('book.*',
                 DB::raw('avg(review.rating_start) as avg_rating_star'),
                 DB::raw('case
 					when now() >= discount.discount_start_date
@@ -61,8 +56,7 @@ class ShopRepository
             ->groupBy('book.id',
                 'discount.discount_start_date',
                 'discount.discount_end_date',
-                'discount.discount_price',
-                'author.author_name')
+                'discount.discount_price')
 
         // Filter by Rating Review use num rating
             ->when($num_rating !== null, function ($query) use ($num_rating) {
@@ -91,6 +85,6 @@ class ShopRepository
                 break;
         }
 
-        return [$query->paginate($num_item)];
+        return $query->paginate($num_item);
     }
 }
