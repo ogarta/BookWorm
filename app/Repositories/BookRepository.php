@@ -5,6 +5,7 @@ use App\Models\Book;
 use App\Models\Review;
 use DB;
 use App\Http\Resources\Book\BookResource;
+use App\Helper\Constant;
 
 class BookRepository
 {
@@ -18,7 +19,7 @@ class BookRepository
     {
         $listTopDisCount = $this->detailBook()
             ->orderBy('discount_price','DESC')
-            ->limit(env('LIMIT_TOP_DISCOUNT'));
+            ->limit(Constant::LIMIT_TOP_DISCOUNT);
         return $listTopDisCount;
     }
 
@@ -32,7 +33,7 @@ class BookRepository
         $listTopRecommend = $this->detailBook()
             ->orderBy('avg_rating_star')
             ->orderBy('final_price', 'ASC')
-            ->limit(env('LIMIT_TOP_RECOMMEND'));
+            ->limit(Constant::LIMIT_TOP_RECOMMEND);
         return $listTopRecommend;
     }
 
@@ -46,7 +47,7 @@ class BookRepository
         $listTopPopular = $this->detailBook()
             ->orderBy('count_review', 'DESC')
             ->orderBy('final_price', 'ASC')
-            ->limit(env('LIMIT_TOP_POPULAR'));
+            ->limit(Constant::LIMIT_TOP_POPULAR);
         return $listTopPopular;
     }
 

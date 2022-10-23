@@ -5,6 +5,7 @@ use App\Http\Requests\FillterAndSortRequest;
 use App\Models\Book;
 use App\Models\Review;
 use DB;
+use App\Helper\Constant;
 
 class ShopRepository
 {
@@ -22,7 +23,7 @@ class ShopRepository
         $category_id = $request->category_id;
         $author_id = $request->author_id;
         $num_rating = $request->num_rating;
-        $num_item = $request->num_item !== null ? $request->num_item : env('DEFAULT_ITEM_PAGE');
+        $num_item = $request->num_item !== null ? $request->num_item : Constant::DEFAULT_ITEM_PAGE;
         return $this->filterAndSortBookBy($sort, $category_id, $num_rating, $author_id, $num_item);
     }
 
@@ -54,19 +55,19 @@ class ShopRepository
         // Sort List Books
         switch ($sort) {
             // Sort by most discount price with descending mode and final price with ascending mode
-            case 'on_sale':
+            case Constant::ON_SALE:
                 $query = $query->orderBy('sub_price', 'DESC')->orderBy('final_price', 'ASC');
                 break;
             // Sort by the most reviews with descending mode and final price with ascending mode
-            case 'popularity':
+            case Constant::POPULARITY:
                 $query = $query->orderBy('count_review', 'DESC')->orderBy('final_price', 'ASC');
                 break;
             // Sort by final price ascending mode
-            case 'price_low_to_high':
+            case Constant::PRICE_LOW_TO_HIGH:
                 $query = $query->orderBy('final_price', 'ASC');
                 break;
             // Sort by final price descending mode
-            case 'price_high_to_low':
+            case Constant::PRICE_HIGH_TO_LOW:
                 $query = $query->orderBy('final_price', 'DESC');
                 break;
             default:
