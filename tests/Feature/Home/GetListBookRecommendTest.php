@@ -12,6 +12,7 @@ use App\Models\Discount;
 use App\Models\Review;
 use Carbon\Carbon;
 use Faker\Factory;
+use App\Helper\Usort;
 
 class GetListBookRecommendTest extends TestCase
 {
@@ -88,17 +89,11 @@ class GetListBookRecommendTest extends TestCase
             $arrAvgStarOfBook[$book->id] = $avgRatingStar;
         }
 
-        uasort ( $arrAvgStarOfBook , function ($a, $b) {
-            if ($a == $b) {
-                return 0;
-            }
-            return ($a > $b) ? -1 : 1;
-        }
-        );
+        $arrAvgStarOfBook = Usort::sortArray($arrAvgStarOfBook, 'desc');
         
-        $listIdBookRecommend =[];
+        $listAvgRatingStar =[];
         foreach($arrAvgStarOfBook as $key => $value) {
-            $listIdBookRecommend[] = $key;
+            $listAvgRatingStar[] = number_format($value, 5);
         }
 
         $response = $this->getJson(route('home.top-recommend'));
@@ -128,34 +123,34 @@ class GetListBookRecommendTest extends TestCase
         $response->assertJson([
             'data' => [
                 [
-                    'id' => $listIdBookRecommend[0],
+                    'avg_rating_star' => $listAvgRatingStar[0],
                 ],
                 [
-                    'id' => $listIdBookRecommend[1],
+                    'avg_rating_star' => $listAvgRatingStar[1],
                 ],
                 [
-                    'id' => $listIdBookRecommend[2],
+                    'avg_rating_star' => $listAvgRatingStar[2],
                 ],
                 [
-                    'id' => $listIdBookRecommend[3],
+                    'avg_rating_star' => $listAvgRatingStar[3],
                 ],
                 [
-                    'id' => $listIdBookRecommend[4],
+                    'avg_rating_star' => $listAvgRatingStar[4],
                 ],
                 [
-                    'id' => $listIdBookRecommend[5],
+                    'avg_rating_star' => $listAvgRatingStar[5],
                 ],
                 [
-                    'id' => $listIdBookRecommend[6],
+                    'avg_rating_star' => $listAvgRatingStar[6],
                 ],
                 [
-                    'id' => $listIdBookRecommend[7],
+                    'avg_rating_star' => $listAvgRatingStar[7],
                 ],
             ],
         ]);
 
     }
-
+    
     public function test_sort_recommend_by_most_avg_rating_star_and_lowest_final_price_have_discount()
     {
         $author = Author::factory()->create();
@@ -202,24 +197,26 @@ class GetListBookRecommendTest extends TestCase
                 ];
         }
 
+        // $arrAvgStarOfBook = Usort::sortMultidimensionalArrays($arrAvgStarOfBook, 'avg_rating_star', 'final_price', 'desc', 'asc');
+
         uasort ( $arrAvgStarOfBook , function ($a, $b) {
-            if ($a['avg_rating_star'] == $b['avg_rating_star']) {
-                // avg_rating_star is the same, sort by final_price
-                if ($a['final_price'] > $b['final_price']) {
-                    return 1;
+                    if ($a['avg_rating_star'] == $b['avg_rating_star']) {
+                        // avg_rating_star is the same, sort by final_price
+                        if ($a['final_price'] > $b['final_price']) {
+                            return 1;
+                        }
+                    }
+                
+                    // sort the higher avg_rating_star first:
+                    return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
                 }
-            }
-        
-            // sort the higher avg_rating_star first:
-            return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
-        }
-        );
-        
+                );
+
         $listIdBookRecommend =[];
         foreach($arrAvgStarOfBook as $key => $value) {
             $listIdBookRecommend[] = $key;
         }
-
+        
         $response = $this->getJson(route('home.top-recommend'));
 
         // check status response

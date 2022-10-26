@@ -23,7 +23,7 @@ class BookResource extends JsonResource
             'author_name' => $this->author->author_name,
             'category_name' => $this->category->category_name,
             'count_review' => $this->count_review,
-            'avg_rating_star' => $this->avg_rating_star,
+            'avg_rating_star' => number_format($this->avg_rating_star, 5),
             'final_price' => $this->final_price,
             'sub_price' => $this->sub_price,
             'discount_price' => $this->discount_price,
