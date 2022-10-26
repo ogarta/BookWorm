@@ -18,7 +18,7 @@ class GetListBookRecommendTest extends TestCase
 {
 
     /** @test */
-    public function test_list_book_have_recommend_null()
+    public function test_list_book_dont_have_recommend()
     {
         $author = Author::factory()->create();
         $category = Category::factory()->create();
@@ -191,26 +191,13 @@ class GetListBookRecommendTest extends TestCase
             }
             $avgRatingStar = $sumRatingStar / $book->id;
 
-            $arrAvgStarOfBook[$book->id]['avg_rating_star'] = [
+            $arrAvgStarOfBook[$book->id] = [
                 'avg_rating_star'=>$avgRatingStar, 
                 'final_price'=>number_format($book->book_price * $percentage / 100, 2)
                 ];
         }
 
-        // $arrAvgStarOfBook = Usort::sortMultidimensionalArrays($arrAvgStarOfBook, 'avg_rating_star', 'final_price', 'desc', 'asc');
-
-        uasort ( $arrAvgStarOfBook , function ($a, $b) {
-                    if ($a['avg_rating_star'] == $b['avg_rating_star']) {
-                        // avg_rating_star is the same, sort by final_price
-                        if ($a['final_price'] > $b['final_price']) {
-                            return 1;
-                        }
-                    }
-                
-                    // sort the higher avg_rating_star first:
-                    return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
-                }
-                );
+        $arrAvgStarOfBook = Usort::sortMultidimensionalArrays($arrAvgStarOfBook, 'avg_rating_star','final_price', 'desc', 'asc');
 
         $listIdBookRecommend =[];
         foreach($arrAvgStarOfBook as $key => $value) {
@@ -319,24 +306,13 @@ class GetListBookRecommendTest extends TestCase
             }
             $avgRatingStar = $sumRatingStar / $book->id;
 
-            $arrAvgStarOfBook[$book->id]['avg_rating_star'] = [
+            $arrAvgStarOfBook[$book->id] = [
                 'avg_rating_star'=>$avgRatingStar, 
-                'final_price'=>number_format($book->book_price * $percentage / 100, 2)
+                'final_price'=>100
                 ];
         }
 
-        uasort ( $arrAvgStarOfBook , function ($a, $b) {
-            if ($a['avg_rating_star'] == $b['avg_rating_star']) {
-                // avg_rating_star is the same, sort by final_price
-                if ($a['final_price'] > $b['final_price']) {
-                    return 1;
-                }
-            }
-        
-            // sort the higher avg_rating_star first:
-            return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
-        }
-        );
+        $arrAvgStarOfBook = Usort::sortMultidimensionalArrays($arrAvgStarOfBook, 'avg_rating_star','final_price', 'desc', 'asc');
         
         $listIdBookRecommend =[];
         foreach($arrAvgStarOfBook as $key => $value) {

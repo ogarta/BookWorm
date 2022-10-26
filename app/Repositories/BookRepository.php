@@ -52,6 +52,7 @@ class BookRepository
     public function getTopPopular()
     {
         $listTopPopular = $this->detailBook()
+            ->havingRaw('count(review.book_id) > 0')
             ->orderBy('count_review', 'DESC')
             ->orderBy('final_price', 'ASC')
             ->limit(Constant::LIMIT_TOP_POPULAR)

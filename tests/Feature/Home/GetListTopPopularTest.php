@@ -5,392 +5,343 @@ namespace Tests\Feature\Home;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\Discount;
+use App\Models\Review;
+use Carbon\Carbon;
+use Faker\Factory;
+use App\Helper\Usort;
 
 class GetListTopPopularTest extends TestCase
 {
-    // /** @test */
-    // public function test_list_book_have_recommend_null()
-    // {
-    //     $author = Author::factory()->create();
-    //     $category = Category::factory()->create();
+    /** @test */
+    public function test_list_book_dont_have_popular()
+    {
+        $author = Author::factory()->create();
+        $category = Category::factory()->create();
 
-    //     // fake data date 
-    //     $date= Carbon::now()->add('-2 months');
-    //     $startDate = $date->toDateString();
-    //     $endDate = null;
+        // fake data date 
+        $date= Carbon::now()->add('-2 months');
+        $startDate = $date->toDateString();
+        $endDate = null;
         
-    //     // fake data books
-    //     $booksDiscount = Book::factory()
-    //         ->count(10)
-    //         ->create([
-    //             'category_id' => $category->id,
-    //             'author_id' => $author->id,
-    //             'book_price' => 100
-    //     ]);
-    //     $percentage = 0;
-    //     foreach ($booksDiscount as $book) {
-    //         $discount = Discount::factory([
-    //             'discount_start_date' => $startDate,
-    //             'discount_end_date' => $endDate
-    //         ]);
-    //         $percentage+= 10;
-    //         if ($percentage) {
+        // fake data books
+        $booksPopular= Book::factory()
+            ->count(10)
+            ->create([
+                'category_id' => $category->id,
+                'author_id' => $author->id,
+                'book_price' => 100
+        ]);
 
-    //             $discount->create([
-    //                 'discount_price' => number_format($book->book_price * $percentage / 100, 2),
-    //                 'book_id' => $book->id
-    //             ]);
-    //         } else {
-    //             $discount->create(['book_id' => $book->id]);
-    //         }
-    //     }
-    //     $response = $this->getJson(route('home.top-recommend'));
+        $response = $this->getJson(route('home.top-popular'));
 
-    //     $response->assertStatus(404);
-    // }
+        $response->assertStatus(404);
+    }
 
-    // /** @test */
-    // public function test_sort_recommend_by_most_avg_rating_star()
-    // {
-    //     // fake data author and category
-    //     $author = Author::factory()->create();
-    //     $category = Category::factory()->create();
+    /** @test */
+    public function test_sort_popular_by_most_sum_review()
+    {
+        // fake data author and category
+        $author = Author::factory()->create();
+        $category = Category::factory()->create();
         
-    //     // fake data books
-    //     $faker = Factory::create();
+        // fake data books
+        $faker = Factory::create();
 
-    //     $booksRecommend = Book::factory()
-    //         ->count(10)
-    //         ->create([
-    //             'category_id' => $category->id,
-    //             'author_id' => $author->id,
-    //             'book_price' => 100
-    //         ]); 
-    //     $arrAvgStarOfBook = array();
-    //     foreach ($booksRecommend as $book) {
-    //         $reviews = Review::factory()->count($book->id)
-    //             ->create([
-    //                 'book_id' => $book->id,
-    //             ]);
-    //         $sumRatingStar = 0; 
-    //         foreach($reviews as $review) {
-    //             $sumRatingStar = $sumRatingStar + $review->rating_start;
-    //         }
-    //         $avgRatingStar = $sumRatingStar / $book->id;
-    //         $arrAvgStarOfBook[$book->id] = $avgRatingStar;
-    //     }
+        $booksPopular = Book::factory()
+            ->count(10)
+            ->create([
+                'category_id' => $category->id,
+                'author_id' => $author->id,
+                'book_price' => 100
+            ]); 
+        $arrSumReviewOfBook = array();
+        foreach ($booksPopular as $book) {
+            $reviews = Review::factory()->count($book->id)
+                ->create([
+                    'book_id' => $book->id,
+                ]);
+            $arrSumReviewOfBook[$book->id] = $book->id;
+        }
 
-    //     uasort ( $arrAvgStarOfBook , function ($a, $b) {
-    //         if ($a == $b) {
-    //             return 0;
-    //         }
-    //         return ($a > $b) ? -1 : 1;
-    //     }
-    //     );
+        $arrSumReviewOfBook = Usort::sortArray($arrSumReviewOfBook, 'desc');
+
         
-    //     $listIdBookRecommend =[];
-    //     foreach($arrAvgStarOfBook as $key => $value) {
-    //         $listIdBookRecommend[] = $key;
-    //     }
+        $listIdBookPopular =[];
+        foreach($arrSumReviewOfBook as $key => $value) {
+            $listIdBookPopular[] = $key;
+        }
 
-    //     $response = $this->getJson(route('home.top-recommend'));
+        $response = $this->getJson(route('home.top-popular'));
 
-    //     $response->assertStatus(200);
+        $response->assertStatus(200);
 
-    //     $response->assertJsonStructure([
-    //         'data' => [
-    //             '*' => [
-    //                 'id',
-    //                 'book_title',
-    //                 'book_price',
-    //                 'book_cover_photo',
-    //                 'book_description',
-    //                 'author_name',
-    //                 'category_name',
-    //                 'count_review',
-    //                 'avg_rating_star',
-    //                 'final_price',
-    //                 'sub_price',
-    //                 'discount_price',
-    //             ],
-    //         ],
-    //     ]);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'book_title',
+                    'book_price',
+                    'book_cover_photo',
+                    'book_description',
+                    'author_name',
+                    'category_name',
+                    'count_review',
+                    'avg_rating_star',
+                    'final_price',
+                    'sub_price',
+                    'discount_price',
+                ],
+            ],
+        ]);
 
-    //     // check data response
-    //     $response->assertJson([
-    //         'data' => [
-    //             [
-    //                 'id' => $listIdBookRecommend[0],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[1],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[2],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[3],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[4],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[5],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[6],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[7],
-    //             ],
-    //         ],
-    //     ]);
+        // check data response
+        $response->assertJson([
+            'data' => [
+                [
+                    'id' => $listIdBookPopular[0],
+                ],
+                [
+                    'id' => $listIdBookPopular[1],
+                ],
+                [
+                    'id' => $listIdBookPopular[2],
+                ],
+                [
+                    'id' => $listIdBookPopular[3],
+                ],
+                [
+                    'id' => $listIdBookPopular[4],
+                ],
+                [
+                    'id' => $listIdBookPopular[5],
+                ],
+                [
+                    'id' => $listIdBookPopular[6],
+                ],
+                [
+                    'id' => $listIdBookPopular[7],
+                ],
+            ],
+        ]);
 
-    // }
+    }
 
-    // public function test_sort_recommend_by_most_avg_rating_star_and_lowest_final_price_have_discount()
-    // {
-    //     $author = Author::factory()->create();
-    //     $category = Category::factory()->create();
-
-    //     // fake data date 
-    //     $date= Carbon::now()->add('-2 months');
-    //     $startDate = $date->toDateString();
-    //     $endDate = null;
+    public function test_sort_popular_by_most_sum_review_and_lowest_final_price_have_discount()
+    {
+        $author = Author::factory()->create();
+        $category = Category::factory()->create();
+        $faker = Factory::create();
+        // fake data date 
+        $date= Carbon::now()->add('-2 months');
+        $startDate = $date->toDateString();
+        $endDate = null;
         
-    //     // fake data books
-    //     $booksRecommend = Book::factory()
-    //         ->count(10)
-    //         ->create([
-    //             'category_id' => $category->id,
-    //             'author_id' => $author->id,
-    //             'book_price' => 100
-    //     ]);
-    //     $percentage = 0;
-    //     $arrAvgStarOfBook = array();
-    //     foreach ($booksRecommend as $book) {
-    //         $discount = Discount::factory([
-    //             'discount_start_date' => $startDate,
-    //             'discount_end_date' => $endDate
-    //         ]);
-    //         $percentage+= 10;
-    //         $discount->create([
-    //             'discount_price' => number_format($book->book_price * $percentage / 100, 2),
-    //             'book_id' => $book->id
-    //         ]);            
-    //         $reviews = Review::factory()->count($book->id)
-    //             ->create([
-    //                 'book_id' => $book->id,
-    //             ]);
-    //         $sumRatingStar = 0; 
-    //         foreach($reviews as $review) {
-    //             $sumRatingStar = $sumRatingStar + $review->rating_start;
-    //         }
-    //         $avgRatingStar = $sumRatingStar / $book->id;
+        // fake data books
+        $booksPopular = Book::factory()
+            ->count(10)
+            ->create([
+                'category_id' => $category->id,
+                'author_id' => $author->id,
+                'book_price' => 100
+        ]);
+        $percentage = 0;
+        $arrSumReviewOfBook = array();
+        foreach ($booksPopular as $book) {
+            $discount = Discount::factory([
+                'discount_start_date' => $startDate,
+                'discount_end_date' => $endDate
+            ]);
+            $percentage+= 10;
+            $discount->create([
+                'discount_price' => number_format($book->book_price * $percentage / 100, 2),
+                'book_id' => $book->id
+            ]);            
+            $reviews = Review::factory()->count($faker->numberBetween(1, 10))
+                ->create([
+                    'book_id' => $book->id,
+                ]);
 
-    //         $arrAvgStarOfBook[$book->id]['avg_rating_star'] = [
-    //             'avg_rating_star'=>$avgRatingStar, 
-    //             'final_price'=>number_format($book->book_price * $percentage / 100, 2)
-    //             ];
-    //     }
+            $arrSumReviewOfBook[$book->id] = [
+                'sum_review'=>count($reviews), 
+                'final_price'=>number_format($book->book_price * $percentage / 100, 2)
+                ];
+        }
 
-    //     uasort ( $arrAvgStarOfBook , function ($a, $b) {
-    //         if ($a['avg_rating_star'] == $b['avg_rating_star']) {
-    //             // avg_rating_star is the same, sort by final_price
-    //             if ($a['final_price'] > $b['final_price']) {
-    //                 return 1;
-    //             }
-    //         }
-        
-    //         // sort the higher avg_rating_star first:
-    //         return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
-    //     }
-    //     );
-        
-    //     $listIdBookRecommend =[];
-    //     foreach($arrAvgStarOfBook as $key => $value) {
-    //         $listIdBookRecommend[] = $key;
-    //     }
+        $arrSumReviewOfBook = Usort::sortMultidimensionalArrays($arrSumReviewOfBook, 'sum_review','final_price', 'desc', 'asc');
 
-    //     $response = $this->getJson(route('home.top-recommend'));
+        $listIdBookPopular =[];
+        foreach($arrSumReviewOfBook as $key => $value) {
+            $listIdBookPopular[] = $key;
+        }
 
-    //     // check status response
-    //     $response->assertStatus(200);
+        $response = $this->getJson(route('home.top-popular'));
 
-    //     // check structure json response
-    //     $response->assertJsonStructure([
-    //         'data' => [
-    //             '*' => [
-    //                 'id',
-    //                 'book_title',
-    //                 'book_price',
-    //                 'book_cover_photo',
-    //                 'book_description',
-    //                 'author_name',
-    //                 'category_name',
-    //                 'count_review',
-    //                 'avg_rating_star',
-    //                 'final_price',
-    //                 'sub_price',
-    //                 'discount_price',
-    //             ],
-    //         ],
-    //     ]);
+        // check status response
+        $response->assertStatus(200);
 
-    //     // check data response
-    //     $response->assertJson([
-    //         'data' => [
-    //             [
-    //                 'id' => $listIdBookRecommend[0],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[1],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[2],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[3],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[4],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[5],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[6],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[7],
-    //             ],
-    //         ],
-    //     ]);
-    // }
+        // check structure json response
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'book_title',
+                    'book_price',
+                    'book_cover_photo',
+                    'book_description',
+                    'author_name',
+                    'category_name',
+                    'count_review',
+                    'avg_rating_star',
+                    'final_price',
+                    'sub_price',
+                    'discount_price',
+                ],
+            ],
+        ]);
 
-    // public function test_sort_recommend_by_most_avg_rating_star_and_lowest_final_price_dont_have_discount()
-    // {
-    //     $author = Author::factory()->create();
-    //     $category = Category::factory()->create();
+        // check data response
+        $response->assertJson([
+            'data' => [
+                [
+                    'id' => $listIdBookPopular[0],
+                ],
+                [
+                    'id' => $listIdBookPopular[1],
+                ],
+                [
+                    'id' => $listIdBookPopular[2],
+                ],
+                [
+                    'id' => $listIdBookPopular[3],
+                ],
+                [
+                    'id' => $listIdBookPopular[4],
+                ],
+                [
+                    'id' => $listIdBookPopular[5],
+                ],
+                [
+                    'id' => $listIdBookPopular[6],
+                ],
+                [
+                    'id' => $listIdBookPopular[7],
+                ],
+            ],
+        ]);
+    }
 
-    //     // fake data date expired
-    //     $dateOutOf = Carbon::now()->add($this->faker->randomElement([
-    //         '-1 week',
-    //         '+2 months',
-    //     ]));
-    //     $startDateOutOf = $dateOutOf->toDateString();
-    //     $endDateOutOf = $dateOutOf->add($this->faker->randomElement([
-    //         '-2 months',
-    //         '-3 months',
-    //     ]))->toDateString();
+    public function test_sort_popular_by_most_sum_review_and_lowest_final_price_dont_have_discount()
+    {
+        $author = Author::factory()->create();
+        $category = Category::factory()->create();
+        $faker = Factory::create();
+        // fake data date expired
+        $dateOutOf = Carbon::now()->add($this->faker->randomElement([
+            '-1 week',
+            '+2 months',
+        ]));
+        $startDateOutOf = $dateOutOf->toDateString();
+        $endDateOutOf = $dateOutOf->add($this->faker->randomElement([
+            '-2 months',
+            '-3 months',
+        ]))->toDateString();
 
-    //     // fake data books
-    //     $booksRecommend = Book::factory()
-    //         ->count(10)
-    //         ->create([
-    //             'category_id' => $category->id,
-    //             'author_id' => $author->id,
-    //             'book_price' => 100
-    //     ]);
-    //     $percentage = 0;
-    //     $arrAvgStarOfBook = array();
-    //     foreach ($booksRecommend as $book) {
-    //         $discount = Discount::factory([
-    //             'discount_start_date' => $startDateOutOf,
-    //             'discount_end_date' => $endDateOutOf
-    //         ]);
-    //         $percentage+= 10;
-    //         $discount->create([
-    //             'discount_price' => number_format($book->book_price * $percentage / 100, 2),
-    //             'book_id' => $book->id
-    //         ]);            
-    //         $reviews = Review::factory()->count($book->id)
-    //             ->create([
-    //                 'book_id' => $book->id,
-    //             ]);
-    //         $sumRatingStar = 0; 
-    //         foreach($reviews as $review) {
-    //             $sumRatingStar = $sumRatingStar + $review->rating_start;
-    //         }
-    //         $avgRatingStar = $sumRatingStar / $book->id;
+        // fake data books
+        $booksPopular = Book::factory()
+            ->count(10)
+            ->create([
+                'category_id' => $category->id,
+                'author_id' => $author->id,
+                'book_price' => 100
+        ]);
+        $percentage = 0;
+        $arrSumReviewOfBook = array();
+        foreach ($booksPopular as $book) {
+            $discount = Discount::factory([
+                'discount_start_date' => $startDateOutOf,
+                'discount_end_date' => $endDateOutOf
+            ]);
+            $percentage+= 10;
+            $discount->create([
+                'discount_price' => number_format($book->book_price * $percentage / 100, 2),
+                'book_id' => $book->id
+            ]);            
+            $reviews = Review::factory()->count($faker->numberBetween(1, 10))
+                ->create([
+                    'book_id' => $book->id,
+                ]);
 
-    //         $arrAvgStarOfBook[$book->id]['avg_rating_star'] = [
-    //             'avg_rating_star'=>$avgRatingStar, 
-    //             'final_price'=>number_format($book->book_price * $percentage / 100, 2)
-    //             ];
-    //     }
+            $arrSumReviewOfBook[$book->id] = [
+                'sum_review'=>count($reviews), 
+                'final_price'=>100
+                ];
+        }
 
-    //     uasort ( $arrAvgStarOfBook , function ($a, $b) {
-    //         if ($a['avg_rating_star'] == $b['avg_rating_star']) {
-    //             // avg_rating_star is the same, sort by final_price
-    //             if ($a['final_price'] > $b['final_price']) {
-    //                 return 1;
-    //             }
-    //         }
-        
-    //         // sort the higher avg_rating_star first:
-    //         return $a['avg_rating_star'] < $b['avg_rating_star'] ? 1 : -1;
-    //     }
-    //     );
-        
-    //     $listIdBookRecommend =[];
-    //     foreach($arrAvgStarOfBook as $key => $value) {
-    //         $listIdBookRecommend[] = $key;
-    //     }
+        $arrSumReviewOfBook = Usort::sortMultidimensionalArrays($arrSumReviewOfBook, 'sum_review','final_price', 'desc', 'asc');
+        // dd($arrSumReviewOfBook);
 
-    //     $response = $this->getJson(route('home.top-recommend'));
+        $listSumReviewBookPopular =[];
+        foreach($arrSumReviewOfBook as $key => $value) {
+            $listSumReviewBookPopular[] = $value['sum_review'];
+        }
 
-    //     // check status response
-    //     $response->assertStatus(200);
+        $response = $this->getJson(route('home.top-popular'));
 
-    //     // check structure json response
-    //     $response->assertJsonStructure([
-    //         'data' => [
-    //             '*' => [
-    //                 'id',
-    //                 'book_title',
-    //                 'book_price',
-    //                 'book_cover_photo',
-    //                 'book_description',
-    //                 'author_name',
-    //                 'category_name',
-    //                 'count_review',
-    //                 'avg_rating_star',
-    //                 'final_price',
-    //                 'sub_price',
-    //                 'discount_price',
-    //             ],
-    //         ],
-    //     ]);
+        // check status response
+        $response->assertStatus(200);
 
-    //     // check data response
-    //     $response->assertJson([
-    //         'data' => [
-    //             [
-    //                 'id' => $listIdBookRecommend[0],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[1],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[2],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[3],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[4],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[5],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[6],
-    //             ],
-    //             [
-    //                 'id' => $listIdBookRecommend[7],
-    //             ],
-    //         ],
-    //     ]);
-    // }
+        // check structure json response
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'book_title',
+                    'book_price',
+                    'book_cover_photo',
+                    'book_description',
+                    'author_name',
+                    'category_name',
+                    'count_review',
+                    'avg_rating_star',
+                    'final_price',
+                    'sub_price',
+                    'discount_price',
+                ],
+            ],
+        ]);
+
+        // check data response
+        $response->assertJson([
+            'data' => [
+                [
+                    'count_review' => $listSumReviewBookPopular[0],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[1],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[2],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[3],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[4],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[5],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[6],
+                ],
+                [
+                    'count_review' => $listSumReviewBookPopular[7],
+                ],
+            ],
+        ]);
+    }
 }

@@ -16,7 +16,7 @@ class GetListTopDiscountTest extends TestCase
 {
 
     /** @test */
-    public function test_list_book_have_discount_null()
+    public function test_list_book_dont_have_discount()
     {
         $response = $this->getJson(route('home.top-discount'));
 
