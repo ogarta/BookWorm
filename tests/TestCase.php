@@ -8,5 +8,5 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, WithFaker;
+    use CreatesApplication, WithFaker, RefreshDatabase;
 }
