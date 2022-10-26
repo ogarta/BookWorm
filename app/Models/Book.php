@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Book extends Model
 {
@@ -45,19 +46,28 @@ class Book extends Model
     public static function selecFinalPrice($query){
         return $query->
         selectRaw('case
-            when now() >= discount.discount_start_date
-            and (discount.discount_end_date is null
-            or now() <=discount.discount_end_date) then discount.discount_price
-            else book.book_price
+            when discount.discount_price is null then book.book_price 
+            else discount.discount_price
             end as final_price');
+    }
+
+    public static function joinDiscountTable($query){
+        return $query->
+        leftJoin('discount', function($join){
+            $join->on('book.id', '=', 'discount.book_id');
+            $join->on('discount.discount_start_date', '<=', DB::raw('now()'));
+            $join->on(function($query){
+                $query->on('discount.discount_end_date', '>=', DB::raw('now()'))
+                ->orWhereRaw('discount.discount_end_date is null');
+            });
+        });
     }
 
     public static function selectSubPrice($query){
         return $query->
             selectRaw('case
-                when now() >= discount.discount_start_date
-                and (discount.discount_end_date is null
-                or now() <= discount.discount_end_date) then book.book_price - discount.discount_price
-                end as sub_price');
+            when discount.discount_price is null then 0 
+            else book.book_price - discount.discount_price
+            end as sub_price');
     }
 }

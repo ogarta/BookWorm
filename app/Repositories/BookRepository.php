@@ -5,6 +5,7 @@ use App\Models\Book;
 use App\Models\Review;
 use DB;
 use App\Http\Resources\Book\BookResource;
+use App\Http\Resources\Book\BookCollection;
 use App\Helper\Constant;
 
 class BookRepository
@@ -18,8 +19,11 @@ class BookRepository
     public function getTopDiscount()
     {
         $listTopDisCount = $this->detailBook()
-            ->orderBy('discount_price','DESC')
-            ->limit(Constant::LIMIT_TOP_DISCOUNT);
+            ->whereNotNull('discount.discount_price')
+            ->orderBy('discount.discount_price','DESC')
+            ->limit(Constant::LIMIT_TOP_DISCOUNT)
+            ->get();
+        $listTopDisCount = new BookCollection($listTopDisCount);
         return $listTopDisCount;
     }
 
@@ -31,9 +35,12 @@ class BookRepository
     public function getTopRecommend()
     {
         $listTopRecommend = $this->detailBook()
-            ->orderBy('avg_rating_star')
+            ->havingRaw('AVG(rating_start) is not null')
+            ->orderBy('avg_rating_star','DESC')
             ->orderBy('final_price', 'ASC')
-            ->limit(Constant::LIMIT_TOP_RECOMMEND);
+            ->limit(Constant::LIMIT_TOP_RECOMMEND)
+            ->get();
+        $listTopRecommend = new BookCollection($listTopRecommend);
         return $listTopRecommend;
     }
 
@@ -47,7 +54,9 @@ class BookRepository
         $listTopPopular = $this->detailBook()
             ->orderBy('count_review', 'DESC')
             ->orderBy('final_price', 'ASC')
-            ->limit(Constant::LIMIT_TOP_POPULAR);
+            ->limit(Constant::LIMIT_TOP_POPULAR)
+            ->get();
+        $listTopPopular = new BookCollection($listTopPopular);
         return $listTopPopular;
     }
 
@@ -60,23 +69,22 @@ class BookRepository
     public function detailBook($id = null)
     {
         $detailBook = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
-            ->Leftjoin('discount', 'book.id', '=', 'discount.book_id')
             ->select(
-                'book.*')
+                'book.*',
+                'discount.discount_price',)
             ->when($id !== null, function ($query) use ($id) {
                 return $query->where('book.id', $id);
             })
-            ->groupBy('book.id',
-                'discount.discount_start_date',
-                'discount.discount_end_date',
-                'discount.discount_price',);
+            ->groupBy('book.id', 'discount.discount_price');
+        
+        // Handle join discount table
+        $detailBook = Book::joinDiscountTable($detailBook);
         
         // Handle Select specific field
-
         $detailBook = Book::selecFinalPrice($detailBook);
-        $detailBook = Book::selectSubPrice($detailBook);
         $detailBook = Review::selectAvgRatingStar($detailBook);
         $detailBook = Review::selectCountReview($detailBook);
+        $detailBook = Book::selectSubPrice($detailBook);
         
         return $detailBook;
     }

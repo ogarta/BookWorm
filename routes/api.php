@@ -31,8 +31,8 @@ Route::prefix('auth')->group(function () {
 // Home Page
 Route::prefix('home')->name('home.')->group(function () {
 	Route::get('/books/top-discount',[BookController::class,'getTopDiscount'])->name('top-discount');
-	Route::get('/books/top-recommend',[BookController::class,'getTopRecommend']);
-	Route::get('/books/top-popular',[BookController::class,'getTopPopular']);
+	Route::get('/books/top-recommend',[BookController::class,'getTopRecommend'])->name('top-recommend');
+	Route::get('/books/top-popular',[BookController::class,'getTopPopular'])->name('top-popular');
 });
 
 //Shop Page

@@ -26,6 +26,7 @@ class BookResource extends JsonResource
             'avg_rating_star' => $this->avg_rating_star,
             'final_price' => $this->final_price,
             'sub_price' => $this->sub_price,
+            'discount_price' => $this->discount_price,
         ];
     }
 }
