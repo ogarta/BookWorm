@@ -1,0 +1,28 @@
+.card-item {
+	cursor: pointer;
+    width: 250px;
+    height: 450px;
+    // display: flex;
+    justify-content: center;
+    // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-image{
+    width: auto;
+    height: 280px;
+    object-fit: fit;
+}
+
+.card-title{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-footer{
+    height: 60px;
+}
