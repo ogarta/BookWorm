@@ -1,7 +1,7 @@
 import shopApi from '../../../adapters/shopPageAdapter';
 import { useEffect, useState } from 'react';
 import { Accordion } from 'react-bootstrap';
-import { updateFilter } from '../../../reducers/filterReducer';
+import { setAuthor, setFilterDetail, setCategory, setStar } from '../../../reducers/filterReducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 function FilterComponent() {
@@ -23,7 +23,6 @@ function FilterComponent() {
     useEffect(() => {
         const fetchAllAuthor = async () => {
             const response = await shopApi.getAllAuthor();
-            console.log(response);
             setListAuthor(response);
 
         }
@@ -36,14 +35,33 @@ function FilterComponent() {
     }, []);
 
     useEffect(() => {
-        dispatch(updateFilter({
-            author: valueAuthor,
-            category: valueCategory,
+        dispatch(setAuthor(valueAuthor.id));
+        dispatch(setFilterDetail({
+            author_name: valueAuthor.author_name,
+            category_name: valueCategory.category_name,
             star: valueStar,
         }));
-    }, [valueStar, valueAuthor, valueCategory]);
+    }, [valueAuthor]);
 
-    console.log(useSelector(state => state.filterReducer.filter));
+    useEffect(() => {
+        dispatch(setCategory(valueCategory.id));
+        dispatch(setFilterDetail({
+            author_name: valueAuthor.author_name,
+            category_name: valueCategory.category_name,
+            star: valueStar,
+        }));
+    }, [valueCategory]);
+
+    useEffect(() => {
+        dispatch(setStar(valueStar));
+        dispatch(setFilterDetail({
+            author_name: valueAuthor.author_name,
+            category_name: valueCategory.category_name,
+            star: valueStar,
+        }));
+    }, [valueStar]);
+
+    // console.log("param", useSelector(state => state.filterReducer.filter));
     return (
         <div>
             <Accordion defaultActiveKey={['1', '2', '0']} alwaysOpen>
@@ -55,7 +73,7 @@ function FilterComponent() {
                                 <div
                                     key={category.id}
                                     onClick={() =>
-                                        setValueCategory(category)
+                                        setValueCategory(valueCategory === category ? "" : category)
                                     }
                                 >
                                     {category.category_name}
@@ -72,7 +90,7 @@ function FilterComponent() {
                                 <div
                                     key={author.id}
                                     onClick={() =>
-                                        setValueAuthor(author)
+                                        setValueAuthor(valueAuthor === author ? "" : author)
                                     }
                                 >
                                     {author.author_name}
@@ -89,7 +107,7 @@ function FilterComponent() {
                                 <div
                                     key={star.value}
                                     onClick={() =>
-                                        setValueStart(star.value)
+                                        setValueStart(valueStar === star.value ? "" : star.value)
                                     }
                                 >
                                     {star.name}

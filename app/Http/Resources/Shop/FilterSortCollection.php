@@ -16,11 +16,6 @@ class FilterSortCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection,
-            'pagination' => [
-                'size' => $this->perPage(),
-                'total' => $this->total(),
-                'current' => $this->currentPage(),
-            ]
         ];    
     }
 }

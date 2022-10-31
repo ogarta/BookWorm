@@ -18,9 +18,7 @@ class ShopController extends Controller
 
     public function filterAndSortBookBy(FillterAndSortRequest $request){
         $listBook = $this->shopRepository->handleFilterAndSort($request);
-        return $listBook->count() > 0?
-        response()->json(new FilterSortCollection($listBook), 200) :
-        response()->json(['message' => 'Not Found List Book'], 404);
+        return new FilterSortCollection($listBook);
     }
 
 }
