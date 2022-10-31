@@ -21,6 +21,8 @@ export const filterSlice = createSlice({
             current_page: 1,
             last_page: 1,
             per_page: 15,
+            from: 1,
+            to: 1,
         }
 
     },
@@ -51,9 +53,12 @@ export const filterSlice = createSlice({
         },
         setPagination: (state, action) => {
             state.pagination = action.payload;
+        },
+        setCurentPage: (state, action) => {
+            state.pagination.current_page = action.payload;
         }
     }
 });
 
-export const { setFilter, setSort, setStar, setAuthor, setCategory, setNumItemsPage, setFilterDetail, setPagination, setPage } = filterSlice.actions;
+export const { setFilter, setSort, setStar, setAuthor, setCategory, setNumItemsPage, setFilterDetail, setPagination, setPage, setCurentPage } = filterSlice.actions;
 export default filterSlice.reducer;

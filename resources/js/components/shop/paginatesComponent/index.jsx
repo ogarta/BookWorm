@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import shopApi from "../../../adapters/shopPageAdapter";
 import ReactPaginate from 'react-paginate';
 import ItemCardComponent from "../../bookCard";
-import { setPage } from "../../../reducers/filterReducer";
+import { setPagination, setCurentPage, setPage } from "../../../reducers/filterReducer";
 
 export default function PaginatesComponent() {
     const dispatch = useDispatch();
@@ -11,15 +11,20 @@ export default function PaginatesComponent() {
     const [pageNumber, setPageNumber] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     const params = useSelector(state => state.filterReducer.filter);
+    const paggination = useSelector(state => state.filterReducer.pagination);
 
     useEffect(() => {
         const fetchListBookByFilterAndSort = async () => {
-            console.log("param", params);
             const response = await shopApi.getListBookByFilterAndSort(params);
-            // console.log(response);
             setListBookFilterAndSort(response);
-            setTotalPage(response.meta.last_page);
-            setPageNumber(response.meta.current_page);
+            dispatch(setPagination({
+                total: response.meta.total,
+                per_page: response.meta.per_page,
+                current_page: response.meta.current_page,
+                last_page: response.meta.last_page,
+                from: response.meta.from,
+                to: response.meta.to,
+            }));
 
         }
         fetchListBookByFilterAndSort();
@@ -55,9 +60,9 @@ export default function PaginatesComponent() {
                     nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
-                    initialPage={pageNumber - 1}
-                    forcePage={pageNumber - 1}
-                    pageCount={totalPage}
+                    initialPage={paggination.current_page - 1}
+                    forcePage={paggination.current_page - 1}
+                    pageCount={paggination.last_page}
                     previousLabel="<"
                     renderOnZeroPageCount={null}
                 />

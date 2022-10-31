@@ -9,6 +9,7 @@ import { setSort, setNumItemsPage } from '../reducers/filterReducer';
 export default function ShopPage() {
     const dispatch = useDispatch();
     const params = useSelector(state => state.filterReducer.filter);
+    const paginate = useSelector(state => state.filterReducer.pagination);
 
     const handleSelectNumItemPage = (e) => {
         dispatch(setNumItemsPage(e));
@@ -40,7 +41,7 @@ export default function ShopPage() {
                     <div className='row'>
                         <div className='col-6'>
                             <section >
-                                <p>Showing 1-12 of 126 books</p>
+                                <p>Showing {paginate.from} - {paginate.to} of {paginate.total} books</p>
                             </section>
                         </div>
                         <div className='col-6 d-flex justify-content-end'>

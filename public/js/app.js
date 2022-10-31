@@ -14248,6 +14248,9 @@ function PaginatesComponent() {
   var params = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.filterReducer.filter;
   });
+  var paggination = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.filterReducer.pagination;
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchListBookByFilterAndSort = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -14256,16 +14259,20 @@ function PaginatesComponent() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("param", params);
-                _context.next = 3;
+                _context.next = 2;
                 return _adapters_shopPageAdapter__WEBPACK_IMPORTED_MODULE_2__["default"].getListBookByFilterAndSort(params);
-              case 3:
+              case 2:
                 response = _context.sent;
-                // console.log(response);
                 setListBookFilterAndSort(response);
-                setTotalPage(response.meta.last_page);
-                setPageNumber(response.meta.current_page);
-              case 7:
+                dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__.setPagination)({
+                  total: response.meta.total,
+                  per_page: response.meta.per_page,
+                  current_page: response.meta.current_page,
+                  last_page: response.meta.last_page,
+                  from: response.meta.from,
+                  to: response.meta.to
+                }));
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -14309,9 +14316,9 @@ function PaginatesComponent() {
         nextLabel: ">",
         onPageChange: handlePageClick,
         pageRangeDisplayed: 5,
-        initialPage: pageNumber - 1,
-        forcePage: pageNumber - 1,
-        pageCount: totalPage,
+        initialPage: paggination.current_page - 1,
+        forcePage: paggination.current_page - 1,
+        pageCount: paggination.last_page,
         previousLabel: "<",
         renderOnZeroPageCount: null
       })
@@ -14421,6 +14428,9 @@ function ShopPage() {
   var params = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.filterReducer.filter;
   });
+  var paginate = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.filterReducer.pagination;
+  });
   var handleSelectNumItemPage = function handleSelectNumItemPage(e) {
     dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__.setNumItemsPage)(e));
   };
@@ -14457,8 +14467,8 @@ function ShopPage() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "col-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("section", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                children: "Showing 1-12 of 126 books"
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+                children: ["Showing ", paginate.from, " - ", paginate.to, " of ", paginate.total, " books"]
               })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -14608,6 +14618,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "filterSlice": () => (/* binding */ filterSlice),
 /* harmony export */   "setAuthor": () => (/* binding */ setAuthor),
 /* harmony export */   "setCategory": () => (/* binding */ setCategory),
+/* harmony export */   "setCurentPage": () => (/* binding */ setCurentPage),
 /* harmony export */   "setFilter": () => (/* binding */ setFilter),
 /* harmony export */   "setFilterDetail": () => (/* binding */ setFilterDetail),
 /* harmony export */   "setNumItemsPage": () => (/* binding */ setNumItemsPage),
@@ -14638,7 +14649,9 @@ var filterSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
       total: 0,
       current_page: 1,
       last_page: 1,
-      per_page: 15
+      per_page: 15,
+      from: 1,
+      to: 1
     }
   },
   reducers: {
@@ -14668,6 +14681,9 @@ var filterSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
     },
     setPagination: function setPagination(state, action) {
       state.pagination = action.payload;
+    },
+    setCurentPage: function setCurentPage(state, action) {
+      state.pagination.current_page = action.payload;
     }
   }
 });
@@ -14680,7 +14696,8 @@ var _filterSlice$actions = filterSlice.actions,
   setNumItemsPage = _filterSlice$actions.setNumItemsPage,
   setFilterDetail = _filterSlice$actions.setFilterDetail,
   setPagination = _filterSlice$actions.setPagination,
-  setPage = _filterSlice$actions.setPage;
+  setPage = _filterSlice$actions.setPage,
+  setCurentPage = _filterSlice$actions.setCurentPage;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (filterSlice.reducer);
 
