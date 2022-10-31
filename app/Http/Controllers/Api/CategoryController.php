@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
-use App\Http\Resources\Book\CategoryResource;
+use App\Http\Resources\Book\CategoryCollection;
 
 class CategoryController extends Controller
 {
@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $listCategory = $this->categoryRepository->getCategory();
         return $listCategory !== null ? 
-            response()->json(CategoryResource::collection($listCategory),200): 
+            response()->json(new CategoryCollection($listCategory),200): 
             response()->json(['message' => 'Not Found'], 404);
     }
 

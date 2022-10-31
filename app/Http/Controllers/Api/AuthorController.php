@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\AuthorRepository;
-use App\Http\Resources\Book\AuthorResource;
+use App\Http\Resources\Book\AuthorCollection;
 
 class AuthorController extends Controller
 {
@@ -23,7 +23,7 @@ class AuthorController extends Controller
     {
         $listAuthor = $this->authorRepository->getAuthor();
         return $listAuthor !== null ? 
-            response()->json(AuthorResource::collection($listAuthor),200): 
+            response()->json(new AuthorCollection($listAuthor),200): 
             response()->json(['message' => 'Not Found'], 404);
     }
 

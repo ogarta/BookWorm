@@ -20,12 +20,10 @@ export default function Feature() {
         const fetchListBookRecommend = async () => {
             const response = await homeApi.getListTopBookRecommended();
             setListRecommend(response);
-            console.log(response);
         }
         const fetchListBookPopular = async () => {
             const response = await homeApi.getListTopBookPopular();
             setListPopular(response);
-            console.log(response);
         }
         fetchListBookPopular();
         fetchListBookRecommend();
