@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\BookRepository;
 use App\Http\Resources\Book\BookCollection;
+use App\Http\Resources\Book\BookResource;
 
 class BookController extends Controller
 {
@@ -44,10 +45,8 @@ class BookController extends Controller
      */
     public function show($id)
     {   
-        $detailBook = $this->bookRepository->detailBook($id)->get();
-        return $detailBook->isNotEmpty()? 
-        response()->json(new BookCollection($detailBook), 200) : 
-        response()->json(['message' => 'Not Found Book'], 404);
+        $detailBook = $this->bookRepository->detailBook($id)->first();
+        return $detailBook ? new BookResource($detailBook) : response()->json(['message' => 'Book not found'], 404);
     }
 
     /**

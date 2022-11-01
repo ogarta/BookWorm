@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-d
 import HeaderComponent from "../components/header/index";
 import HomePage from './HomePage';
 import ShopPage from './ShopPage'
+import ProductPage from './ProductPage'
 
 function Index() {
     return (
@@ -11,6 +12,7 @@ function Index() {
             <Routes>
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
             </Routes>
         </Router>
     );

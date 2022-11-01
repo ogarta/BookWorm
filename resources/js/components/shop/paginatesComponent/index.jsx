@@ -8,10 +8,10 @@ import { setPagination, setCurentPage, setPage } from "../../../reducers/filterR
 export default function PaginatesComponent() {
     const dispatch = useDispatch();
     const [listBookFilterAndSort, setListBookFilterAndSort] = useState({});
-    const [pageNumber, setPageNumber] = useState(1);
-    const [totalPage, setTotalPage] = useState(0);
     const params = useSelector(state => state.filterReducer.filter);
     const paggination = useSelector(state => state.filterReducer.pagination);
+
+    console.log(params);
 
     useEffect(() => {
         const fetchListBookByFilterAndSort = async () => {

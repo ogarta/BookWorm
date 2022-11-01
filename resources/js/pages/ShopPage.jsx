@@ -28,7 +28,7 @@ export default function ShopPage() {
 
     return (
         <div className="container">
-            <h2>Books <span className='filtered-by'>(Filltered by {handleFilteredBy()})</span></h2>
+            <h2 className='mt-3'>Books <span className='filtered-by'>(Filltered by {handleFilteredBy()})</span></h2>
             <hr></hr>
             <div className="row">
                 <div className='col-3'>

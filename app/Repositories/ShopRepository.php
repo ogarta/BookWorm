@@ -18,8 +18,7 @@ class ShopRepository
      */
     public function handleFilterAndSort($request)
     {
-        $sort = $request->sort !== null ? $request->num_item : 'ASC';
-        $order = $request->order;
+        $sort = $request->sort;
         $category_id = $request->category_id;
         $author_id = $request->author_id;
         $num_rating = $request->num_rating;

@@ -17,6 +17,7 @@ const shopApi = {
                 category_id: filterAndSort.category_id,
                 num_rating: filterAndSort.num_rating,
                 num_item: filterAndSort.num_item,
+                sort: filterAndSort.sort,
                 page: filterAndSort.page,
             }
 

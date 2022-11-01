@@ -8,7 +8,7 @@ function HomePage() {
 
     return (
         <>
-            <div className="container">
+            <div className="container mt-3">
                 <section id="on-sale">
                     <div className="row">
                         <div className="col-11">

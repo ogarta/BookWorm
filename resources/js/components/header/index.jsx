@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './style.scss';
 
-function ColorSchemesExample() {
+function HeaderComponent() {
     return (
-        <>
-            <Navbar bg="dark" variant="dark">
+        <header>
+
+            <Navbar bg="dark" variant="dark" className="navbar">
                 <Container>
                     <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
                     <Nav>
@@ -17,8 +19,8 @@ function ColorSchemesExample() {
                     </Nav>
                 </Container>
             </Navbar>
-        </>
+        </header>
     );
 }
 
-export default ColorSchemesExample;
+export default HeaderComponent;
