@@ -9,6 +9,7 @@ use App\Http\Requests\ReviewRequest;
 use App\Http\Requests\CreateReviewRequest;
 use App\Repositories\ReviewRepository;
 use App\Http\Resources\Review\ReviewCollection;
+use App\Http\Resources\Review\RatingCollection;
 
 class ReviewController extends Controller
 {
@@ -19,16 +20,12 @@ class ReviewController extends Controller
     
     public function getDetailRating(IdBookRequest $request){
         $listDetailRating =  $this->reviewRepository->getDetailRating($request->id);
-        return $listDetailRating->isNotEmpty()? 
-        response()->json(["data" =>$listDetailRating], 200) : 
-        response()->json(['message' => 'Not Rating For Book'], 404);
+        return response()->json(new RatingCollection($listDetailRating), 200);
     }
 
     public function getDetailReview(ReviewRequest $request){
         $listDetailReview =  $this->reviewRepository->getDetailReview($request);
-        return $listDetailReview->count() !== 0 ? 
-        response()->json(new ReviewCollection($listDetailReview), 200) : 
-        response()->json(['message' => 'Not found'], 404);
+        return response()->json(new ReviewCollection($listDetailReview), 200);
     }
 
     public function createReview(CreateReviewRequest $request){

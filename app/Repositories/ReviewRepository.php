@@ -21,6 +21,7 @@ class ReviewRepository
                 DB::raw('count(review.rating_start) as count_rating_star'),
             )
             ->groupBy('review.rating_start');
+            // dd($listRatingStart->get());
         return $listRatingStart->get();
     }
 
