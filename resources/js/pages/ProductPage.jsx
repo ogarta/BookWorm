@@ -11,7 +11,6 @@ export default function ProductPage() {
     useEffect(() => {
         const fetchDataBook = async () => {
             const response = await ProductPageAdapter.getProductDetail(id);
-            console.log(response.data.data);
             setBook(response.data);
         }
         fetchDataBook();
@@ -24,7 +23,7 @@ export default function ProductPage() {
         <>
             <div className="container">
 
-                <h3 className="mt-3">{book.data.category_name}</h3>
+                <h3 className="mt-3">{book.category_name}</h3>
                 <hr />
                 <div className="row">
                     <div className="col-8">
@@ -34,7 +33,7 @@ export default function ProductPage() {
                     </div>
 
                 </div>
-                <div className="row">
+                <div className="row mt-3">
                     <div className="col-8">
                         <ReviewProduct dataBook={book} />
                     </div>

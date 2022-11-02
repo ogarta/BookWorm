@@ -20,6 +20,7 @@ class ReviewCollection extends ResourceCollection
                 'size' => $this->perPage(),
                 'total' => $this->total(),
                 'current' => $this->currentPage(),
+                'last' => $this->lastPage(),
             ]
         ];
     }

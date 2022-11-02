@@ -16,22 +16,15 @@ class RatingCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        // dd($this->collection);
-        // $this->collection->map(function ($item) {
-        //     dd($item);
-        //     // return [
-        //     //     'rating_start' => $item->rating_start,
-        //     //     'count_rating_star' => $item->count_rating_star,
-        //     // ];
-        // });
+        // convert collection to array
         $data = $this->collection->toArray();
-        // dd($data);
+        // check if missing data, push 0 to array
         for($i=1;$i<=5;$i++){
             if (!in_array($i, array_column($data, 'rating_start'))) {
                 array_push($data, ['rating_start' => $i, 'count_rating_star' => 0]);
             }
         }
-        // dd($data);
+        // sort array by rating_start
         return [
             'data'=> Usort::sortArray($data,'desc'),
         ];

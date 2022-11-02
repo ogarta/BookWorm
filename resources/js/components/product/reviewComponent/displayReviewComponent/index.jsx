@@ -1,47 +1,56 @@
 import React from "react";
 import ProductPageAdapter from "../../../../adapters/productPageAdapter";
 import { useEffect, useState } from "react";
-export default function ReviewProduct({ dataBook }) {
-    const [review, setReview] = useState([]);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('');
-    const [detailRating, setDetailRating] = useState([]);
-    const avgRating = dataBook.data.avg_rating_star;
-    let starRating = 1;
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import PaginatesReviewComponent from "./PaginatesReviewComponent";
 
-    // useEffect(() => {
-    //     const fetchDataReview = async () => {
-    //         const response = await ProductPageAdapter.getReview(dataBook.data.id);
-    //         setReview(response.data);
-    //     }
-    //     fetchDataReview();
-    // }, []);
+export default function ReviewProduct({ dataBook }) {
+    const [rating, setRating] = useState("");
+    const [detailRating, setDetailRating] = useState([]);
+    const avgRating = dataBook.avg_rating_star;
+    const [sort, setSort] = useState('asc');
+    const [itemsPage, setItemsPage] = useState(15);
+    const [ReviewProduct, setReviewProduct] = useState([]);
+    const [page, setPage] = useState(1);
+    const [paginate, setPaginate] = useState({});
+
+    useEffect(() => {
+        const fetchDataReview = async () => {
+            const response = await ProductPageAdapter.getReview({
+                id: dataBook.id,
+                rating_star: rating,
+                num_item: itemsPage,
+                sort: sort,
+                page: page,
+
+            });
+            console.log(response.pagination);
+            setPaginate(response.pagination);
+            setReviewProduct(response.data);
+        }
+        fetchDataReview();
+    }, [rating, itemsPage, sort, page]);
 
     useEffect(() => {
         const fetchSumEachRating = async () => {
-            const response = await ProductPageAdapter.getSumEachRating(dataBook.data.id);
-            setDetailRating(response.data.data);
+            const response = await ProductPageAdapter.getSumEachRating(dataBook.id);
+            setDetailRating(response.data);
         }
         fetchSumEachRating();
     }, []);
 
-    const handleRating = (e) => {
-        setRating(e.target.value);
+    const handleSelectRating = (e) => {
+        setRating(e);
     }
 
-    const handleComment = (e) => {
-        setComment(e.target.value);
+    const handleSelectSort = (e) => {
+        setSort(e);
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const response = await ProductPageAdapter.postReview(dataBook.data.id, rating, comment);
-        setReview(response.data);
+    const handleSelectNumItemPage = (e) => {
+        setItemsPage(e);
     }
 
-    const handleSelect = (e) => {
-        console.log(e);
-    }
     return (
         <>
             <div className="card">
@@ -50,15 +59,54 @@ export default function ReviewProduct({ dataBook }) {
                 </div>
                 <div className="card-body">
                     <h2>{Number(avgRating).toFixed(1)} Star</h2>
-                    <label className="me-3">({dataBook.data.count_review})</label>
+                    <label className="me-3">({dataBook.count_review})</label>
 
-                    {
-                        detailRating && detailRating.map((item, index) => (
-                            <label className="me-3 " key={index} onClick={() => handleSelect(item.rating_start)}><ins>{item.rating_start} star ({item.count_rating_star})</ins></label>
-                        ))}
+                    {detailRating && detailRating.map((item, index) => (
+                        <label className="me-3 " key={index} onClick={() => handleSelectRating(item.rating_start)}><ins>{item.rating_start} star ({item.count_rating_star})</ins></label>
+                    ))}
+                    <div className="row">
+                        <div className="col-md-6">
+                            <p>Showing  1-12 of 3134</p>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="d-flex justify-content-end">
+                                <div className='col-6 d-flex justify-content-end'>
+                                    <section id="sort" className='me-4'>
+                                        <DropdownButton
+                                            drop='down'
+                                            variant="secondary"
+                                            title={`Sort by ${sort}`}
+                                            autoClose="inside"
+                                            onSelect={handleSelectSort}
+                                        >
+                                            <Dropdown.Item eventKey="desc">Sort by date: newest to oldest</Dropdown.Item>
+                                            <Dropdown.Item eventKey="asc">Sort by date: oldest to newest</Dropdown.Item>
+                                        </DropdownButton>
+                                    </section>
 
+                                    <section id="item-page">
+                                        <DropdownButton
+                                            drop='down'
+                                            variant="secondary"
+                                            title={`Show ${itemsPage}`}
+                                            autoClose="inside"
+                                            onSelect={handleSelectNumItemPage}
+                                        >
+                                            <Dropdown.Item eventKey="5">5</Dropdown.Item>
+                                            <Dropdown.Item eventKey="10">10</Dropdown.Item>
+                                            <Dropdown.Item eventKey="15">15</Dropdown.Item>
+                                            <Dropdown.Item eventKey="20">20</Dropdown.Item>
+                                        </DropdownButton>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <PaginatesReviewComponent dataBook={[paginate, ReviewProduct]} />
+                        </div>
+                    </div >
                 </div>
-            </div >
+            </div>
         </>
     );
 }

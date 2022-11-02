@@ -18,7 +18,7 @@ export default function CardProduct(props) {
         final_price,
         sub_price,
         discount_price,
-    } = { ...book.data };
+    } = book;
 
     return (
         <div className="card">

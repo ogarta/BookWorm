@@ -42,9 +42,9 @@ class ReviewRepository
                 'review.review_date'
             )
             ->when($request->rating_star !== null, function ($query) use ($request) {
-                return $query->where('review.rating_start', $request->rating);
+                return $query->where('review.rating_start', '>=' ,$request->rating_star);
             })
-            ->orderBy('review.review_date', $request->sort ?? 'desc');
+            ->orderBy('review.review_date', $request->sort === 'desc' ? 'desc' : 'asc');
 
         return $listReview->paginate($request->num_item);
     }
