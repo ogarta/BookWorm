@@ -24,7 +24,6 @@ export default function ReviewProduct({ dataBook }) {
                 page: page,
 
             });
-            console.log(response.pagination);
             setPaginate(response.pagination);
             setReviewProduct(response.data);
         }

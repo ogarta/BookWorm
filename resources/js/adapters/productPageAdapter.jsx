@@ -25,6 +25,10 @@ const ProductPageAdapter = {
                 id: id,
             }
         });
+    },
+    addReview(data) {
+        const url = '/api/product/review/create';
+        return axiosClient.post(url, data);
     }
 };
 export default ProductPageAdapter;
