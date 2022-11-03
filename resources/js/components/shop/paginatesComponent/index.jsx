@@ -28,9 +28,9 @@ export default function PaginatesComponent() {
         fetchListBookByFilterAndSort();
     }, [params]);
 
-    // const handlePageClick = (data) => {
-    //     dispatch(setPage(data.selected + 1));
-    // }
+    const handlePageClick = (data) => {
+        dispatch(setPage(data.selected + 1));
+    }
 
     return (
         <>

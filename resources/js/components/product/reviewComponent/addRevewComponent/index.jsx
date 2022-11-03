@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 export default function AddReviewComponen({ dataBook }) {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [timeLeft, setTimeLeft] = useState(null);
-
+    const [responseError, setResponseError] = useState(null);
     useEffect(() => {
         if (timeLeft === 0) {
             window.location.reload();
@@ -29,7 +29,7 @@ export default function AddReviewComponen({ dataBook }) {
                 });
                 setTimeLeft(5)
             } catch (error) {
-                console.log(error.response.data);
+                setResponseError(error.response.data);
             }
         }
 
@@ -63,6 +63,7 @@ export default function AddReviewComponen({ dataBook }) {
                             </select>
                             <p>{timeLeft !== null ? "Successful review" : ""}</p>
                             <p>{timeLeft !== null ? "Reload Page after " + timeLeft + " s" : ""}</p>
+                            <p role="alert" style={{ color: "red" }}>{responseError}</p>
                             <button type="submit" className="btn btn-primary mt-3" >Submit</button>
                         </div>
                     </form>
