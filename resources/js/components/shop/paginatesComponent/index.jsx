@@ -11,8 +11,6 @@ export default function PaginatesComponent() {
     const params = useSelector(state => state.filterReducer.filter);
     const paggination = useSelector(state => state.filterReducer.pagination);
 
-    console.log(params);
-
     useEffect(() => {
         const fetchListBookByFilterAndSort = async () => {
             const response = await shopApi.getListBookByFilterAndSort(params);
@@ -30,9 +28,9 @@ export default function PaginatesComponent() {
         fetchListBookByFilterAndSort();
     }, [params]);
 
-    const handlePageClick = (data) => {
-        dispatch(setPage(data.selected + 1));
-    }
+    // const handlePageClick = (data) => {
+    //     dispatch(setPage(data.selected + 1));
+    // }
 
     return (
         <>

@@ -21,6 +21,8 @@ class ReviewCollection extends ResourceCollection
                 'total' => $this->total(),
                 'current' => $this->currentPage(),
                 'last' => $this->lastPage(),
+                'from'=> $this->firstItem(),
+                'to' => $this->lastItem(),
             ]
         ];
     }

@@ -2,7 +2,7 @@ import React from "react";
 import ItemCardComponent from "../../../../../components/bookCard/index";
 import ReactPaginate from 'react-paginate';
 
-export default function PaginatesReviewComponent({ dataBook }) {
+export default function PaginatesReviewComponent({ dataBook, setPage }) {
     if (Object.keys(dataBook).length === 0) {
         return <h1>Loading...</h1>
     }
@@ -10,8 +10,12 @@ export default function PaginatesReviewComponent({ dataBook }) {
     const paginate = dataBook[0];
 
     const handlePageClick = (data) => {
-        // setPage(data.selected + 1);
+        console.log(data.selected + 1);
+        if (isFinite(data.selected)) {
+            setPage(data.selected + 1);
+        }
     }
+
     return (
         <>
             <div>

@@ -14275,21 +14275,13 @@ function AddReviewComponen(_ref) {
       window.location.reload();
       setTimeLeft(null);
     }
-
-    // exit early when we reach 0
     if (!timeLeft) return;
-
-    // save intervalId to clear the interval when the
-    // component re-renders
     var intervalId = setInterval(function () {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    // clear interval on re-render to avoid memory leaks
     return function () {
       return clearInterval(intervalId);
     };
-    // add timeLeft as a dependency to re-rerun the effect
-    // when we update it
   }, [timeLeft]);
   var onSubmit = function onSubmit(data) {
     var postReview = /*#__PURE__*/function () {
@@ -14433,7 +14425,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function PaginatesReviewComponent(_ref) {
-  var dataBook = _ref.dataBook;
+  var dataBook = _ref.dataBook,
+    setPage = _ref.setPage;
   if (Object.keys(dataBook).length === 0) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
       children: "Loading..."
@@ -14442,7 +14435,10 @@ function PaginatesReviewComponent(_ref) {
   var reviewData = dataBook[1];
   var paginate = dataBook[0];
   var handlePageClick = function handlePageClick(data) {
-    // setPage(data.selected + 1);
+    console.log(data.selected + 1);
+    if (isFinite(data.selected)) {
+      setPage(data.selected + 1);
+    }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -14575,8 +14571,9 @@ function ReviewProduct(_ref) {
               case 2:
                 response = _context.sent;
                 setPaginate(response.pagination);
+                console.log(response.pagination);
                 setReviewProduct(response.data);
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -14616,7 +14613,7 @@ function ReviewProduct(_ref) {
     fetchSumEachRating();
   }, []);
   var handleSelectRating = function handleSelectRating(e) {
-    setRating(e);
+    setRating(e === rating ? '' : e);
   };
   var handleSelectSort = function handleSelectSort(e) {
     setSort(e);
@@ -14631,8 +14628,8 @@ function ReviewProduct(_ref) {
         className: "card-header",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
           className: "card-title",
-          children: ["Customer Reviews ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            children: "(filtered by )"
+          children: ["Customer Reviews ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+            children: ["(filtered by ", rating !== "" ? rating + " star" : "", ")"]
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -14656,8 +14653,8 @@ function ReviewProduct(_ref) {
           className: "row",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-md-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-              children: "Showing  1-12 of 3134"
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+              children: ["Showing ", paginate.from, "-", paginate.to, " of ", paginate.total]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-md-6",
@@ -14709,7 +14706,8 @@ function ReviewProduct(_ref) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_PaginatesReviewComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
-              dataBook: [paginate, ReviewProduct]
+              dataBook: [paginate, ReviewProduct],
+              setPage: setPage
             })
           })]
         })]
@@ -14866,8 +14864,6 @@ function FilterComponent() {
       star: valueStar
     }));
   }, [valueStar]);
-
-  // console.log("param", useSelector(state => state.filterReducer.filter));
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
       defaultActiveKey: ['1', '2', '0'],
@@ -14982,7 +14978,6 @@ function PaginatesComponent() {
   var paggination = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.filterReducer.pagination;
   });
-  console.log(params);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchListBookByFilterAndSort = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -15017,9 +15012,11 @@ function PaginatesComponent() {
     }();
     fetchListBookByFilterAndSort();
   }, [params]);
-  var handlePageClick = function handlePageClick(data) {
-    dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__.setPage)(data.selected + 1));
-  };
+
+  // const handlePageClick = (data) => {
+  //     dispatch(setPage(data.selected + 1));
+  // }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "row",

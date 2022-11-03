@@ -61,7 +61,6 @@ function FilterComponent() {
         }));
     }, [valueStar]);
 
-    // console.log("param", useSelector(state => state.filterReducer.filter));
     return (
         <div>
             <Accordion defaultActiveKey={['1', '2', '0']} alwaysOpen>

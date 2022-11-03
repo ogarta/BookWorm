@@ -13,7 +13,6 @@ export default function ReviewProduct({ dataBook }) {
     const [ReviewProduct, setReviewProduct] = useState([]);
     const [page, setPage] = useState(1);
     const [paginate, setPaginate] = useState({});
-
     useEffect(() => {
         const fetchDataReview = async () => {
             const response = await ProductPageAdapter.getReview({
@@ -25,6 +24,7 @@ export default function ReviewProduct({ dataBook }) {
 
             });
             setPaginate(response.pagination);
+            console.log(response.pagination);
             setReviewProduct(response.data);
         }
         fetchDataReview();
@@ -39,7 +39,7 @@ export default function ReviewProduct({ dataBook }) {
     }, []);
 
     const handleSelectRating = (e) => {
-        setRating(e);
+        setRating(e === rating ? '' : e);
     }
 
     const handleSelectSort = (e) => {
@@ -54,7 +54,7 @@ export default function ReviewProduct({ dataBook }) {
         <>
             <div className="card">
                 <div className="card-header">
-                    <h5 className="card-title">Customer Reviews <span>(filtered by )</span></h5>
+                    <h5 className="card-title">Customer Reviews <span>(filtered by {rating !== "" ? (rating + " star") : ""})</span></h5>
                 </div>
                 <div className="card-body">
                     <h2>{Number(avgRating).toFixed(1)} Star</h2>
@@ -65,7 +65,7 @@ export default function ReviewProduct({ dataBook }) {
                     ))}
                     <div className="row">
                         <div className="col-md-6">
-                            <p>Showing  1-12 of 3134</p>
+                            <p>Showing {paginate.from}-{paginate.to} of {paginate.total}</p>
                         </div>
                         <div className="col-md-6">
                             <div className="d-flex justify-content-end">
@@ -101,7 +101,7 @@ export default function ReviewProduct({ dataBook }) {
                             </div>
                         </div>
                         <div>
-                            <PaginatesReviewComponent dataBook={[paginate, ReviewProduct]} />
+                            <PaginatesReviewComponent dataBook={[paginate, ReviewProduct]} setPage={setPage} />
                         </div>
                     </div >
                 </div>
