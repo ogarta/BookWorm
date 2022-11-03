@@ -3,7 +3,8 @@ import CardProduct from "../components/product/productDetailComponent/idex";
 import ReviewProduct from "../components/product/reviewComponent/displayReviewComponent/index";
 import ProductPageAdapter from "../adapters/productPageAdapter";
 import { useParams } from "react-router-dom";
-import AddReviewComponen from "../components/product/addCartComponent";
+import AddReviewComponen from "../components/product/reviewComponent/addRevewComponent";
+import AddCartComponent from "../components/product/addCartComponent";
 
 export default function ProductPage() {
     let { id } = useParams()
@@ -31,6 +32,7 @@ export default function ProductPage() {
                         <CardProduct dataBook={book} />
                     </div>
                     <div className="col-4">
+                        <AddCartComponent dataBook={book} />
                     </div>
 
                 </div>

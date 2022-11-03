@@ -1,87 +1,57 @@
-import React, { useEffect, useState } from "react";
-import ProductPageAdapter from "../../../adapters/productPageAdapter";
-import { useForm } from "react-hook-form";
-
-export default function AddReviewComponen({ dataBook }) {
-    const [ratingStar, setRatingStar] = useState(1);
-    const [reviewTitle, setReviewTitle] = useState("");
-    const [reviewDetail, setReviewDetail] = useState("");
-    const { register, formState: { errors }, handleSubmit } = useForm();
-
-    const [timeLeft, setTimeLeft] = useState(null);
-
-    useEffect(() => {
-        if (timeLeft === 0) {
-            window.location.reload();
-            setTimeLeft(null)
+import React, { useState } from "react"
+import { Card } from "react-bootstrap"
+import { useDispatch } from "react-redux"
+import { setCart } from "../../../reducers/cartReducer";
+export default function AddCartComponent({ dataBook }) {
+    const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+    const renderPrice = () => {
+        if (dataBook.book_price == dataBook.final_price) {
+            return <p className="price">${dataBook.book_price}</p>;
         }
 
-        // exit early when we reach 0
-        if (!timeLeft) return;
+        return (
+            <p className="price">
+                <span className="text-secondary" ><del>${dataBook.book_price}</del></span>
 
-        // save intervalId to clear the interval when the
-        // component re-renders
-        const intervalId = setInterval(() => {
+                <span className="font-weight-bold ms-3" >${dataBook.final_price}</span>
+            </p>
 
-            setTimeLeft(timeLeft - 1);
-        }, 1000);
-        // clear interval on re-render to avoid memory leaks
-        return () => clearInterval(intervalId);
-        // add timeLeft as a dependency to re-rerun the effect
-        // when we update it
-    }, [timeLeft]);
-
-    const onSubmit = data => {
-        const postReview = async () => {
-            try {
-                const response = await ProductPageAdapter.addReview({
-                    id: dataBook.id,
-                    rating_start: data.reviewRating,
-                    title: data.reviewTitle,
-                    details: data.reviewDetail,
-                });
-                setTimeLeft(5)
-            } catch (error) {
-                console.log(error.response.data);
-            }
-        }
-
-        postReview();
+        );
     };
-
-
+    const handleAddToCart = () => {
+        const data = {
+            id: dataBook.id,
+            book_title: dataBook.book_title,
+            book_price: dataBook.book_price,
+            book_cover_photo: dataBook.book_cover_photo,
+            author_name: dataBook.author_name,
+            quantity: quantity,
+            final_price: dataBook.final_price,
+        }
+        dispatch(setCart(data));
+    }
 
     return (
         <>
-            <div className="card">
-                <div className="card-header">
-                    <h5 className="card-title">Write a review</h5>
-                </div>
-                <div className="card-body">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="form-group">
-                            <p>Add a title</p>
-                            <input type="text" className="form-control" name="review_title" {...register("reviewTitle", { required: true })} />
-                            {errors.reviewTitle?.type === 'required' && <p role="alert" style={{ color: "red" }}>Review title is required</p>}
-                            <p>Details please! Your review helps other shoppers</p>
-                            <textarea className="form-control" rows="3" name="review_detail" {...register("reviewDetail", { required: true })}></textarea>
-                            {errors.reviewDetail?.type === 'required' && <p role="alert" style={{ color: "red" }}>Review detail is required</p>}
-                            <label htmlFor="exampleFormControlSelect1">Rating</label>
-                            <select className="form-control" id="exampleFormControlSelect1" {...register("reviewRating", { required: true })}>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                            <p>{timeLeft !== null ? "Successful review" : ""}</p>
-                            <p>{timeLeft !== null ? "Reload Page after " + timeLeft + " s" : ""}</p>
-                            <button type="submit" className="btn btn-primary mt-3" >Submit</button>
+            <Card>
+                <Card.Header>
+                    {renderPrice()}
+                </Card.Header>
+                <Card.Body>
+                    <p>Quantity</p>
+                    <div className="d-flex justify-content-center">
+                        <button onClick={() => setQuantity(quantity > 1 ? (quantity - 1) : 1)}> - </button>
+                        <div className="bg-dark text-white">
+                            <label className="mx-4"> {quantity} </label>
                         </div>
-                    </form>
-                </div>
-
-            </div>
+                        <button onClick={() => setQuantity(quantity < 8 ? (quantity + 1) : 8)}> + </button>
+                    </div>
+                    <div className="d-flex justify-content-center mt-2">
+                        <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
+                    </div>
+                </Card.Body>
+            </Card >
         </>
-    );
+    )
 }
