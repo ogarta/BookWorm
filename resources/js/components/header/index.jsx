@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useSelector } from 'react-redux';
 import LoginComponent from '../login';
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 function HeaderComponent() {
@@ -15,10 +16,10 @@ function HeaderComponent() {
                 <Container>
                     <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
                     <Nav>
-                        <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/shop">Shop</Nav.Link>
-                        <Nav.Link href="/about">About</Nav.Link>
-                        <Nav.Link href="/cart">Cart ({cartNumber})</Nav.Link>
+                        <NavLink to="/home" className="nav-item nav-link">Home</NavLink>
+                        <NavLink to="/shop" className="nav-item nav-link">Shop</NavLink>
+                        <NavLink to="/about" className="nav-item nav-link">About</NavLink>
+                        <NavLink to="/cart" className="nav-item nav-link">Cart ({cartNumber})</NavLink>
                         <LoginComponent />
                     </Nav>
                 </Container>

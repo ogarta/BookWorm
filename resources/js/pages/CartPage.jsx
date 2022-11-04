@@ -57,7 +57,7 @@ export default function CartPage() {
     return (
         <>
             <Container>
-                <h2>Your cart: </h2>
+                <h2>Your cart: {dataListBook.length}</h2>
                 <hr />
                 <div className="row">
                     <div className="col-md-8">

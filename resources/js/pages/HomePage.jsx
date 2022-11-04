@@ -12,7 +12,7 @@ function HomePage() {
                 <section id="on-sale">
                     <div className="row">
                         <div className="col-11">
-                            <h3>On Sale</h3>
+                            <h2>On Sale</h2>
                         </div>
                         <div className="col-1" >
                             <Link to={'/shop'}>

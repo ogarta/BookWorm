@@ -29,7 +29,8 @@ export default function LoginComponent() {
                 setUser(response.user);
                 dispatch(showPopupLogin(false));
             } catch (error) {
-                setResponseError(error.response.data);
+                // console.log(error.response.data.message);
+                setResponseError(error.response.data.message);
             }
         }
         login();

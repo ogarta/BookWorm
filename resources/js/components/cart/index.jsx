@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import IMAGE from "../../../assets";
-import { setCart, minusQuantity, plusQuantity } from "../../reducers/cartReducer";
+import { minusQuantity, plusQuantity } from "../../reducers/cartReducer";
 import { Link } from 'react-router-dom';
 
 export default function CartComponent({ dataListBook }) {

@@ -20,7 +20,7 @@ class BookRepository
     {
         $listTopDisCount = $this->detailBook()
             ->whereNotNull('discount.discount_price')
-            ->orderBy('discount.discount_price','DESC')
+            ->orderBy('sub_price','DESC')
             ->limit(Constant::LIMIT_TOP_DISCOUNT)
             ->get();
         $listTopDisCount = new BookCollection($listTopDisCount);
