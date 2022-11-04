@@ -32,4 +32,10 @@ class AuthRepository
         ], 401);
     }
 
+    public function logoutUser()
+    {
+        return Auth::user()->tokens()->delete();
+        return response()->json(['message' => 'Logout successfully']);
+    }
+
 }

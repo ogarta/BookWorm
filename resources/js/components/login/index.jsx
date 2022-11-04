@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import authAdapter from '../../adapters/authAdapter';
 import { useForm } from 'react-hook-form';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 export default function LoginComponent() {
     const [show, setShow] = useState(false);
     const [passwordShown, setPasswordShown] = useState(false);
@@ -37,23 +37,40 @@ export default function LoginComponent() {
     };
 
     useEffect(() => {
-        console.log("ahihi");
         if (localStorage.getItem('token')) {
             setUser(JSON.parse(localStorage.getItem('token')).user);
         }
     }, []);
 
+    const handleClickLogOut = (e) => {
+        if (e === 'logout') {
+            const logoutUser = async () => {
+                try {
+                    const responce = await authAdapter.getLogOut();
+                    console.log(responce);
+                    localStorage.removeItem('token');
+                    setUser(null);
+                } catch (error) {
+                    console.log(error.response.data);
+                }
+            }
+            logoutUser();
+        }
+    }
+
     if (user) {
         return (
             <>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        {user.first_name + ' ' + user.last_name}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Log out</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                <DropdownButton
+                    drop='down'
+                    variant="secondary"
+                    title={user.first_name + ' ' + user.last_name}
+                    autoClose="inside"
+                    onSelect={handleClickLogOut}
+                >
+                    <Dropdown.Item eventKey="logout">Log out</Dropdown.Item>
+
+                </DropdownButton>
             </>
         );
     }

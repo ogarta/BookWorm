@@ -26,6 +26,8 @@ use App\Http\Controllers\Api\CategoryController;
 Route::prefix('auth')->group(function () {
 	Route::post('login', [AuthController::class, 'login'])
 	->name('login');
+	Route::middleware('auth:sanctum')->get('logout', [AuthController::class, 'logout'])
+	->name('logout');
 });
 
 // Home Page
