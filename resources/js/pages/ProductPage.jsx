@@ -41,7 +41,7 @@ export default function ProductPage() {
                         <ReviewProduct dataBook={book} />
                     </div>
                     <div className="col-4">
-                        <AddReviewComponen dataBook={book} />
+                        {/* <AddReviewComponen dataBook={book} /> */}
                     </div>
 
                 </div>

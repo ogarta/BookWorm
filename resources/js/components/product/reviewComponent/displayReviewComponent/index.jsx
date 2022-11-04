@@ -76,7 +76,7 @@ export default function ReviewProduct({ dataBook }) {
                                             variant="secondary"
                                             title={`Sort by ${sort}`}
                                             autoClose="inside"
-                                            onSelect={handleSelectSort}
+                                            onSelect={() => handleSelectSort()}
                                         >
                                             <Dropdown.Item eventKey="desc">Sort by date: newest to oldest</Dropdown.Item>
                                             <Dropdown.Item eventKey="asc">Sort by date: oldest to newest</Dropdown.Item>
@@ -89,7 +89,7 @@ export default function ReviewProduct({ dataBook }) {
                                             variant="secondary"
                                             title={`Show ${itemsPage}`}
                                             autoClose="inside"
-                                            onSelect={handleSelectNumItemPage}
+                                            onSelect={() => handleSelectNumItemPage()}
                                         >
                                             <Dropdown.Item eventKey="5">5</Dropdown.Item>
                                             <Dropdown.Item eventKey="10">10</Dropdown.Item>

@@ -5,6 +5,7 @@ import cartAdapter from "../adapters/cartAdapter";
 import CartComponent from "../components/cart";
 import { useDispatch } from 'react-redux';
 import { showPopupLogin } from "../reducers/popupLoginReducer";
+import { removeAllCart } from "../reducers/cartReducer";
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
@@ -47,7 +48,7 @@ export default function CartPage() {
 
         try {
             const response = await cartAdapter.postOrder(params);
-            console.log(response);
+            dispatch(removeAllCart());
         } catch (error) {
             console.log(error.response.data);
         }
