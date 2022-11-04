@@ -5,6 +5,7 @@ import CartComponent from "../components/cart";
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
+
     return (
         <>
             <Container>
@@ -12,7 +13,7 @@ export default function CartPage() {
                 <hr />
                 <div className="row">
                     <div className="col-md-8">
-                        <CartComponent />
+                        <CartComponent dataListBook={dataListBook} />
                     </div>
                     <div className="col-md-4">
 
