@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { Card } from "react-bootstrap"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setCart } from "../../../reducers/cartReducer";
 export default function AddCartComponent({ dataBook }) {
+    const maxQuantity = useSelector((state) => state.cartReducer.maxQuantity);
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const renderPrice = () => {
@@ -45,7 +46,7 @@ export default function AddCartComponent({ dataBook }) {
                         <div className="bg-dark text-white">
                             <label className="mx-4"> {quantity} </label>
                         </div>
-                        <button onClick={() => setQuantity(quantity < 8 ? (quantity + 1) : 8)}> + </button>
+                        <button onClick={() => setQuantity(quantity < maxQuantity ? (quantity + 1) : maxQuantity)}> + </button>
                     </div>
                     <div className="d-flex justify-content-center mt-2">
                         <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
