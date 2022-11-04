@@ -37,9 +37,9 @@ export default function CartComponent({ dataListBook }) {
                 <Card.Body>
                     {dataListBook.map((item, index) => {
                         return (
-                            <Link to={`/product/${item.id}`} style={{ textDecoration: 'none', color: 'black' }} key={index}>
-                                <div className="row mt-3">
-                                    <div className="col-md-5">
+                            <div className="row mt-3" key={index}>
+                                <div className="col-md-5">
+                                    <Link to={`/product/${item.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <div className="d-flex">
                                             <img src={item.book_cover_photo ? IMAGE[item.book_cover_photo] : IMAGE['empty']} alt="" width="100px" height="150px" />
                                             <div className="ms-3">
@@ -47,24 +47,25 @@ export default function CartComponent({ dataListBook }) {
                                                 <p>{item.author_name}</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-2">
-                                        {renderPrice(item.book_price, item.final_price)}
-                                    </div>
-                                    <div className="col-md-3">
-                                        <div className="d-flex justify-content-start">
-                                            <button onClick={() => dishpatch(minusQuantity(item.id))}> - </button>
-                                            <div className="bg-dark text-white">
-                                                <label className="mx-4"> {item.quantity} </label>
-                                            </div>
-                                            <button onClick={() => dishpatch(plusQuantity(item.id))}> + </button>
+                                    </Link>
+                                </div>
+
+                                <div className="col-md-2">
+                                    {renderPrice(item.book_price, item.final_price)}
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="d-flex justify-content-start">
+                                        <button onClick={() => dishpatch(minusQuantity(item.id))}> - </button>
+                                        <div className="bg-dark text-white">
+                                            <label className="mx-4"> {item.quantity} </label>
                                         </div>
-                                    </div>
-                                    <div className="col-md-2">
-                                        <p className="price">${item.final_price}</p>
+                                        <button onClick={() => dishpatch(plusQuantity(item.id))}> + </button>
                                     </div>
                                 </div>
-                            </Link>
+                                <div className="col-md-2">
+                                    <p className="price">${(item.final_price * item.quantity).toFixed(2)}</p>
+                                </div>
+                            </div>
 
                         )
                     })}
