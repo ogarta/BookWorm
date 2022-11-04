@@ -4,15 +4,18 @@ import Modal from 'react-bootstrap/Modal';
 import authAdapter from '../../adapters/authAdapter';
 import { useForm } from 'react-hook-form';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { showPopupLogin } from '../../reducers/popupLoginReducer';
 export default function LoginComponent() {
-    const [show, setShow] = useState(false);
+    const show = useSelector((state) => state.popupLoginReducer.isShow);
+    const dispatch = useDispatch();
     const [passwordShown, setPasswordShown] = useState(false);
     const [responseError, setResponseError] = useState(null);
     const [user, setUser] = useState(null);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => dispatch(showPopupLogin(false));
+    const handleShow = () => dispatch(showPopupLogin(true));
 
     const onSubmit = data => {
         const params = {
@@ -24,7 +27,7 @@ export default function LoginComponent() {
                 const response = await authAdapter.postLogin(params);
                 localStorage.setItem('token', JSON.stringify(response));
                 setUser(response.user);
-                setShow(false);
+                dispatch(showPopupLogin(false));
             } catch (error) {
                 setResponseError(error.response.data);
             }

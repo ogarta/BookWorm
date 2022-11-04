@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import cartAdapter from "../adapters/cartAdapter";
 import CartComponent from "../components/cart";
+import { useDispatch } from 'react-redux';
+import { showPopupLogin } from "../reducers/popupLoginReducer";
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
+    const dispatch = useDispatch();
     var totalCart = 0;
     const [totalPrice, setTotalPrice] = useState(0);
     useEffect(() => {
@@ -13,6 +17,41 @@ export default function CartPage() {
         });
         setTotalPrice(totalCart.toFixed(2));
     }, [dataListBook]);
+
+    const handleOrder = async () => {
+
+        if (totalPrice == 0) {
+            alert('Please add book to cart');
+            return;
+        }
+
+        if (!localStorage.getItem('token')) {
+            dispatch(showPopupLogin(true));
+            return;
+        }
+
+        var itemsOreder = [];
+        dataListBook.map((item) => {
+            itemsOreder.push({
+                book_id: item.id,
+                quantity: item.quantity,
+            });
+
+        })
+        const params = {
+            "order_amount": totalPrice,
+            "items_order": itemsOreder
+        }
+
+        // console.log(params);
+
+        try {
+            const response = await cartAdapter.postOrder(params);
+            console.log(response);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
 
     return (
         <>
@@ -31,7 +70,7 @@ export default function CartPage() {
                             <Card.Body>
                                 <p className="d-flex justify-content-center">${totalPrice}</p>
                                 <div className="d-flex justify-content-center">
-                                    <button className="btn btn-primary">Proceed to checkout</button>
+                                    <button className="btn btn-primary" onClick={() => handleOrder()}>Placed order</button>
                                 </div>
                             </Card.Body>
                         </Card>
