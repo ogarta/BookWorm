@@ -2,9 +2,12 @@ import React, { useState } from "react"
 import { Card } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { setCart } from "../../../reducers/cartReducer";
+import AlertComponent from "../../alert";
 export default function AddCartComponent({ dataBook }) {
     const maxQuantity = useSelector((state) => state.cartReducer.maxQuantity);
     const [quantity, setQuantity] = useState(1);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertParams, setAlertParams] = useState({});
     const dispatch = useDispatch();
     const renderPrice = () => {
         if (dataBook.book_price == dataBook.final_price) {
@@ -20,6 +23,14 @@ export default function AddCartComponent({ dataBook }) {
 
         );
     };
+
+    const handleHideAlert = () => {
+        const timer = setTimeout(() => {
+            setShowAlert(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }
+
     const handleAddToCart = () => {
         const data = {
             id: dataBook.id,
@@ -31,11 +42,18 @@ export default function AddCartComponent({ dataBook }) {
             final_price: dataBook.final_price,
         }
         dispatch(setCart(data));
+        setAlertParams({
+            type: "success",
+            title: "Add to cart",
+            message: "Add to cart successfully",
+        });
+        setShowAlert(true);
+        handleHideAlert();
     }
 
     return (
         <>
-            <Card>
+            <Card className="mb-3">
                 <Card.Header>
                     {renderPrice()}
                 </Card.Header>
@@ -53,6 +71,9 @@ export default function AddCartComponent({ dataBook }) {
                     </div>
                 </Card.Body>
             </Card >
+            {
+                showAlert ? AlertComponent(alertParams) : ''
+            }
         </>
     )
 }

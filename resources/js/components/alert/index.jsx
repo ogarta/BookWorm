@@ -13,6 +13,7 @@ export default function AlertComponent(paramas) {
     return (
         <Alert variant="danger">
             <Alert.Heading>{paramas.title}</Alert.Heading>
+            <hr />
             <p>
                 {paramas.message}
             </p>

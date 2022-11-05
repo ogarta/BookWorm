@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import ProductPageAdapter from "../../../../adapters/productPageAdapter";
 import { useForm } from "react-hook-form";
+import { Card } from "react-bootstrap";
+import AlertComponent from "../../../alert";
 
 export default function AddReviewComponen({ dataBook }) {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [timeLeft, setTimeLeft] = useState(null);
-    const [responseError, setResponseError] = useState(null);
-    useEffect(() => {
-        if (timeLeft === 0) {
-            window.location.reload();
-            setTimeLeft(null)
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertParams, setAlertParams] = useState({});
+
+    const handleHideAlert = (type) => {
+        if (type == "success") {
+            const timer = setTimeout(() => {
+                // reload page
+                window.location.reload();
+            }, 5000);
+            return () => clearTimeout(timer);
         }
-        if (!timeLeft) return;
-        const intervalId = setInterval(() => {
-            setTimeLeft(timeLeft - 1);
-        }, 1000);
-        return () => clearInterval(intervalId);
-    }, [timeLeft]);
+        const timer = setTimeout(() => {
+            setShowAlert(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }
 
     const onSubmit = data => {
         const postReview = async () => {
@@ -27,9 +32,22 @@ export default function AddReviewComponen({ dataBook }) {
                     title: data.reviewTitle,
                     details: data.reviewDetail,
                 });
-                setTimeLeft(5)
+                setAlertParams({
+                    type: "success",
+                    title: "Add review",
+                    message: "Add review successfully",
+                });
+                setShowAlert(true);
+                handleHideAlert("success");
+
             } catch (error) {
-                setResponseError(error.response.data);
+                setAlertParams({
+                    type: "fail",
+                    title: "Add review",
+                    message: "Add review failed",
+                });
+                setShowAlert(true);
+                handleHideAlert();
             }
         }
 
@@ -40,11 +58,11 @@ export default function AddReviewComponen({ dataBook }) {
 
     return (
         <>
-            <div className="card">
-                <div className="card-header">
+            <Card className="mb-3">
+                <Card.Header>
                     <h5 className="card-title">Write a review</h5>
-                </div>
-                <div className="card-body">
+                </Card.Header>
+                <Card.Body>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <p>Add a title</p>
@@ -61,15 +79,12 @@ export default function AddReviewComponen({ dataBook }) {
                                 <option>4</option>
                                 <option>5</option>
                             </select>
-                            <p>{timeLeft !== null ? "Successful review" : ""}</p>
-                            <p>{timeLeft !== null ? "Reload Page after " + timeLeft + " s" : ""}</p>
-                            <p role="alert" style={{ color: "red" }}>{responseError}</p>
                             <button type="submit" className="btn btn-primary mt-3" >Submit</button>
                         </div>
                     </form>
-                </div>
-
-            </div>
+                </Card.Body>
+            </Card>
+            {showAlert ? AlertComponent(alertParams) : ''}
         </>
     );
 }
