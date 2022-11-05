@@ -13,6 +13,7 @@ export default function ReviewProduct({ dataBook }) {
     const [ReviewProduct, setReviewProduct] = useState([]);
     const [page, setPage] = useState(1);
     const [paginate, setPaginate] = useState({});
+
     useEffect(() => {
         const fetchDataReview = async () => {
             const response = await ProductPageAdapter.getReview({
@@ -24,7 +25,6 @@ export default function ReviewProduct({ dataBook }) {
 
             });
             setPaginate(response.pagination);
-            console.log(response.pagination);
             setReviewProduct(response.data);
         }
         fetchDataReview();
