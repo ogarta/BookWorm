@@ -7,13 +7,15 @@ import { useDispatch } from 'react-redux';
 import { showPopupLogin } from "../reducers/popupLoginReducer";
 import { removeAllCart, removeItemCart } from "../reducers/cartReducer";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../components/alert";
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
     const dispatch = useDispatch();
-    const [showAlert, setShowAlert] = useState(false);
-    var totalCart = 0;
     const [totalPrice, setTotalPrice] = useState(0);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertParams, setAlertParams] = useState({});
+    var totalCart = 0;
     const navigate = useNavigate();
     useEffect(() => {
         dataListBook.map((item) => {
@@ -29,9 +31,22 @@ export default function CartPage() {
         return () => clearTimeout(timer);
     }
 
+    const handleHideAlert = () => {
+        const timer = setTimeout(() => {
+            setShowAlert(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }
+
     const handleOrder = async () => {
         if (totalPrice == 0) {
-            alert('Please add book to cart');
+            setAlertParams({
+                type: "fail",
+                title: "Order fail",
+                message: "You have not selected any book to order",
+            });
+            setShowAlert(true);
+            handleHideAlert();
             return;
         }
 
@@ -55,13 +70,24 @@ export default function CartPage() {
         try {
             const response = await cartAdapter.postOrder(params);
             dispatch(removeAllCart());
+            setAlertParams({
+                type: 'success',
+                title: 'Order success',
+                message: 'Please wait for 10s to redirect to home page'
+            });
             setShowAlert(true);
             goHomePage();
         } catch (error) {
             error.response.data.errors.items_order.map((item) => {
-                // console.log(item[0]);
                 dispatch(removeItemCart(item[0]));
             })
+            setAlertParams({
+                type: "fail",
+                title: "Order fail",
+                message: "Book is not exits. We removed it from your cart",
+            });
+            setShowAlert(true);
+            handleHideAlert();
         }
     }
 
@@ -78,13 +104,7 @@ export default function CartPage() {
                     </div>
                     <div className="col-md-4">
                         {
-                            showAlert ? (
-                                <Alert variant="success">
-                                    <Alert.Heading>Successfully order</Alert.Heading>
-                                    <p>
-                                        Back to home page ...
-                                    </p>
-                                </Alert>) : ''
+                            showAlert ? AlertComponent(alertParams) : ''
                         }
                         <Card>
                             <Card.Header>
