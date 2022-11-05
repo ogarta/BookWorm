@@ -13716,7 +13716,7 @@ function ItemCardComponent(props) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Img, {
         className: "card-image",
         variant: "top",
-        src: book_cover_photo ? _assets_index__WEBPACK_IMPORTED_MODULE_1__["default"][book_cover_photo] : _assets_index__WEBPACK_IMPORTED_MODULE_1__["default"].empty,
+        src: book_cover_photo ? _assets_index__WEBPACK_IMPORTED_MODULE_1__["default"][book_cover_photo] : _assets_index__WEBPACK_IMPORTED_MODULE_1__["default"].Empty,
         alt: book_cover_photo
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Body, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Title, {
@@ -13822,7 +13822,7 @@ function CartComponent(_ref) {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "d-flex",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                    src: item.book_cover_photo ? _assets__WEBPACK_IMPORTED_MODULE_2__["default"][item.book_cover_photo] : _assets__WEBPACK_IMPORTED_MODULE_2__["default"].empty,
+                    src: item.book_cover_photo ? _assets__WEBPACK_IMPORTED_MODULE_2__["default"][item.book_cover_photo] : _assets__WEBPACK_IMPORTED_MODULE_2__["default"].Empty,
                     alt: "",
                     width: "100px",
                     height: "150px"
@@ -14455,7 +14455,7 @@ function LoginComponent() {
               style: {
                 color: "red"
               },
-              children: "Email is required"
+              children: " Email is required"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "form-group",
@@ -14721,7 +14721,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function AddReviewComponen(_ref) {
-  var _errors$reviewTitle, _errors$reviewDetail;
+  var _errors$reviewTitle, _errors$reviewTitle2;
   var dataBook = _ref.dataBook;
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_3__.useForm)(),
     register = _useForm.register,
@@ -14808,28 +14808,27 @@ function AddReviewComponen(_ref) {
               className: "form-control",
               name: "review_title"
             }, register("reviewTitle", {
-              required: true
+              required: true,
+              maxLength: 120
             }))), ((_errors$reviewTitle = errors.reviewTitle) === null || _errors$reviewTitle === void 0 ? void 0 : _errors$reviewTitle.type) === 'required' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               role: "alert",
               style: {
                 color: "red"
               },
               children: "Review title is required"
+            }), ((_errors$reviewTitle2 = errors.reviewTitle) === null || _errors$reviewTitle2 === void 0 ? void 0 : _errors$reviewTitle2.type) === 'maxLength' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              role: "alert",
+              style: {
+                color: "red"
+              },
+              children: "Review title max length 120 characters"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               children: "Details please! Your review helps other shoppers"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", _objectSpread({
               className: "form-control",
               rows: "3",
               name: "review_detail"
-            }, register("reviewDetail", {
-              required: true
-            }))), ((_errors$reviewDetail = errors.reviewDetail) === null || _errors$reviewDetail === void 0 ? void 0 : _errors$reviewDetail.type) === 'required' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-              role: "alert",
-              style: {
-                color: "red"
-              },
-              children: "Review detail is required"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            }, register("reviewDetail"))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "exampleFormControlSelect1",
               children: "Rating"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", _objectSpread(_objectSpread({
@@ -14888,7 +14887,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_bookCard_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../components/bookCard/index */ "./resources/js/components/bookCard/index.jsx");
 /* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
 /* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _utils_convertDate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../utils/convertDate */ "./resources/js/utils/convertDate.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -14899,7 +14900,7 @@ function PaginatesReviewComponent(_ref) {
   var dataBook = _ref.dataBook,
     setPage = _ref.setPage;
   if (Object.keys(dataBook).length === 0) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "Loading..."
     });
   }
@@ -14911,26 +14912,26 @@ function PaginatesReviewComponent(_ref) {
       setPage(data.selected + 1);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       children: reviewData === null || reviewData === void 0 ? void 0 : reviewData.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
             className: "fw-bold",
-            children: [item.review_title, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+            children: [item.review_title, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
               className: "fw-light",
               children: [" | ", item.rating_start]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: item.review_details
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: item.review_date
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {})]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: _utils_convertDate__WEBPACK_IMPORTED_MODULE_3__["default"].convertDate(item.review_date)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {})]
         }, index);
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "d-flex justify-content-center",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)((react_paginate__WEBPACK_IMPORTED_MODULE_2___default()), {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((react_paginate__WEBPACK_IMPORTED_MODULE_2___default()), {
         pageClassName: "page-item",
         pageLinkClassName: "page-link",
         previousClassName: "page-item",
@@ -15380,7 +15381,7 @@ function FilterComponent() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
         eventKey: "2",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Header, {
-          children: "Star"
+          children: "Rating review"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Body, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "row",
@@ -15913,7 +15914,7 @@ function ShopPage() {
     var filteredBy = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
       return state.filterReducer.filterDetail;
     });
-    return (filteredBy.category_name ? 'Category: ' + filteredBy.category_name : '') + (filteredBy.author_name ? ' | Author: ' + filteredBy.author_name : '') + (filteredBy.star ? ' | Star: ' + filteredBy.star : '');
+    return (filteredBy.category_name ? 'Category: ' + filteredBy.category_name : '') + (filteredBy.author_name ? ' | Author: ' + filteredBy.author_name : '') + (filteredBy.star ? ' | Rating review: ' + filteredBy.star : '');
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "container",
@@ -15981,14 +15982,14 @@ function ShopPage() {
                   eventKey: "5",
                   children: "5"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
-                  eventKey: "10",
-                  children: "10"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "15",
                   children: "15"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "20",
                   children: "20"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
+                  eventKey: "25",
+                  children: "25"
                 })]
               })
             })]
@@ -16351,6 +16352,44 @@ __webpack_require__.r(__webpack_exports__);
     popupLoginReducer: _popupLoginReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/utils/convertDate.jsx":
+/*!********************************************!*\
+  !*** ./resources/js/utils/convertDate.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var ConvertDate = /*#__PURE__*/function () {
+  function ConvertDate() {
+    _classCallCheck(this, ConvertDate);
+  }
+  _createClass(ConvertDate, null, [{
+    key: "convertDate",
+    value:
+    // convert 2020-05-30 12:00:00 to 30 May 2020
+    function convertDate(date) {
+      var newDate = new Date(date);
+      var day = newDate.getDate();
+      var month = newDate.toLocaleString('default', {
+        month: 'long'
+      });
+      var year = newDate.getFullYear();
+      return month + ' ' + day + ' ' + year;
+    }
+  }]);
+  return ConvertDate;
+}();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ConvertDate);
 
 /***/ }),
 

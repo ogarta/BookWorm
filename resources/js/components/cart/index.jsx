@@ -41,7 +41,7 @@ export default function CartComponent({ dataListBook }) {
                                 <div className="col-md-5">
                                     <Link to={`/product/${item.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <div className="d-flex">
-                                            <img src={item.book_cover_photo ? IMAGE[item.book_cover_photo] : IMAGE['empty']} alt="" width="100px" height="150px" />
+                                            <img src={item.book_cover_photo ? IMAGE[item.book_cover_photo] : IMAGE['Empty']} alt="" width="100px" height="150px" />
                                             <div className="ms-3">
                                                 <p>{item.book_title}</p>
                                                 <p>{item.author_name}</p>

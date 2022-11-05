@@ -30,4 +30,11 @@ class OrderRequest extends FormRequest
             
         ];
     }
+
+    public function messages()
+{
+    return [
+        'items_order.*.book_id.exists' => 'The book does not exist #:position',
+    ];
+}
 }

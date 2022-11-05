@@ -99,7 +99,7 @@ function FilterComponent() {
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
-                    <Accordion.Header>Star</Accordion.Header>
+                    <Accordion.Header>Rating review</Accordion.Header>
                     <Accordion.Body >
                         <div className="row">
                             {listStar.map((star, idx) => (

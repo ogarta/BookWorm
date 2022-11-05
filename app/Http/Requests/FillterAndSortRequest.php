@@ -28,7 +28,7 @@ class FillterAndSortRequest extends FormRequest
             'category_id' => 'string|nullable',
             'author_id' => 'string|nullable',
             'num_rating' => 'integer|min:0|max:5|nullable',
-            'num_item' => 'integer|nullable|in:5,10,15,20',        
+            'num_item' => 'integer|nullable|in:5,15,20,25',        
         ];
     }
 }

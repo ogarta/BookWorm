@@ -40,7 +40,7 @@ export default function ItemCardComponent(props) {
     return (
         <Link to={`/product/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
             <Card className="card-item">
-                <Card.Img className='card-image' variant="top" src={book_cover_photo ? IMAGE[book_cover_photo] : IMAGE['empty']} alt={book_cover_photo} />
+                <Card.Img className='card-image' variant="top" src={book_cover_photo ? IMAGE[book_cover_photo] : IMAGE['Empty']} alt={book_cover_photo} />
                 <Card.Body>
                     <Card.Title>{book_title}</Card.Title>
                     <Card.Text>{author_name}</Card.Text>

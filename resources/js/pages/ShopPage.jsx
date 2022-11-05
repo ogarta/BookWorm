@@ -23,7 +23,7 @@ export default function ShopPage() {
         const filteredBy = useSelector(state => state.filterReducer.filterDetail);
         return (filteredBy.category_name ? ('Category: ' + filteredBy.category_name) : '') +
             (filteredBy.author_name ? (' | Author: ' + filteredBy.author_name) : '') +
-            (filteredBy.star ? (' | Star: ' + filteredBy.star) : '');
+            (filteredBy.star ? (' | Rating review: ' + filteredBy.star) : '');
     }
 
     return (
@@ -69,9 +69,9 @@ export default function ShopPage() {
                                     onSelect={handleSelectNumItemPage}
                                 >
                                     <Dropdown.Item eventKey="5">5</Dropdown.Item>
-                                    <Dropdown.Item eventKey="10">10</Dropdown.Item>
                                     <Dropdown.Item eventKey="15">15</Dropdown.Item>
                                     <Dropdown.Item eventKey="20">20</Dropdown.Item>
+                                    <Dropdown.Item eventKey="25">25</Dropdown.Item>
                                 </DropdownButton>
                             </section>
                         </div>

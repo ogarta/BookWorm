@@ -98,7 +98,7 @@ export default function LoginComponent() {
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                                 name="email" {...register("email", { required: true })} />
-                            {errors.email?.type === 'required' && <p role="alert" style={{ color: "red" }}>Email is required</p>}
+                            {errors.email?.type === 'required' && <p role="alert" style={{ color: "red" }}> Email is required</p>}
 
                         </div>
                         <div className="form-group">

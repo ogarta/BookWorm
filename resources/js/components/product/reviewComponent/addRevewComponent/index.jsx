@@ -48,11 +48,11 @@ export default function AddReviewComponen({ dataBook }) {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <p>Add a title</p>
-                            <input type="text" className="form-control" name="review_title" {...register("reviewTitle", { required: true })} />
+                            <input type="text" className="form-control" name="review_title" {...register("reviewTitle", { required: true, maxLength: 120 })} />
                             {errors.reviewTitle?.type === 'required' && <p role="alert" style={{ color: "red" }}>Review title is required</p>}
+                            {errors.reviewTitle?.type === 'maxLength' && <p role="alert" style={{ color: "red" }}>Review title max length 120 characters</p>}
                             <p>Details please! Your review helps other shoppers</p>
-                            <textarea className="form-control" rows="3" name="review_detail" {...register("reviewDetail", { required: true })}></textarea>
-                            {errors.reviewDetail?.type === 'required' && <p role="alert" style={{ color: "red" }}>Review detail is required</p>}
+                            <textarea className="form-control" rows="3" name="review_detail" {...register("reviewDetail")}></textarea>
                             <label htmlFor="exampleFormControlSelect1">Rating</label>
                             <select className="form-control" id="exampleFormControlSelect1" {...register("reviewRating", { required: true })}>
                                 <option>1</option>
