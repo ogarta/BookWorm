@@ -31,10 +31,28 @@ class OrderRequest extends FormRequest
         ];
     }
 
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $errors = $validator->errors();
+        $errorExist = [];
+        foreach($errors->get('items_order.*.book_id') as $error) {
+            array_push($errorExist,$error);
+        }
+        $response = response()->json([
+            'message' => 'The given data was invalid.',
+            'errors' => [
+                'items_order' => $errorExist,
+                'quantity' => $errors->get('items_order.*.quantity'),
+            ]
+        ], 422);
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
+
     public function messages()
 {
     return [
-        'items_order.*.book_id.exists' => 'The book does not exist #:index#',
+        // get value 
+        'items_order.*.book_id.exists' => ':input',
     ];
 }
 }

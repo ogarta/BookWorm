@@ -36,19 +36,6 @@ function CarouselListDiscount() {
         }
     };
 
-    const handleCarouselItem = () => {
-        const rows = listDiscount;
-
-        return rows && rows.map((item, index) => {
-            return (
-                <div key={index} className="d-flex justify-content-center">
-                    <ItemCardComponent dataBook={item} />
-                </div>
-
-            );
-        })
-    }
-
     return (
         <Carousel responsive={responsive}>
             {

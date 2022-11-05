@@ -14043,17 +14043,6 @@ function CarouselListDiscount() {
       items: 2
     }
   };
-  var handleCarouselItem = function handleCarouselItem() {
-    var rows = listDiscount;
-    return rows && rows.map(function (item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "d-flex justify-content-center",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_bookCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          dataBook: item
-        })
-      }, index);
-    });
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     responsive: responsive,
     children: listDiscount && listDiscount.map(function (item, index) {
@@ -15574,7 +15563,7 @@ function CartPage() {
   }, [dataListBook]);
   var handleOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var itemsOreder, params, response, indexBookError;
+      var itemsOreder, params, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -15610,14 +15599,16 @@ function CartPage() {
             case 12:
               response = _context.sent;
               dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeAllCart)());
-              _context.next = 20;
+              _context.next = 19;
               break;
             case 16:
               _context.prev = 16;
               _context.t0 = _context["catch"](9);
-              indexBookError = _context.t0.response.data.message.split("#");
-              dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeItemCart)(indexBookError[1]));
-            case 20:
+              _context.t0.response.data.errors.items_order.map(function (item) {
+                // console.log(item[0]);
+                dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeItemCart)(item[0]));
+              });
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -16169,15 +16160,16 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       state.cart = [];
     },
     removeItemCart: function removeItemCart(state, action) {
-      var cartList = [];
-      //  Check exits item in cart
-      if (state.cart[action.payload]) {
-        state.cart.splice(action.payload, 1);
-        cartList = _toConsumableArray(state.cart);
+      //  Find id of item exits in carts
+      var index = state.cart.findIndex(function (item) {
+        return item.id == action.payload;
+      });
+      //  If exits, update quantity
+      if (index !== -1) {
+        state.cart.splice(index, 1);
       }
       //  Update cart in localStorage
       localStorage.setItem("cart", JSON.stringify(state.cart));
-      state.cart = cartList;
     }
   }
 });

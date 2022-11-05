@@ -64,15 +64,14 @@ export const cartSlice = createSlice({
             state.cart = [];
         },
         removeItemCart: (state, action) => {
-            var cartList = [];
-            //  Check exits item in cart
-            if (state.cart[action.payload]) {
-                state.cart.splice((action.payload), 1);
-                cartList = [...state.cart];
+            //  Find id of item exits in carts
+            var index = state.cart.findIndex((item) => item.id == action.payload);
+            //  If exits, update quantity
+            if (index !== -1) {
+                state.cart.splice(index, 1);
             }
             //  Update cart in localStorage
             localStorage.setItem("cart", JSON.stringify(state.cart));
-            state.cart = cartList;
         }
     }
 });

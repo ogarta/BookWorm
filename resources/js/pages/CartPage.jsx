@@ -50,8 +50,10 @@ export default function CartPage() {
             const response = await cartAdapter.postOrder(params);
             dispatch(removeAllCart());
         } catch (error) {
-            const indexBookError = error.response.data.message.split("#");
-            dispatch(removeItemCart(indexBookError[1]));
+            error.response.data.errors.items_order.map((item) => {
+                // console.log(item[0]);
+                dispatch(removeItemCart(item[0]));
+            })
         }
     }
 
