@@ -26,7 +26,7 @@ class OrderRequest extends FormRequest
         return [
             'items_order' => 'required|array',
             'items_order.*.book_id' => 'required|integer|exists:book,id',
-            'items_order.*.quantity' => 'required|integer'
+            'items_order.*.quantity' => 'required|integer|min:1|max:8',
             
         ];
     }
@@ -34,7 +34,7 @@ class OrderRequest extends FormRequest
     public function messages()
 {
     return [
-        'items_order.*.book_id.exists' => 'The book does not exist #:position',
+        'items_order.*.book_id.exists' => 'The book does not exist #:index#',
     ];
 }
 }

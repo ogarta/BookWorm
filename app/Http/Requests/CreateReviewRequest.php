@@ -25,8 +25,8 @@ class CreateReviewRequest extends FormRequest
     {
         return [
             'id' => 'required|integer|exists:book,id',
-            'title' => 'required|string|max:255',
-            'details' => 'required|string|max:255',
+            'title' => 'required|string|max:120',
+            'details' => 'nullable|string',
             'rating_start' => 'required|integer|min:0|max:5',
         ];
     }

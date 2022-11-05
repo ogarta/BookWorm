@@ -62,9 +62,20 @@ export const cartSlice = createSlice({
             localStorage.setItem("cart", JSON.stringify([]));
             //  remove cart in state
             state.cart = [];
+        },
+        removeItemCart: (state, action) => {
+            var cartList = [];
+            //  Check exits item in cart
+            if (state.cart[action.payload]) {
+                state.cart.splice((action.payload), 1);
+                cartList = [...state.cart];
+            }
+            //  Update cart in localStorage
+            localStorage.setItem("cart", JSON.stringify(state.cart));
+            state.cart = cartList;
         }
     }
 });
 
-export const { setCart, minusQuantity, plusQuantity, removeAllCart } = cartSlice.actions;
+export const { setCart, minusQuantity, plusQuantity, removeAllCart, removeItemCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -15590,7 +15590,7 @@ function CartPage() {
   }, [dataListBook]);
   var handleOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var itemsOreder, params, response;
+      var itemsOreder, params, response, indexBookError;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -15626,13 +15626,14 @@ function CartPage() {
             case 12:
               response = _context.sent;
               dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeAllCart)());
-              _context.next = 19;
+              _context.next = 20;
               break;
             case 16:
               _context.prev = 16;
               _context.t0 = _context["catch"](9);
-              console.log(_context.t0.response.data);
-            case 19:
+              indexBookError = _context.t0.response.data.message.split("#");
+              dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeItemCart)(indexBookError[1]));
+            case 20:
             case "end":
               return _context.stop();
           }
@@ -16103,6 +16104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "minusQuantity": () => (/* binding */ minusQuantity),
 /* harmony export */   "plusQuantity": () => (/* binding */ plusQuantity),
 /* harmony export */   "removeAllCart": () => (/* binding */ removeAllCart),
+/* harmony export */   "removeItemCart": () => (/* binding */ removeItemCart),
 /* harmony export */   "setCart": () => (/* binding */ setCart)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -16181,6 +16183,17 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       localStorage.setItem("cart", JSON.stringify([]));
       //  remove cart in state
       state.cart = [];
+    },
+    removeItemCart: function removeItemCart(state, action) {
+      var cartList = [];
+      //  Check exits item in cart
+      if (state.cart[action.payload]) {
+        state.cart.splice(action.payload, 1);
+        cartList = _toConsumableArray(state.cart);
+      }
+      //  Update cart in localStorage
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+      state.cart = cartList;
     }
   }
 });
@@ -16188,7 +16201,8 @@ var _cartSlice$actions = cartSlice.actions,
   setCart = _cartSlice$actions.setCart,
   minusQuantity = _cartSlice$actions.minusQuantity,
   plusQuantity = _cartSlice$actions.plusQuantity,
-  removeAllCart = _cartSlice$actions.removeAllCart;
+  removeAllCart = _cartSlice$actions.removeAllCart,
+  removeItemCart = _cartSlice$actions.removeItemCart;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cartSlice.reducer);
 

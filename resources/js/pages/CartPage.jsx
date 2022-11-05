@@ -5,7 +5,7 @@ import cartAdapter from "../adapters/cartAdapter";
 import CartComponent from "../components/cart";
 import { useDispatch } from 'react-redux';
 import { showPopupLogin } from "../reducers/popupLoginReducer";
-import { removeAllCart } from "../reducers/cartReducer";
+import { removeAllCart, removeItemCart } from "../reducers/cartReducer";
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
@@ -50,7 +50,8 @@ export default function CartPage() {
             const response = await cartAdapter.postOrder(params);
             dispatch(removeAllCart());
         } catch (error) {
-            console.log(error.response.data);
+            const indexBookError = error.response.data.message.split("#");
+            dispatch(removeItemCart(indexBookError[1]));
         }
     }
 
