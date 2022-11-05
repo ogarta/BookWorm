@@ -10,9 +10,13 @@ export default function LoginComponent() {
     const show = useSelector((state) => state.popupLoginReducer.isShow);
     const dispatch = useDispatch();
     const [passwordShown, setPasswordShown] = useState(false);
-    const [responseError, setResponseError] = useState(null);
     const [user, setUser] = useState(null);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState({
+        title: '',
+        message: '',
+    });
 
     const handleClose = () => dispatch(showPopupLogin(false));
     const handleShow = () => dispatch(showPopupLogin(true));
@@ -28,9 +32,17 @@ export default function LoginComponent() {
                 localStorage.setItem('token', JSON.stringify(response));
                 setUser(response.user);
                 dispatch(showPopupLogin(false));
+                setToastMessage({
+                    title: 'Success',
+                    message: 'Login success',
+                });
+                setShowToast(true);
             } catch (error) {
-                // console.log(error.response.data.message);
-                setResponseError(error.response.data.message);
+                setToastMessage({
+                    title: 'Error',
+                    message: error.response.data.message,
+                });
+                setShowToast(true);
             }
         }
         login();
@@ -54,8 +66,17 @@ export default function LoginComponent() {
                     console.log(responce);
                     localStorage.removeItem('token');
                     setUser(null);
+                    setToastMessage({
+                        title: 'Success',
+                        message: 'Logout success',
+                    });
+                    setShowToast(true);
                 } catch (error) {
-                    console.log(error.response.data);
+                    setToastMessage({
+                        title: 'Error',
+                        message: error.response.data.message,
+                    });
+                    setShowToast(true);
                 }
             }
             logoutUser();
@@ -75,6 +96,21 @@ export default function LoginComponent() {
                     <Dropdown.Item eventKey="logout">Log out</Dropdown.Item>
 
                 </DropdownButton>
+
+                <Modal
+                    size="lg"
+                    show={showToast}
+                    onHide={() => setShowToast(false)}
+                    aria-labelledby="example-modal-sizes-title-lg"
+                    variant="success"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            {toastMessage.title}
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{toastMessage.message}</Modal.Body>
+                </Modal>
             </>
         );
     }
@@ -98,7 +134,7 @@ export default function LoginComponent() {
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                                 name="email" {...register("email", { required: true })} />
-                            {errors.email?.type === 'required' && <p role="alert" style={{ color: "red" }}> Email is required</p>}
+                            {errors.email?.type === 'required' && <p role="alert" style={{ color: "red" }}>Email is required</p>}
 
                         </div>
                         <div className="form-group">
@@ -110,7 +146,6 @@ export default function LoginComponent() {
                             <input type="checkbox" onClick={togglePasswordVisiblity} /> Show Password
                             {errors.password?.type === 'required' && <p role="alert" style={{ color: "red" }}>Password is required</p>}
                         </div>
-                        <p role="alert" style={{ color: "red" }}>{responseError}</p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -121,6 +156,20 @@ export default function LoginComponent() {
                         </Button>
                     </Modal.Footer>
                 </form>
+            </Modal>
+
+            <Modal
+                size="lg"
+                show={showToast}
+                onHide={() => setShowToast(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        {toastMessage.title}
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{toastMessage.message}</Modal.Body>
             </Modal>
         </>
     );

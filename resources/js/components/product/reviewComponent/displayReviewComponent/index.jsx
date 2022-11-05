@@ -1,7 +1,7 @@
 import React from "react";
 import ProductPageAdapter from "../../../../adapters/productPageAdapter";
 import { useEffect, useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Card, Dropdown, DropdownButton } from "react-bootstrap";
 import PaginatesReviewComponent from "./PaginatesReviewComponent";
 
 export default function ReviewProduct({ dataBook }) {
@@ -50,13 +50,23 @@ export default function ReviewProduct({ dataBook }) {
         setItemsPage(e);
     }
 
+    if (ReviewProduct.length == 0) {
+        return (
+            <Card>
+                <Card.Body>
+                    <h3 className="d-flex justify-content-center">There are no reviews yet.</h3>
+                </Card.Body>
+            </Card>
+        )
+    }
+
     return (
         <>
-            <div className="card">
-                <div className="card-header">
+            <Card>
+                <Card.Header>
                     <h5 className="card-title">Customer Reviews <span>(filtered by {rating !== "" ? (rating + " star") : ""})</span></h5>
-                </div>
-                <div className="card-body">
+                </Card.Header>
+                <Card.Body>
                     <h2>{Number(avgRating).toFixed(1)} Star</h2>
                     <label className="me-3">({dataBook.count_review})</label>
 
@@ -104,8 +114,8 @@ export default function ReviewProduct({ dataBook }) {
                             <PaginatesReviewComponent dataBook={[paginate, ReviewProduct]} setPage={setPage} />
                         </div>
                     </div >
-                </div>
-            </div>
+                </Card.Body>
+            </Card>
         </>
     );
 }

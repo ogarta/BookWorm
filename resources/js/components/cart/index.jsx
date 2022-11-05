@@ -1,5 +1,5 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import IMAGE from "../../../assets";
 import { minusQuantity, plusQuantity } from "../../reducers/cartReducer";
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 export default function CartComponent({ dataListBook }) {
     const maxQuantity = useSelector((state) => state.cartReducer.maxQuantity);
     const dishpatch = useDispatch();
+
     const renderPrice = (bookPrice, finalPrice) => {
         if (bookPrice == finalPrice) {
             return <p className="price">${bookPrice}</p>;
