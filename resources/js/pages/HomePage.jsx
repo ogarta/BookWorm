@@ -10,24 +10,28 @@ function HomePage() {
         <>
             <div className="container mt-3">
                 <section id="on-sale">
-                    <div className="row">
-                        <div className="col-11">
-                            <h2>On Sale</h2>
+                    <div className="row justify-content-between p-0">
+                        <div className="col-4 p-0">
+                            <p id="title" >On Sale</p>
                         </div>
-                        <div className="col-1" >
-                            <Link to={'/shop'}>
-                                <button type="button" className="btn btn-secondary btn-view-all">
-                                    View All <i className="fa fa-caret-right"></i>
-                                </button>
-                            </Link>
+                        <div className="col-4 align-self-center p-0" >
+                            <div className="d-flex justify-content-end p-0">
+                                <div className="col-auto">
+                                    <Link to={'/shop'}>
+                                        <button type="button" className="btn btn-secondary btn-view-all">
+                                            <span className="text-view-all">View All</span>
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="on-sale-carousel">
-                        <CarouselListDiscount />
+                        <div className="on-sale-carousel">
+                            <CarouselListDiscount />
+                        </div>
                     </div>
                 </section>
-                <section id="feature">
+                <section>
                     <Feature />
                 </section>
             </div>

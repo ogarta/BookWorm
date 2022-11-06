@@ -2,7 +2,9 @@ import shopApi from '../../../adapters/shopPageAdapter';
 import { useEffect, useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { setAuthor, setFilterDetail, setCategory, setStar } from '../../../reducers/filterReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { capitalizeFistLeter } from '../../../utils/captislize';
+import './style.scss';
 
 function FilterComponent() {
     const [listAuthor, setListAuthor] = useState({});
@@ -63,34 +65,43 @@ function FilterComponent() {
 
     return (
         <div>
-            <Accordion defaultActiveKey={['1', '2', '0']} alwaysOpen>
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Category</Accordion.Header>
+            <Accordion defaultActiveKey={['1', '2', '0']} alwaysOpen flush>
+                <Accordion.Item eventKey="0" id="accordion-item">
+                    <Accordion.Header id="accordion-header">Category</Accordion.Header>
                     <Accordion.Body>
                         <div className='row'>
                             {listCategory.data && listCategory.data.map((category, idx) => (
                                 <div
+                                    className="category-item"
                                     key={category.id}
+                                    style={{
+                                        backgroundColor: valueCategory === category ? "#B0ADAD" : "",
+                                    }}
                                     onClick={() =>
                                         setValueCategory(valueCategory === category ? "" : category)
                                     }
                                 >
-                                    {category.category_name}
+                                    {capitalizeFistLeter(category.category_name)}
                                 </div>
                             ))}
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Author</Accordion.Header>
+                <Accordion.Item eventKey="1" id="accordion-item">
+                    <Accordion.Header id="accordion-header">Author</Accordion.Header>
                     <Accordion.Body>
                         <div className='row'>
                             {listAuthor.data && listAuthor.data.map((author, idx) => (
                                 <div
+                                    className="author-item"
                                     key={author.id}
+                                    style={{
+                                        backgroundColor: valueAuthor === author ? "#B0ADAD" : "",
+                                    }}
                                     onClick={() =>
                                         setValueAuthor(valueAuthor === author ? "" : author)
                                     }
+
                                 >
                                     {author.author_name}
                                 </div>
@@ -98,13 +109,17 @@ function FilterComponent() {
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="2">
-                    <Accordion.Header>Rating review</Accordion.Header>
+                <Accordion.Item eventKey="2" id="accordion-item">
+                    <Accordion.Header id="accordion-header">Rating review</Accordion.Header>
                     <Accordion.Body >
                         <div className="row">
                             {listStar.map((star, idx) => (
                                 <div
+                                    className="star-item"
                                     key={star.value}
+                                    style={{
+                                        backgroundColor: valueStar === star.value ? "#B0ADAD" : "",
+                                    }}
                                     onClick={() =>
                                         setValueStart(valueStar === star.value ? "" : star.value)
                                     }

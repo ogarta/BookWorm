@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import homeApi from '../../../adapters/homePageAdapter';
 import ItemCardComponent from '../../bookCard';
-import { FiPlay } from "react-icons/fi";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import './style.scss';
 
 function CarouselListDiscount() {
     const [listDiscount, setListDiscount] = useState([]);
@@ -37,7 +37,7 @@ function CarouselListDiscount() {
     };
 
     return (
-        <Carousel responsive={responsive}>
+        <Carousel responsive={responsive} className="py-2">
             {
                 listDiscount && listDiscount.map((item, index) => {
                     return (

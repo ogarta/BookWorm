@@ -5,6 +5,7 @@ import '../../css/shopPage.scss';
 import FilterComponent from "../components/shop/fillterComponent/index"
 import PaginatesComponent from '../components/shop/paginatesComponent';
 import { setSort, setNumItemsPage } from '../reducers/filterReducer';
+import { capitalizeFistLeter } from '../utils/captislize';
 
 export default function ShopPage() {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function ShopPage() {
 
         for (const [key, value] of Object.entries(filteredBy)) {
             if (value) {
-                filterArrary.push(value);
+                filterArrary.push(capitalizeFistLeter(value));
             }
         }
 
@@ -38,21 +39,22 @@ export default function ShopPage() {
 
     return (
         <div className="container">
-            <h2 className='mt-3'>Books <span className='filtered-by'>(Filltered by {handleFilteredBy()})</span></h2>
+            <div className='title-box'>
+                <p className='title-shop'>Books <span className='filtered-by'><small>(Filltered by {handleFilteredBy()})</small></span></p>
+            </div>
+
             <hr></hr>
             <div className="row">
                 <div className='col-3'>
-                    <p>Filter by</p>
+                    <p className='mb-4'>Filter by</p>
                     <section id="filter">
                         <FilterComponent />
                     </section>
                 </div>
                 <div className='col-9'>
-                    <div className='row'>
+                    <div className='row mb-2'>
                         <div className='col-6'>
-                            <section >
-                                <p>Showing {paginate.from} - {paginate.to} of {paginate.total} books</p>
-                            </section>
+                            <p className='show-item-page'>Showing {paginate.from} - {paginate.to} of {paginate.total} books</p>
                         </div>
                         <div className='col-6 d-flex justify-content-end'>
                             <section id="sort" className='me-4'>

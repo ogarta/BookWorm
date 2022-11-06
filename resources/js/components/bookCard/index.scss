@@ -25,4 +25,20 @@
 
 .card-footer{
     height: 60px;
+    .price{
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+#book_title{
+    font-weight: bold;
+}
+
+#final_price{
+    font-weight: bold;
+}
+
+.card-item:hover {
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
 }

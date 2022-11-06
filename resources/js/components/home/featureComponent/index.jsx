@@ -45,8 +45,8 @@ export default function Feature() {
     }
 
     return (
-        <div className="control_feature">
-            <p className='text-center'>Feature Books</p>
+        <div className="control_feature m-0">
+            <p className='text-center' id="title">Feature Books</p>
             <div className='d-flex justify-content-center'>
                 <ButtonGroup>
                     {radios.map((radio, idx) => (
@@ -56,6 +56,7 @@ export default function Feature() {
                                 type="radio"
                                 variant="outline-secondary"
                                 name="radio"
+                                style={{ fontSize: "1.5rem", fontWeight: "bold" }}
                                 value={radio.value}
                                 checked={statusFeature === radio.value}
                                 onChange={(e) => setStatusFeature(e.currentTarget.value)}

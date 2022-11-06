@@ -24,31 +24,33 @@ export default function ItemCardComponent(props) {
 
     const renderPrice = () => {
         if (book_price == final_price) {
-            return <p className="price">${book_price}</p>;
+            return <Card.Text className="price" id="final_price">${book_price}</Card.Text>;
         }
 
         return (
-            <p className="price">
+            <Card.Text className="price">
                 <span className="text-secondary" ><del>${book_price}</del></span>
 
-                <span className="font-weight-bold ms-3" >${final_price}</span>
-            </p>
+                <span className="font-weight-bold ms-3" id="final_price">${final_price}</span>
+            </Card.Text>
 
         );
     };
 
     return (
         <Link to={`/product/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
-            <Card className="card-item">
-                <Card.Img className='card-image' variant="top" src={book_cover_photo ? IMAGE[book_cover_photo] : IMAGE['Empty']} alt={book_cover_photo} />
-                <Card.Body>
-                    <Card.Title>{book_title}</Card.Title>
-                    <Card.Text>{author_name}</Card.Text>
-                </Card.Body>
-                <Card.Footer variant="bottom" className="card-footer">
-                    {renderPrice()}
-                </Card.Footer>
-            </Card>
+            <div id="item">
+                <Card border="dark" className="card-item">
+                    <Card.Img className='card-image' variant="top" src={book_cover_photo ? IMAGE[book_cover_photo] : IMAGE['Empty']} alt={book_cover_photo} />
+                    <Card.Body>
+                        <Card.Title id="book_title">{book_title}</Card.Title>
+                        <Card.Text>{author_name}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer variant="bottom" className="card-footer">
+                        {renderPrice()}
+                    </Card.Footer>
+                </Card>
+            </div>
         </Link>
     );
 }

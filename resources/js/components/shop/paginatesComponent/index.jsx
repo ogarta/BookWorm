@@ -4,10 +4,11 @@ import shopApi from "../../../adapters/shopPageAdapter";
 import ReactPaginate from 'react-paginate';
 import ItemCardComponent from "../../bookCard";
 import { setPagination, setCurentPage, setPage } from "../../../reducers/filterReducer";
+import IMAGE from "../../../../assets";
 
 export default function PaginatesComponent() {
     const dispatch = useDispatch();
-    const [listBookFilterAndSort, setListBookFilterAndSort] = useState({});
+    const [listBookFilterAndSort, setListBookFilterAndSort] = useState([]);
     const params = useSelector(state => state.filterReducer.filter);
     const paggination = useSelector(state => state.filterReducer.pagination);
 
@@ -15,7 +16,7 @@ export default function PaginatesComponent() {
         const fetchListBookByFilterAndSort = async () => {
             try {
                 const response = await shopApi.getListBookByFilterAndSort(params);
-                setListBookFilterAndSort(response);
+                setListBookFilterAndSort(response.data);
                 dispatch(setPagination({
                     total: response.meta.total,
                     per_page: response.meta.per_page,
@@ -36,10 +37,24 @@ export default function PaginatesComponent() {
         dispatch(setPage(data.selected + 1));
     }
 
+    if (listBookFilterAndSort.length === 0) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="d-flex justify-content-center">
+                            <img src={IMAGE.EmptyListBook} alt="EmptyListBook" className="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className="row">
-                {listBookFilterAndSort.data?.map((item, index) => (
+                {listBookFilterAndSort?.map((item, index) => (
                     <div className="col-3 mb-2" key={index}>
                         <ItemCardComponent dataBook={item} />
                     </div>
