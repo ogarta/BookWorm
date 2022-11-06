@@ -36,10 +36,6 @@ export const cartSlice = createSlice({
             if (index !== -1) {
                 if (state.cart[index].quantity > 0) {
                     state.cart[index].quantity -= 1;
-                    // remove item if quantity is 0
-                    if (state.cart[index].quantity === 0) {
-                        state.cart.splice(index, 1);
-                    }
                 }
             }
             //  Update cart in localStorage

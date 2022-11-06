@@ -20,10 +20,20 @@ export default function ShopPage() {
     }
 
     const handleFilteredBy = () => {
+
+        let filterArrary = [];
+
         const filteredBy = useSelector(state => state.filterReducer.filterDetail);
-        return (filteredBy.category_name ? ('Category: ' + filteredBy.category_name) : '') +
-            (filteredBy.author_name ? (' | Author: ' + filteredBy.author_name) : '') +
-            (filteredBy.star ? (' | Rating review: ' + filteredBy.star) : '');
+
+        for (const [key, value] of Object.entries(filteredBy)) {
+            if (value) {
+                filterArrary.push(value);
+            }
+        }
+
+        let filterString = filterArrary.join('| ');
+
+        return filterString;
     }
 
     return (
@@ -49,14 +59,14 @@ export default function ShopPage() {
                                 <DropdownButton
                                     drop='down'
                                     variant="secondary"
-                                    title={`Sort by ${params.sort}`}
+                                    title={`Sort by ${params.sort.replaceAll('_', ' ')}`}
                                     autoClose="inside"
                                     onSelect={handleSelectSort}
                                 >
-                                    <Dropdown.Item eventKey="on_sale">On Sale</Dropdown.Item>
-                                    <Dropdown.Item eventKey="popularity">Popularity</Dropdown.Item>
-                                    <Dropdown.Item eventKey="price_low_to_high">Price: Low to High</Dropdown.Item>
-                                    <Dropdown.Item eventKey="price_high_to_low">Price: High to Low</Dropdown.Item>
+                                    <Dropdown.Item eventKey="on_sale">sort by on Sale</Dropdown.Item>
+                                    <Dropdown.Item eventKey="popularity">sort by popularity</Dropdown.Item>
+                                    <Dropdown.Item eventKey="price_low_to_high">sort by price: Low to High</Dropdown.Item>
+                                    <Dropdown.Item eventKey="price_high_to_low">sort by price: High to Low</Dropdown.Item>
                                 </DropdownButton>
                             </section>
 

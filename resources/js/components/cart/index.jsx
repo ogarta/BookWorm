@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import { Card, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import IMAGE from "../../../assets";
-import { minusQuantity, plusQuantity } from "../../reducers/cartReducer";
+import { minusQuantity, plusQuantity, removeItemCart } from "../../reducers/cartReducer";
 import { Link } from 'react-router-dom';
 
 export default function CartComponent({ dataListBook }) {
     const maxQuantity = useSelector((state) => state.cartReducer.maxQuantity);
+    const [show, setShow] = useState(false);
     const dishpatch = useDispatch();
+
+    const handleClose = () => {
+        setShow(false);
+
+    };
+    const handleShow = () => {
+        setShow(true);
+    };
 
     const renderPrice = (bookPrice, finalPrice) => {
         if (bookPrice == finalPrice) {
@@ -59,6 +68,18 @@ export default function CartComponent({ dataListBook }) {
                                         <button onClick={() => dishpatch(minusQuantity(item.id))}> - </button>
                                         <div className="bg-dark text-white">
                                             <label className="mx-4"> {item.quantity} </label>
+                                            {item.quantity == 0 ?
+                                                (<Modal show={item.quantity == 0 ? true : false} >
+                                                    <Modal.Header>
+                                                        <Modal.Title>Confirm remove item</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>Are you sure you want to remove this item?</Modal.Body>
+                                                    <Modal.Footer>
+                                                        <button className="btn btn-secondary" onClick={() => dishpatch(plusQuantity(item.id))}>Cancel</button>
+                                                        <button className="btn btn-primary" onClick={() => dishpatch(removeItemCart(item.id))}>Remove</button>
+                                                    </Modal.Footer>
+                                                </Modal>) : ''
+                                            }
                                         </div>
                                         <button onClick={() => dishpatch(plusQuantity(item.id))}> + </button>
                                     </div>

@@ -13787,11 +13787,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../assets */ "./resources/assets/index.jsx");
 /* harmony import */ var _reducers_cartReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/cartReducer */ "./resources/js/reducers/cartReducer.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -13806,7 +13813,17 @@ function CartComponent(_ref) {
   var maxQuantity = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.cartReducer.maxQuantity;
   });
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    show = _useState2[0],
+    setShow = _useState2[1];
   var dishpatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var handleClose = function handleClose() {
+    setShow(false);
+  };
+  var handleShow = function handleShow() {
+    setShow(true);
+  };
   var renderPrice = function renderPrice(bookPrice, finalPrice) {
     if (bookPrice == finalPrice) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
@@ -13887,12 +13904,35 @@ function CartComponent(_ref) {
                     return dishpatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_3__.minusQuantity)(item.id));
                   },
                   children: " - "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "bg-dark text-white",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
                     className: "mx-4",
                     children: [" ", item.quantity, " "]
-                  })
+                  }), item.quantity == 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                    show: item.quantity == 0 ? true : false,
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Header, {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Title, {
+                        children: "Confirm remove item"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Body, {
+                      children: "Are you sure you want to remove this item?"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Footer, {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "btn btn-secondary",
+                        onClick: function onClick() {
+                          return dishpatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_3__.plusQuantity)(item.id));
+                        },
+                        children: "Cancel"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "btn btn-primary",
+                        onClick: function onClick() {
+                          return dishpatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_3__.removeItemCart)(item.id));
+                        },
+                        children: "Remove"
+                      })]
+                    })]
+                  }) : '']
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                   onClick: function onClick() {
                     return dishpatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_3__.plusQuantity)(item.id));
@@ -15003,7 +15043,6 @@ function PaginatesReviewComponent(_ref) {
   var reviewData = dataBook[1];
   var paginate = dataBook[0];
   var handlePageClick = function handlePageClick(data) {
-    console.log(data.selected + 1);
     if (isFinite(data.selected)) {
       setPage(data.selected + 1);
     }
@@ -15129,7 +15168,8 @@ function ReviewProduct(_ref) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _context.next = 3;
                 return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getReview({
                   id: dataBook.id,
                   rating_star: rating,
@@ -15137,21 +15177,28 @@ function ReviewProduct(_ref) {
                   sort: sort,
                   page: page
                 });
-              case 2:
+              case 3:
                 response = _context.sent;
                 setPaginate(response.pagination);
                 setReviewProduct(response.data);
-              case 5:
+                _context.next = 11;
+                break;
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8]]);
       }));
       return function fetchDataReview() {
         return _ref2.apply(this, arguments);
       };
     }();
+    console.log("Load review");
     fetchDataReview();
   }, [rating, itemsPage, sort, page]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -15184,7 +15231,7 @@ function ReviewProduct(_ref) {
     setRating(e === rating ? '' : e);
   };
   var handleSelectSort = function handleSelectSort(e) {
-    setSort(e);
+    setSort(e === "newest_to_oldest" ? "desc" : "asc");
   };
   var handleSelectNumItemPage = function handleSelectNumItemPage(e) {
     setItemsPage(e);
@@ -15243,16 +15290,16 @@ function ReviewProduct(_ref) {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
                     drop: "down",
                     variant: "secondary",
-                    title: "Sort by ".concat(sort),
+                    title: "Sort by date ".concat(sort === "desc" ? "newwest to oldest" : "oldest to newwest"),
                     autoClose: "inside",
-                    onSelect: function onSelect() {
-                      return handleSelectSort();
+                    onSelect: function onSelect(e) {
+                      return handleSelectSort(e);
                     },
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
-                      eventKey: "desc",
+                      eventKey: "newest_to_oldest",
                       children: "Sort by date: newest to oldest"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
-                      eventKey: "asc",
+                      eventKey: "oldest_to_newest",
                       children: "Sort by date: oldest to newest"
                     })]
                   })
@@ -15263,8 +15310,8 @@ function ReviewProduct(_ref) {
                     variant: "secondary",
                     title: "Show ".concat(itemsPage),
                     autoClose: "inside",
-                    onSelect: function onSelect() {
-                      return handleSelectNumItemPage();
+                    onSelect: function onSelect(e) {
+                      return handleSelectNumItemPage(e);
                     },
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
                       eventKey: "5",
@@ -16041,6 +16088,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_shop_paginatesComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/shop/paginatesComponent */ "./resources/js/components/shop/paginatesComponent/index.jsx");
 /* harmony import */ var _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/filterReducer */ "./resources/js/reducers/filterReducer.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -16065,10 +16118,20 @@ function ShopPage() {
     dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__.setSort)(e));
   };
   var handleFilteredBy = function handleFilteredBy() {
+    var filterArrary = [];
     var filteredBy = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
       return state.filterReducer.filterDetail;
     });
-    return (filteredBy.category_name ? 'Category: ' + filteredBy.category_name : '') + (filteredBy.author_name ? ' | Author: ' + filteredBy.author_name : '') + (filteredBy.star ? ' | Rating review: ' + filteredBy.star : '');
+    for (var _i = 0, _Object$entries = Object.entries(filteredBy); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+      if (value) {
+        filterArrary.push(value);
+      }
+    }
+    var filterString = filterArrary.join('| ');
+    return filterString;
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "container",
@@ -16107,21 +16170,21 @@ function ShopPage() {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
                 drop: "down",
                 variant: "secondary",
-                title: "Sort by ".concat(params.sort),
+                title: "Sort by ".concat(params.sort.replaceAll('_', ' ')),
                 autoClose: "inside",
                 onSelect: handleSelectSort,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "on_sale",
-                  children: "On Sale"
+                  children: "sort by on Sale"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "popularity",
-                  children: "Popularity"
+                  children: "sort by popularity"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "price_low_to_high",
-                  children: "Price: Low to High"
+                  children: "sort by price: Low to High"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Item, {
                   eventKey: "price_high_to_low",
-                  children: "Price: High to Low"
+                  children: "sort by price: High to Low"
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("section", {
@@ -16308,10 +16371,6 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       if (index !== -1) {
         if (state.cart[index].quantity > 0) {
           state.cart[index].quantity -= 1;
-          // remove item if quantity is 0
-          if (state.cart[index].quantity === 0) {
-            state.cart.splice(index, 1);
-          }
         }
       }
       //  Update cart in localStorage

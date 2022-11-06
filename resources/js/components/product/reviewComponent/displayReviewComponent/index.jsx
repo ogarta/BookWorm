@@ -16,17 +16,22 @@ export default function ReviewProduct({ dataBook }) {
 
     useEffect(() => {
         const fetchDataReview = async () => {
-            const response = await ProductPageAdapter.getReview({
-                id: dataBook.id,
-                rating_star: rating,
-                num_item: itemsPage,
-                sort: sort,
-                page: page,
+            try {
+                const response = await ProductPageAdapter.getReview({
+                    id: dataBook.id,
+                    rating_star: rating,
+                    num_item: itemsPage,
+                    sort: sort,
+                    page: page,
 
-            });
-            setPaginate(response.pagination);
-            setReviewProduct(response.data);
+                });
+                setPaginate(response.pagination);
+                setReviewProduct(response.data);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        console.log("Load review");
         fetchDataReview();
     }, [rating, itemsPage, sort, page]);
 
@@ -43,7 +48,7 @@ export default function ReviewProduct({ dataBook }) {
     }
 
     const handleSelectSort = (e) => {
-        setSort(e);
+        setSort(e === "newest_to_oldest" ? "desc" : "asc");
     }
 
     const handleSelectNumItemPage = (e) => {
@@ -84,12 +89,12 @@ export default function ReviewProduct({ dataBook }) {
                                         <DropdownButton
                                             drop='down'
                                             variant="secondary"
-                                            title={`Sort by ${sort}`}
+                                            title={`Sort by date ${sort === "desc" ? "newwest to oldest" : "oldest to newwest"}`}
                                             autoClose="inside"
-                                            onSelect={() => handleSelectSort()}
+                                            onSelect={(e) => handleSelectSort(e)}
                                         >
-                                            <Dropdown.Item eventKey="desc">Sort by date: newest to oldest</Dropdown.Item>
-                                            <Dropdown.Item eventKey="asc">Sort by date: oldest to newest</Dropdown.Item>
+                                            <Dropdown.Item eventKey="newest_to_oldest">Sort by date: newest to oldest</Dropdown.Item>
+                                            <Dropdown.Item eventKey="oldest_to_newest">Sort by date: oldest to newest</Dropdown.Item>
                                         </DropdownButton>
                                     </section>
 
@@ -99,7 +104,7 @@ export default function ReviewProduct({ dataBook }) {
                                             variant="secondary"
                                             title={`Show ${itemsPage}`}
                                             autoClose="inside"
-                                            onSelect={() => handleSelectNumItemPage()}
+                                            onSelect={(e) => handleSelectNumItemPage(e)}
                                         >
                                             <Dropdown.Item eventKey="5">5</Dropdown.Item>
                                             <Dropdown.Item eventKey="10">10</Dropdown.Item>

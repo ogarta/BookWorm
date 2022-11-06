@@ -11,7 +11,6 @@ export default function PaginatesReviewComponent({ dataBook, setPage }) {
     const paginate = dataBook[0];
 
     const handlePageClick = (data) => {
-        console.log(data.selected + 1);
         if (isFinite(data.selected)) {
             setPage(data.selected + 1);
         }
