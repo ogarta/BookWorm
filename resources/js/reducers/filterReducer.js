@@ -32,6 +32,7 @@ export const filterSlice = createSlice({
             state.filter = action.payload;
         },
         setSort: (state, action) => {
+            state.filter.page = 1;
             state.filter.sort = action.payload;
         },
         setStar: (state, action) => {

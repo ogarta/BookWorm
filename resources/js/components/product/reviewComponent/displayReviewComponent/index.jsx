@@ -32,28 +32,7 @@ export default function ReviewProduct({ dataBook }) {
             }
         }
         fetchDataReview();
-    }, [rating, itemsPage, sort]);
-
-    useEffect(() => {
-        const fetchDataReview = async () => {
-            try {
-                const response = await ProductPageAdapter.getReview({
-                    id: dataBook.id,
-                    rating_star: rating,
-                    num_item: itemsPage,
-                    sort: sort,
-                    page: page,
-
-                });
-                setPaginate(response.pagination);
-                setReviewProduct(response.data);
-                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchDataReview();
-    }, [page]);
+    }, [rating, itemsPage, sort, page]);
 
     useEffect(() => {
         const fetchSumEachRating = async () => {
@@ -64,14 +43,17 @@ export default function ReviewProduct({ dataBook }) {
     }, []);
 
     const handleSelectRating = (e) => {
+        setPage(1);
         setRating(e === rating ? '' : e);
     }
 
     const handleSelectSort = (e) => {
+        setPage(1);
         setSort(e === "newest_to_oldest" ? "desc" : "asc");
     }
 
     const handleSelectNumItemPage = (e) => {
+        setPage(1);
         setItemsPage(e);
     }
 

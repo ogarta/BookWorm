@@ -15079,6 +15079,7 @@ function PaginatesReviewComponent(_ref) {
         activeClassName: "active",
         breakLabel: "...",
         nextLabel: ">",
+        forcePage: paginate.current - 1,
         onPageChange: handlePageClick,
         pageRangeDisplayed: 5,
         pageCount: paginate.last,
@@ -15197,85 +15198,43 @@ function ReviewProduct(_ref) {
       };
     }();
     fetchDataReview();
-  }, [rating, itemsPage, sort]);
+  }, [rating, itemsPage, sort, page]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var fetchDataReview = /*#__PURE__*/function () {
+    var fetchSumEachRating = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getReview({
-                  id: dataBook.id,
-                  rating_star: rating,
-                  num_item: itemsPage,
-                  sort: sort,
-                  page: page
-                });
-              case 3:
+                _context2.next = 2;
+                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getSumEachRating(dataBook.id);
+              case 2:
                 response = _context2.sent;
-                setPaginate(response.pagination);
-                setReviewProduct(response.data);
-                window.scrollTo({
-                  top: 0,
-                  left: 0,
-                  behavior: 'smooth'
-                });
-                _context2.next = 12;
-                break;
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
-              case 12:
+                setDetailRating(response.data);
+              case 4:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 9]]);
-      }));
-      return function fetchDataReview() {
-        return _ref3.apply(this, arguments);
-      };
-    }();
-    fetchDataReview();
-  }, [page]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var fetchSumEachRating = /*#__PURE__*/function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getSumEachRating(dataBook.id);
-              case 2:
-                response = _context3.sent;
-                setDetailRating(response.data);
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
+        }, _callee2);
       }));
       return function fetchSumEachRating() {
-        return _ref4.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }();
     fetchSumEachRating();
   }, []);
   var handleSelectRating = function handleSelectRating(e) {
+    setPage(1);
     setRating(e === rating ? '' : e);
   };
   var handleSelectSort = function handleSelectSort(e) {
+    setPage(1);
     setSort(e === "newest_to_oldest" ? "desc" : "asc");
   };
   var handleSelectNumItemPage = function handleSelectNumItemPage(e) {
+    setPage(1);
     setItemsPage(e);
   };
   if (ReviewProduct.length == 0) {
@@ -16529,6 +16488,7 @@ var filterSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
       state.filter = action.payload;
     },
     setSort: function setSort(state, action) {
+      state.filter.page = 1;
       state.filter.sort = action.payload;
     },
     setStar: function setStar(state, action) {
