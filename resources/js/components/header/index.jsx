@@ -12,7 +12,7 @@ function HeaderComponent() {
     return (
         <header>
 
-            <Navbar bg="dark" variant="dark" className="navbar">
+            {/* <Navbar bg="dark" variant="dark" className="navbar">
                 <Container>
                     <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
                     <Nav>
@@ -22,6 +22,23 @@ function HeaderComponent() {
                         <NavLink to="/cart" className="nav-item nav-link">Cart ({cartNumber})</NavLink>
                         <LoginComponent />
                     </Nav>
+                </Container>
+            </Navbar> */}
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Container>
+                    <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                        </Nav>
+                        <Nav>
+                            <NavLink to="/home" className="nav-item nav-link">Home</NavLink>
+                            <NavLink to="/shop" className="nav-item nav-link">Shop</NavLink>
+                            <NavLink to="/about" className="nav-item nav-link">About</NavLink>
+                            <NavLink to="/cart" className="nav-item nav-link">Cart ({cartNumber})</NavLink>
+                            <LoginComponent />
+                        </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         </header>

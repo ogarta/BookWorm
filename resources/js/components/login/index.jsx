@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import authAdapter from '../../adapters/authAdapter';
 import { useForm } from 'react-hook-form';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { showPopupLogin } from '../../reducers/popupLoginReducer';
 export default function LoginComponent() {
@@ -86,16 +86,12 @@ export default function LoginComponent() {
     if (user) {
         return (
             <>
-                <DropdownButton
-                    drop='down'
-                    variant="secondary"
+                <NavDropdown
                     title={user.first_name + ' ' + user.last_name}
-                    autoClose="inside"
                     onSelect={handleClickLogOut}
                 >
-                    <Dropdown.Item eventKey="logout">Log out</Dropdown.Item>
-
-                </DropdownButton>
+                    <NavDropdown.Item eventKey="logout">Log out</NavDropdown.Item>
+                </NavDropdown>
 
                 <Modal
                     size="lg"
