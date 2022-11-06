@@ -15721,10 +15721,9 @@ function PaginatesComponent() {
         activeClassName: "active",
         breakLabel: "...",
         nextLabel: ">",
+        forcePage: paggination.current_page - 1,
         onPageChange: handlePageClick,
         pageRangeDisplayed: 5,
-        initialPage: paggination.current_page - 1,
-        forcePage: paggination.current_page - 1,
         pageCount: paggination.last_page,
         previousLabel: "<",
         renderOnZeroPageCount: null
@@ -16526,21 +16525,26 @@ var filterSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
   },
   reducers: {
     setFilter: function setFilter(state, action) {
+      action.payload.page = 1;
       state.filter = action.payload;
     },
     setSort: function setSort(state, action) {
       state.filter.sort = action.payload;
     },
     setStar: function setStar(state, action) {
+      state.filter.page = 1;
       state.filter.num_rating = action.payload;
     },
     setAuthor: function setAuthor(state, action) {
+      state.filter.page = 1;
       state.filter.author_id = action.payload;
     },
     setCategory: function setCategory(state, action) {
+      state.filter.page = 1;
       state.filter.category_id = action.payload;
     },
     setNumItemsPage: function setNumItemsPage(state, action) {
+      state.filter.page = 1;
       state.filter.num_item = action.payload;
     },
     setPage: function setPage(state, action) {

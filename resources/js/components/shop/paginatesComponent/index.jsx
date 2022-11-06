@@ -60,10 +60,9 @@ export default function PaginatesComponent() {
                     activeClassName="active"
                     breakLabel="..."
                     nextLabel=">"
+                    forcePage={paggination.current_page - 1}
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
-                    initialPage={paggination.current_page - 1}
-                    forcePage={paggination.current_page - 1}
                     pageCount={paggination.last_page}
                     previousLabel="<"
                     renderOnZeroPageCount={null}

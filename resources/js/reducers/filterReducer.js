@@ -28,21 +28,26 @@ export const filterSlice = createSlice({
     },
     reducers: {
         setFilter: (state, action) => {
+            action.payload.page = 1;
             state.filter = action.payload;
         },
         setSort: (state, action) => {
             state.filter.sort = action.payload;
         },
         setStar: (state, action) => {
+            state.filter.page = 1;
             state.filter.num_rating = action.payload;
         },
         setAuthor: (state, action) => {
+            state.filter.page = 1;
             state.filter.author_id = action.payload;
         },
         setCategory: (state, action) => {
+            state.filter.page = 1;
             state.filter.category_id = action.payload;
         },
         setNumItemsPage: (state, action) => {
+            state.filter.page = 1;
             state.filter.num_item = action.payload;
         },
         setPage: (state, action) => {
