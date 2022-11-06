@@ -45,8 +45,6 @@ export default function PaginatesReviewComponent({ dataBook, setPage }) {
                     nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
-                    initialPage={paginate.current - 1}
-                    forcePage={paginate.current - 1}
                     pageCount={paginate.last}
                     previousLabel="<"
                     renderOnZeroPageCount={null}

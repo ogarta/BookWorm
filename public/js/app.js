@@ -15081,8 +15081,6 @@ function PaginatesReviewComponent(_ref) {
         nextLabel: ">",
         onPageChange: handlePageClick,
         pageRangeDisplayed: 5,
-        initialPage: paginate.current - 1,
-        forcePage: paginate.current - 1,
         pageCount: paginate.last,
         previousLabel: "<",
         renderOnZeroPageCount: null
@@ -15198,31 +15196,75 @@ function ReviewProduct(_ref) {
         return _ref2.apply(this, arguments);
       };
     }();
-    console.log("Load review");
     fetchDataReview();
-  }, [rating, itemsPage, sort, page]);
+  }, [rating, itemsPage, sort]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var fetchSumEachRating = /*#__PURE__*/function () {
+    var fetchDataReview = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getSumEachRating(dataBook.id);
-              case 2:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getReview({
+                  id: dataBook.id,
+                  rating_star: rating,
+                  num_item: itemsPage,
+                  sort: sort,
+                  page: page
+                });
+              case 3:
                 response = _context2.sent;
-                setDetailRating(response.data);
-              case 4:
+                setPaginate(response.pagination);
+                setReviewProduct(response.data);
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth'
+                });
+                _context2.next = 12;
+                break;
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 9]]);
+      }));
+      return function fetchDataReview() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+    fetchDataReview();
+  }, [page]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchSumEachRating = /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _adapters_productPageAdapter__WEBPACK_IMPORTED_MODULE_1__["default"].getSumEachRating(dataBook.id);
+              case 2:
+                response = _context3.sent;
+                setDetailRating(response.data);
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }));
       return function fetchSumEachRating() {
-        return _ref3.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }();
     fetchSumEachRating();
@@ -15612,9 +15654,10 @@ function PaginatesComponent() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _context.next = 3;
                 return _adapters_shopPageAdapter__WEBPACK_IMPORTED_MODULE_2__["default"].getListBookByFilterAndSort(params);
-              case 2:
+              case 3:
                 response = _context.sent;
                 setListBookFilterAndSort(response);
                 dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_5__.setPagination)({
@@ -15625,12 +15668,23 @@ function PaginatesComponent() {
                   from: response.meta.from,
                   to: response.meta.to
                 }));
-              case 5:
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth'
+                });
+                _context.next = 12;
+                break;
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0.response.data);
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 9]]);
       }));
       return function fetchListBookByFilterAndSort() {
         return _ref.apply(this, arguments);

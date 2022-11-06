@@ -31,9 +31,29 @@ export default function ReviewProduct({ dataBook }) {
                 console.log(error);
             }
         }
-        console.log("Load review");
         fetchDataReview();
-    }, [rating, itemsPage, sort, page]);
+    }, [rating, itemsPage, sort]);
+
+    useEffect(() => {
+        const fetchDataReview = async () => {
+            try {
+                const response = await ProductPageAdapter.getReview({
+                    id: dataBook.id,
+                    rating_star: rating,
+                    num_item: itemsPage,
+                    sort: sort,
+                    page: page,
+
+                });
+                setPaginate(response.pagination);
+                setReviewProduct(response.data);
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchDataReview();
+    }, [page]);
 
     useEffect(() => {
         const fetchSumEachRating = async () => {

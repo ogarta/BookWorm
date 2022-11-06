@@ -13,17 +13,21 @@ export default function PaginatesComponent() {
 
     useEffect(() => {
         const fetchListBookByFilterAndSort = async () => {
-            const response = await shopApi.getListBookByFilterAndSort(params);
-            setListBookFilterAndSort(response);
-            dispatch(setPagination({
-                total: response.meta.total,
-                per_page: response.meta.per_page,
-                current_page: response.meta.current_page,
-                last_page: response.meta.last_page,
-                from: response.meta.from,
-                to: response.meta.to,
-            }));
-
+            try {
+                const response = await shopApi.getListBookByFilterAndSort(params);
+                setListBookFilterAndSort(response);
+                dispatch(setPagination({
+                    total: response.meta.total,
+                    per_page: response.meta.per_page,
+                    current_page: response.meta.current_page,
+                    last_page: response.meta.last_page,
+                    from: response.meta.from,
+                    to: response.meta.to,
+                }));
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.log(error.response.data);
+            }
         }
         fetchListBookByFilterAndSort();
     }, [params]);
