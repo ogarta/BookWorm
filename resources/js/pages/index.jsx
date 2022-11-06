@@ -5,16 +5,18 @@ import HomePage from './HomePage';
 import ShopPage from './ShopPage'
 import ProductPage from './ProductPage'
 import CartPage from './CartPage';
-
+import ErrorPage from './ErrorPage';
 function Index() {
     return (
         <Router>
             <HeaderComponent />
             <Routes>
+                <Route path="/" element={<HomePage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>
     );

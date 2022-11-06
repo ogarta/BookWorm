@@ -10,6 +10,7 @@ const IMAGE = {
     book9: require('./bookcover/book9.jpg').default,
     book10: require('./bookcover/book10.jpg').default,
     Empty: require('./bookcover/empty.jpg').default,
+    Error404: require('./error/Error404.jpg').default,
 }
 
 export default IMAGE
