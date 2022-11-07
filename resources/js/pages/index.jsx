@@ -6,6 +6,7 @@ import ShopPage from './ShopPage'
 import ProductPage from './ProductPage'
 import CartPage from './CartPage';
 import ErrorPage from './ErrorPage';
+import AboutPage from './AboutPage';
 function Index() {
     return (
         <Router>
@@ -16,6 +17,7 @@ function Index() {
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>
