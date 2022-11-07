@@ -8,12 +8,13 @@ import CartPage from './CartPage';
 import ErrorPage from './ErrorPage';
 import AboutPage from './AboutPage';
 import FooterComponent from '../components/footer';
+import './style.scss';
 
 function Index() {
     return (
         <Router>
             <HeaderComponent />
-            <div style={{ paddingTop: "50px" }}>
+            <div className='body-page'>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/home" element={<HomePage />} />
