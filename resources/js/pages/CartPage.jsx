@@ -8,6 +8,7 @@ import { showPopupLogin } from "../reducers/popupLoginReducer";
 import { removeAllCart, removeItemCart } from "../reducers/cartReducer";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../components/alert";
+import '../../css/cartPage.scss';
 
 export default function CartPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
@@ -96,7 +97,7 @@ export default function CartPage() {
         <>
             <Container>
 
-                <h2>Your cart: {dataListBook.length}</h2>
+                <h2 className="title-cart mt-2">Your cart: {dataListBook.length} items</h2>
                 <hr />
                 <div className="row">
                     <div className="col-md-8">
