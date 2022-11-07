@@ -3,6 +3,7 @@ import ProductPageAdapter from "../../../../adapters/productPageAdapter";
 import { useEffect, useState } from "react";
 import { Card, Dropdown, DropdownButton } from "react-bootstrap";
 import PaginatesReviewComponent from "./PaginatesReviewComponent";
+import './style.scss';
 
 export default function ReviewProduct({ dataBook }) {
     const [rating, setRating] = useState("");
@@ -70,19 +71,38 @@ export default function ReviewProduct({ dataBook }) {
     return (
         <>
             <Card>
-                <Card.Header>
-                    <h5 className="card-title">Customer Reviews <span>(filtered by {rating !== "" ? (rating + " star") : ""})</span></h5>
-                </Card.Header>
                 <Card.Body>
+                    <h5>Customer Reviews <span>{rating !== "" ? "(filtered by " + rating + " star)" : ""}</span></h5>
                     <h2>{Number(avgRating).toFixed(1)} Star</h2>
-                    <label className="me-3">({dataBook.count_review})</label>
+                    <label className="me-3 text-decoration-underline">({dataBook.count_review})</label>
 
-                    {detailRating && detailRating.map((item, index) => (
-                        <label className="me-3 " key={index} onClick={() => handleSelectRating(item.rating_start)}><ins>{item.rating_start} star ({item.count_rating_star})</ins></label>
-                    ))}
-                    <div className="row">
+                    {detailRating && detailRating.map((item, index) => {
+                        return item.count_rating_star > 0 ?
+                            (< label
+                                className="me-2 "
+                                key={index} onClick={() => handleSelectRating(item.rating_start)}
+                            >
+                                {item.rating_start == "5" ? "" : "| "}
+                                <ins>
+                                    {item.rating_start} star ({item.count_rating_star})
+                                </ins>
+                            </label>)
+                            : (< label
+                                className="me-2"
+                                key={index}
+                            >
+                                {item.rating_start == "5" ? "" : "| "}
+                                <span
+                                    className="text-decoration-underline"
+                                >
+                                    {item.rating_start} star ({item.count_rating_star})
+                                </span>
+                            </label>)
+
+                    })}
+                    < div className="row">
                         <div className="col-md-6">
-                            <p>Showing {paginate.from}-{paginate.to} of {paginate.total}</p>
+                            <p>Showing {paginate.from}-{paginate.to} of {paginate.total} reviews</p>
                         </div>
                         <div className="col-md-6">
                             <div className="d-flex justify-content-end">

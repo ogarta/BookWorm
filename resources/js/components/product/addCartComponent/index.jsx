@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { setCart } from "../../../reducers/cartReducer";
 import AlertComponent from "../../alert";
+import './style.scss';
 export default function AddCartComponent({ dataBook }) {
     const maxQuantity = useSelector((state) => state.cartReducer.maxQuantity);
     const [quantity, setQuantity] = useState(1);
@@ -11,14 +12,14 @@ export default function AddCartComponent({ dataBook }) {
     const dispatch = useDispatch();
     const renderPrice = () => {
         if (dataBook.book_price == dataBook.final_price) {
-            return <p className="price">${dataBook.book_price}</p>;
+            return <p className="price card-title" id="final-price">${dataBook.book_price}</p>;
         }
 
         return (
-            <p className="price">
+            <p className="price card-title">
                 <span className="text-secondary" ><del>${dataBook.book_price}</del></span>
 
-                <span className="font-weight-bold ms-3" >${dataBook.final_price}</span>
+                <span className="font-weight-bold ms-3" id="final-price" >${dataBook.final_price}</span>
             </p>
 
         );
@@ -58,16 +59,16 @@ export default function AddCartComponent({ dataBook }) {
                     {renderPrice()}
                 </Card.Header>
                 <Card.Body>
-                    <p>Quantity</p>
-                    <div className="d-flex justify-content-center">
+                    <p className="title-quantity">Quantity</p>
+                    <div className="box-control-quantity d-flex justify-content-center">
                         <button onClick={() => setQuantity(quantity > 1 ? (quantity - 1) : 1)}> - </button>
-                        <div className="bg-dark text-white">
-                            <label className="mx-4"> {quantity} </label>
+                        <div className=" d-flex justify-content-center" id="box-label">
+                            <label className="mx-4 "> {quantity} </label>
                         </div>
                         <button onClick={() => setQuantity(quantity < maxQuantity ? (quantity + 1) : maxQuantity)}> + </button>
                     </div>
                     <div className="d-flex justify-content-center mt-2">
-                        <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
+                        <button type="button" className="btn btn-secondary" onClick={handleAddToCart} id="btn-add-cart">Add to cart</button>
                     </div>
                 </Card.Body>
             </Card >

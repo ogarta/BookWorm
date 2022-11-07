@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ToggleButton, ButtonGroup } from 'react-bootstrap';
 import homeApi from '../../../adapters/homePageAdapter';
 import ItemCardComponent from '../../bookCard';
-import './index.scss';
+import './style.scss';
 
 export default function Feature() {
     const [listRecommend, setListRecommend] = useState({});
@@ -45,34 +45,36 @@ export default function Feature() {
     }
 
     return (
-        <div className="control_feature m-0">
-            <p className='text-center' id="title">Feature Books</p>
-            <div className='d-flex justify-content-center'>
-                <ButtonGroup>
-                    {radios.map((radio, idx) => (
-                        <div key={idx} className="mx-5">
-                            <ToggleButton
-                                id={`radio-${idx}`}
-                                type="radio"
-                                variant="outline-secondary"
-                                name="radio"
-                                style={{ fontSize: "1.5rem", fontWeight: "bold" }}
-                                value={radio.value}
-                                checked={statusFeature === radio.value}
-                                onChange={(e) => setStatusFeature(e.currentTarget.value)}
-                            >
-                                {radio.name}
-                            </ToggleButton>
-                        </div>
+        <>
+            <div className="control_feature m-0">
+                <p className='text-center' id="title">Feature Books</p>
+                <div className='d-flex justify-content-center'>
+                    <ButtonGroup>
+                        {radios.map((radio, idx) => (
+                            <div key={idx} className="mx-5">
+                                <ToggleButton
+                                    id={`radio-${idx}`}
+                                    type="radio"
+                                    variant="outline-secondary"
+                                    name="radio"
+                                    style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                                    value={radio.value}
+                                    checked={statusFeature === radio.value}
+                                    onChange={(e) => setStatusFeature(e.currentTarget.value)}
+                                >
+                                    {radio.name}
+                                </ToggleButton>
+                            </div>
 
-                    ))}
-                </ButtonGroup>
-            </div>
-            <div className="list-book-by-feature">
-                <div className='row'>
-                    {handleShowListBookByFeature()}
+                        ))}
+                    </ButtonGroup>
                 </div>
+
             </div>
-        </div>
+            <div className='bookworm__feature row mt-3'>
+                {handleShowListBookByFeature()}
+            </div>
+        </>
+
     );
 }

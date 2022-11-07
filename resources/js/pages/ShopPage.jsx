@@ -34,13 +34,13 @@ export default function ShopPage() {
 
         let filterString = filterArrary.join('| ');
 
-        return filterString;
+        return filterString ? '(Filltered by ' + filterString + ")" : '';
     }
 
     return (
         <div className="container">
             <div className='title-box'>
-                <p className='title-shop'>Books <span className='filtered-by'><small>(Filltered by {handleFilteredBy()})</small></span></p>
+                <p className='title-shop'>Books <span className='filtered-by'>{handleFilteredBy()}</span></p>
             </div>
 
             <hr></hr>

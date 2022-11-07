@@ -25,7 +25,6 @@ function HomePage() {
                                 </div>
                             </div>
                         </div>
-
                         <div className="on-sale-carousel">
                             <CarouselListDiscount />
                         </div>

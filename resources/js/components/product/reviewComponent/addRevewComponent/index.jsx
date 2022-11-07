@@ -3,6 +3,7 @@ import ProductPageAdapter from "../../../../adapters/productPageAdapter";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
 import AlertComponent from "../../../alert";
+import './style.scss';
 
 export default function AddReviewComponen({ dataBook }) {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -60,7 +61,7 @@ export default function AddReviewComponen({ dataBook }) {
         <>
             <Card className="mb-3">
                 <Card.Header>
-                    <h5 className="card-title">Write a review</h5>
+                    <h5 className="title-add-review card-title">Write a review</h5>
                 </Card.Header>
                 <Card.Body>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,9 +70,9 @@ export default function AddReviewComponen({ dataBook }) {
                             <input type="text" className="form-control" name="review_title" {...register("reviewTitle", { required: true, maxLength: 120 })} />
                             {errors.reviewTitle?.type === 'required' && <p role="alert" style={{ color: "red" }}>Review title is required</p>}
                             {errors.reviewTitle?.type === 'maxLength' && <p role="alert" style={{ color: "red" }}>Review title max length 120 characters</p>}
-                            <p>Details please! Your review helps other shoppers</p>
+                            <p className="mt-2">Details please! Your review helps other shoppers</p>
                             <textarea className="form-control" rows="3" name="review_detail" {...register("reviewDetail")}></textarea>
-                            <label htmlFor="exampleFormControlSelect1">Rating</label>
+                            <label htmlFor="exampleFormControlSelect1" className="my-2">Rating</label>
                             <select className="form-control" id="exampleFormControlSelect1" {...register("reviewRating", { required: true })}>
                                 <option>1</option>
                                 <option>2</option>
@@ -79,7 +80,7 @@ export default function AddReviewComponen({ dataBook }) {
                                 <option>4</option>
                                 <option>5</option>
                             </select>
-                            <button type="submit" className="btn btn-primary mt-3" >Submit</button>
+                            <button type="submit" className="btn-sumit-add-review btn btn-secondary mt-3" >Submit Review</button>
                         </div>
                     </form>
                 </Card.Body>

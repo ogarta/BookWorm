@@ -37,7 +37,8 @@ function CarouselListDiscount() {
     };
 
     return (
-        <Carousel responsive={responsive} className="py-2">
+        <Carousel responsive={responsive} className="bookworm__carousel py-2"
+            infinite={true}>
             {
                 listDiscount && listDiscount.map((item, index) => {
                     return (

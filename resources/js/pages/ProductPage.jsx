@@ -5,6 +5,8 @@ import ProductPageAdapter from "../adapters/productPageAdapter";
 import { useParams } from "react-router-dom";
 import AddReviewComponen from "../components/product/reviewComponent/addRevewComponent";
 import AddCartComponent from "../components/product/addCartComponent";
+import { capitalizeFistLeter } from "../utils/captislize";
+import '../../css/productPage.scss';
 
 export default function ProductPage() {
     let { id } = useParams()
@@ -25,7 +27,7 @@ export default function ProductPage() {
         <>
             <div className="container">
 
-                <h3 className="mt-3">{book.category_name}</h3>
+                <h3 className="mt-3" id="title-product">{capitalizeFistLeter(book.category_name)}</h3>
                 <hr />
                 <div className="row">
                     <div className="col-8">

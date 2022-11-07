@@ -3,16 +3,20 @@
 //     color: rgb(248, 248, 7);
 // }
 
-.title-shop{
-    font-weight: bold;
-    font-size: 2.2rem;
-    margin: 0;
-    padding: 0;
-}
 .title-box{
     margin-top: 10px;
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    .title-shop{
+        font-weight: bold;
+        font-size: 1.8rem;
+        margin: 0;
+        padding: 0;
+        .filtered-by{
+            font-size: 1.2rem;
+            color: rgb(188, 188, 188);
+        }
+    }
 }
