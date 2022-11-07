@@ -3,9 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import authAdapter from '../../adapters/authAdapter';
 import { useForm } from 'react-hook-form';
-import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { showPopupLogin } from '../../reducers/popupLoginReducer';
+import './style.scss';
+import { NavLink } from 'react-router-dom';
+
 export default function LoginComponent() {
     const show = useSelector((state) => state.popupLoginReducer.isShow);
     const dispatch = useDispatch();
@@ -37,12 +40,14 @@ export default function LoginComponent() {
                     message: 'Login success',
                 });
                 setShowToast(true);
+                handleHideToast();
             } catch (error) {
                 setToastMessage({
                     title: 'Error',
                     message: error.response.data.message,
                 });
                 setShowToast(true);
+                handleHideToast();
             }
         }
         login();
@@ -71,16 +76,25 @@ export default function LoginComponent() {
                         message: 'Logout success',
                     });
                     setShowToast(true);
+                    handleHideToast();
                 } catch (error) {
                     setToastMessage({
                         title: 'Error',
                         message: error.response.data.message,
                     });
                     setShowToast(true);
+                    handleHideToast();
                 }
             }
             logoutUser();
         }
+    }
+
+    const handleHideToast = () => {
+        const timer = setTimeout(() => {
+            setShowToast(false);
+        }, 2000);
+        return () => clearTimeout(timer);
     }
 
     if (user) {
@@ -100,12 +114,24 @@ export default function LoginComponent() {
                     aria-labelledby="example-modal-sizes-title-lg"
                     variant="success"
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header
+                        style={{
+                            backgroundColor: toastMessage.title === 'Success' ? '#87faa6' : 'red',
+                            color: toastMessage.title === 'Success' ? 'black' : 'white'
+                        }}
+                    >
                         <Modal.Title>
                             {toastMessage.title}
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{toastMessage.message}</Modal.Body>
+                    <Modal.Body
+                        style={{
+                            backgroundColor: toastMessage.title === 'Success' ? '#b8fccb' : '#f0aea1',
+                            color: toastMessage.title === 'Success' ? 'black' : 'white'
+                        }}
+                    >
+                        {toastMessage.message}
+                    </Modal.Body>
                 </Modal>
             </>
         );
@@ -113,13 +139,13 @@ export default function LoginComponent() {
 
     return (
         <>
-            <Button variant="dark" onClick={handleShow}>
-                Login
-            </Button>
+            <Nav.Link onClick={handleShow}>
+                login
+            </Nav.Link>
 
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
+                    <Modal.Title className='title-login'>Login</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Modal.Body>
@@ -144,10 +170,10 @@ export default function LoginComponent() {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
+                        <Button className="btn btn-danger" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button type="submit" variant="primary">
+                        <Button type="submit" className="btn btn-secondary" variant="primary">
                             Login
                         </Button>
                     </Modal.Footer>
@@ -160,12 +186,24 @@ export default function LoginComponent() {
                 onHide={() => setShowToast(false)}
                 aria-labelledby="example-modal-sizes-title-lg"
             >
-                <Modal.Header closeButton>
+                <Modal.Header
+                    style={{
+                        backgroundColor: toastMessage.title === 'Success' ? '#87faa6' : 'red',
+                        color: toastMessage.title === 'Success' ? 'black' : 'white'
+                    }}
+                >
                     <Modal.Title>
                         {toastMessage.title}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{toastMessage.message}</Modal.Body>
+                <Modal.Body
+                    style={{
+                        backgroundColor: toastMessage.title === 'Success' ? '#b8fccb' : '#f0aea1',
+                        color: toastMessage.title === 'Success' ? 'black' : 'white'
+                    }}
+                >
+                    {toastMessage.message}
+                </Modal.Body>
             </Modal>
         </>
     );

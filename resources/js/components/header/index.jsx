@@ -12,18 +12,6 @@ function HeaderComponent() {
     return (
         <header>
 
-            {/* <Navbar bg="dark" variant="dark" className="navbar">
-                <Container>
-                    <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
-                    <Nav>
-                        <NavLink to="/home" className="nav-item nav-link">Home</NavLink>
-                        <NavLink to="/shop" className="nav-item nav-link">Shop</NavLink>
-                        <NavLink to="/about" className="nav-item nav-link">About</NavLink>
-                        <NavLink to="/cart" className="nav-item nav-link">Cart ({cartNumber})</NavLink>
-                        <LoginComponent />
-                    </Nav>
-                </Container>
-            </Navbar> */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>

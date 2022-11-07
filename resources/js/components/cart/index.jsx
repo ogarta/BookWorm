@@ -82,7 +82,7 @@ export default function CartComponent({ dataListBook }) {
                                                         <Modal.Body>Are you sure you want to remove this item?</Modal.Body>
                                                         <Modal.Footer>
                                                             <button className="btn btn-secondary" onClick={() => dishpatch(plusQuantity(item.id))}>Cancel</button>
-                                                            <button className="btn btn-primary" onClick={() => dishpatch(removeItemCart(item.id))}>Remove</button>
+                                                            <button className="btn btn-danger" onClick={() => dishpatch(removeItemCart(item.id))}>Remove</button>
                                                         </Modal.Footer>
                                                     </Modal>) : ''
                                                 }
