@@ -92,11 +92,9 @@ export default function CartPage() {
         }
     }
 
-
     return (
         <>
             <Container>
-
                 <h2 className="title-cart mt-2">Your cart: {dataListBook.length} items</h2>
                 <hr />
                 <div className="row">
@@ -107,21 +105,20 @@ export default function CartPage() {
                         {
                             showAlert ? AlertComponent(alertParams) : ''
                         }
-                        <Card>
+                        <Card className="card-add-cart">
                             <Card.Header>
-                                <p>Card totals</p>
+                                Card totals
                             </Card.Header>
                             <Card.Body>
-                                <p className="d-flex justify-content-center">${totalPrice}</p>
+                                <p className="total-price d-flex justify-content-center">${totalPrice}</p>
                                 <div className="d-flex justify-content-center">
-                                    <button className="btn btn-primary" onClick={() => handleOrder()}>Placed order</button>
+                                    <button className="btn btn-secondary" onClick={() => handleOrder()}>Placed order</button>
                                 </div>
                             </Card.Body>
                         </Card>
                     </div>
                 </div>
             </Container>
-
         </>
     )
 }

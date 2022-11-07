@@ -59,7 +59,7 @@ export default function CartComponent({ dataListBook }) {
                                     <div className="col-md-5">
                                         <div className="d-flex" onClick={() => handleClickProduct(item.id)}>
                                             <img src={item.book_cover_photo ? IMAGE[item.book_cover_photo] : IMAGE['Empty']} alt="" width="100px" height="150px" />
-                                            <div className="ms-3">
+                                            <div className="info-book ms-3">
                                                 <p className="title-book m-0">{item.book_title}</p>
                                                 <p className="m-0">{item.author_name}</p>
                                             </div>

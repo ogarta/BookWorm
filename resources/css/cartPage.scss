@@ -2,3 +2,26 @@
     font-weight: bold;
     font-size: 1.8rem;
 }
+
+.card-add-cart{
+    .card-header{
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    .card-body{
+        .total-price{
+            font-weight: bold;
+            font-size: 1.6rem;
+        }
+        button{
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-left: 50px;
+            margin-right: 50px;
+            width: 100%;
+            height: 40px;
+        }
+
+    }
+}

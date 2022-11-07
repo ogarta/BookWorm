@@ -10,6 +10,11 @@
         margin-bottom: 10px;
         .row-cart{
             align-items: center;
+            .info-book{
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
             .title-book{
                 font-weight: bold;
                 font-size: 1.1rem;

@@ -13896,7 +13896,7 @@ function CartComponent(_ref) {
                     width: "100px",
                     height: "150px"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                    className: "ms-3",
+                    className: "info-book ms-3",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
                       className: "title-book m-0",
                       children: item.book_title
@@ -15947,18 +15947,17 @@ function CartPage() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
           className: "col-md-4",
           children: [showAlert ? (0,_components_alert__WEBPACK_IMPORTED_MODULE_6__["default"])(alertParams) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            className: "card-add-cart",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["default"].Header, {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-                children: "Card totals"
-              })
+              children: "Card totals"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["default"].Body, {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("p", {
-                className: "d-flex justify-content-center",
+                className: "total-price d-flex justify-content-center",
                 children: ["$", totalPrice]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
                 className: "d-flex justify-content-center",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
-                  className: "btn btn-primary",
+                  className: "btn btn-secondary",
                   onClick: function onClick() {
                     return handleOrder();
                   },
@@ -16997,7 +16996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".title-cart {\n  font-weight: bold;\n  font-size: 1.8rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".title-cart {\n  font-weight: bold;\n  font-size: 1.8rem;\n}\n\n.card-add-cart .card-header {\n  text-align: center;\n  font-weight: 700;\n  font-size: 1.1rem;\n}\n.card-add-cart .card-body .total-price {\n  font-weight: bold;\n  font-size: 1.6rem;\n}\n.card-add-cart .card-body button {\n  font-weight: 600;\n  font-size: 1.2rem;\n  margin-left: 50px;\n  margin-right: 50px;\n  width: 100%;\n  height: 40px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17117,7 +17116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card .card-header .parmas-book-cart {\n  font-weight: 700;\n  font-size: 1.1rem;\n}\n.card .list-group-item {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.card .list-group-item .row-cart {\n  align-items: center;\n}\n.card .list-group-item .row-cart .title-book {\n  font-weight: bold;\n  font-size: 1.1rem;\n}\n.card .list-group-item .row-cart .price-book {\n  font-weight: bold;\n  font-size: 1.3rem;\n}\n.card .list-group-item .row-cart .total-price {\n  font-weight: bold;\n  font-size: 1.3rem;\n  margin: 0;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart {\n  height: 35px;\n  padding-right: 40px;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #box-label {\n  width: 60%;\n  background-color: #bcbcbc;\n  align-items: center;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #box-label label {\n  font-weight: bold;\n  font-size: 1.2rem;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #btn-quantity {\n  width: 35px;\n  height: 35px;\n  border-radius: 0;\n  border: 1px solid #5e5e5e;\n  border: 1px solid #5e5e5e;\n  color: #797979;\n  font-size: 1.5rem;\n  font-weight: bold;\n  line-height: 1;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card .card-header .parmas-book-cart {\n  font-weight: 700;\n  font-size: 1.1rem;\n}\n.card .list-group-item {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.card .list-group-item .row-cart {\n  align-items: center;\n}\n.card .list-group-item .row-cart .info-book {\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n}\n.card .list-group-item .row-cart .title-book {\n  font-weight: bold;\n  font-size: 1.1rem;\n}\n.card .list-group-item .row-cart .price-book {\n  font-weight: bold;\n  font-size: 1.3rem;\n}\n.card .list-group-item .row-cart .total-price {\n  font-weight: bold;\n  font-size: 1.3rem;\n  margin: 0;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart {\n  height: 35px;\n  padding-right: 40px;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #box-label {\n  width: 60%;\n  background-color: #bcbcbc;\n  align-items: center;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #box-label label {\n  font-weight: bold;\n  font-size: 1.2rem;\n}\n.card .list-group-item .row-cart .box-control-book-quantity-cart #btn-quantity {\n  width: 35px;\n  height: 35px;\n  border-radius: 0;\n  border: 1px solid #5e5e5e;\n  border: 1px solid #5e5e5e;\n  color: #797979;\n  font-size: 1.5rem;\n  font-weight: bold;\n  line-height: 1;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
