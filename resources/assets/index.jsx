@@ -12,6 +12,7 @@ const IMAGE = {
     Empty: require('./bookcover/empty.jpg').default,
     Error404: require('./error/Error404.jpg').default,
     EmptyListBook: require('./error/EmptyListBook.jpg').default,
+    logo: require('./logo.png').default,
 }
 
 export default IMAGE

@@ -7,6 +7,8 @@ import ProductPage from './ProductPage'
 import CartPage from './CartPage';
 import ErrorPage from './ErrorPage';
 import AboutPage from './AboutPage';
+import FooterComponent from '../components/footer';
+
 function Index() {
     return (
         <Router>
@@ -22,7 +24,7 @@ function Index() {
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </div>
-
+            <FooterComponent />
         </Router>
     );
 }
