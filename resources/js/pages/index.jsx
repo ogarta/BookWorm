@@ -11,15 +11,18 @@ function Index() {
     return (
         <Router>
             <HeaderComponent />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/shop" element={<ShopPage />} />
-                <Route path="/product/:id" element={<ProductPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="*" element={<ErrorPage />} />
-            </Routes>
+            <div style={{ paddingTop: "50px" }}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/shop" element={<ShopPage />} />
+                    <Route path="/product/:id" element={<ProductPage />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="*" element={<ErrorPage />} />
+                </Routes>
+            </div>
+
         </Router>
     );
 }

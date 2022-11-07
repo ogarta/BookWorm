@@ -11,8 +11,7 @@ function HeaderComponent() {
     const cartNumber = useSelector((state) => state.cartReducer.cart).length;
     return (
         <header>
-
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
                 <Container>
                     <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
