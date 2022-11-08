@@ -1,26 +1,57 @@
 
-footer{
-    .row{
+.footer-web{
+    margin: 0;
+    div{
+        height: 90px;
+        display: inline-block;
+        img{
+            width: auto;
+            height: 100%;
+            vertical-align: 0;
+        }
+    
+    }
+    .info-footer{
+        height: 90px;
+        .title-footer{
+        font-weight: 700;
+        font-size: 1.5rem;
         margin: 0;
-        .col{
-            height: 100px;
+        }
+        p{  
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        
+    }
+    @media only screen and (max-width: 700px){
+        div{
+            height: 60px;
+            display: inline-block;
             img{
                 width: auto;
                 height: 100%;
+                vertical-align: 0;
             }
-            .info-footer{
-                .title-footer{
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    margin: 0;
-                }
-                p{  
-                    font-weight: 500;
-                    font-size: 1.2rem;
-                    margin: 0;
-                }
-                
+        
+        }
+        .info-footer{
+            height: 60px;
+            .title-footer{
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0;
             }
+            p{  
+                font-weight: 500;
+                font-size: 0.8rem;
+                margin: 0;
+            }
+            
+            
         }
     }
+    
 }
