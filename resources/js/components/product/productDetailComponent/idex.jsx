@@ -21,15 +21,15 @@ export default function CardProduct(props) {
     } = book;
 
     return (
-        <div className="card">
+        <div className="card pb-2">
             <div className="row">
-                <div className="col-4">
+                <div className="col-xs-6 col-sm-6 col-lg-4 col-xl-4">
                     <img src={book_cover_photo ? IMAGE[book_cover_photo] : IMAGE['Empty']} className="card-img-top" alt="book_cover_photo" />
-                    <p className="text-end">By (author) <span className="fw-bold">AnnaBanks</span></p>
+                    <p className="text-end m-0">By (author) <span className="fw-bold">AnnaBanks</span></p>
                 </div>
-                <div className="col-8">
+                <div className="col-xs-6 col-sm-6 col-lg-8 col-xl-8">
                     <div className="card-body">
-                        <h5 className="card-title">{book_title}</h5>
+                        <h5 className="card-title m-0">{book_title}</h5>
                         <p className="card-text">{book_description}</p>
                     </div>
                 </div>
