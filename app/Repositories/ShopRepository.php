@@ -29,7 +29,9 @@ class ShopRepository
     public function filterAndSortBookBy($sort, $category_id, $num_rating, $author_id, $num_item)
     {
         $query = Book::Leftjoin('review', 'book.id', '=', 'review.book_id')
-            ->select('book.*',)
+            ->LeftJoin('author', 'book.author_id', '=', 'author.id')
+            ->select('book.*',
+                'author.author_name')
 
             // Filter by Category use category id
             ->when($category_id !== null, function ($query) use ($category_id) {
@@ -40,7 +42,7 @@ class ShopRepository
             ->when($author_id !== null, function ($query) use ($author_id) {
                 return $query->where('book.author_id', $author_id);
             })
-            ->groupBy('book.id', 'discount.discount_price')
+            ->groupBy('book.id', 'discount.discount_price','author.author_name')
 
             // Filter by Rating Review use num rating
             ->when($num_rating !== null, function ($query) use ($num_rating) {

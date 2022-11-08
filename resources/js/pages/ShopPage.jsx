@@ -45,18 +45,18 @@ export default function ShopPage() {
 
             <hr></hr>
             <div className="row">
-                <div className='col-3'>
+                <div className='col-xs-12 col-sm-12 col-lg-3 col-xl-3'>
                     <p className='mb-4'>Filter by</p>
                     <section id="filter">
                         <FilterComponent />
                     </section>
                 </div>
-                <div className='col-9'>
+                <div className='col-xs-12 col-sm-12 col-lg-9 col-xl-9'>
                     <div className='row mb-2'>
-                        <div className='col-6'>
+                        <div className='col-xs-12 col-sm-12 col-lg-6 col-xl-6'>
                             <p className='show-item-page'>Showing {paginate.from} - {paginate.to} of {paginate.total} books</p>
                         </div>
-                        <div className='col-6 d-flex justify-content-end'>
+                        <div className='col-xs-12 col-sm-12 col-lg-6 col-xl-6 d-flex justify-content-end'>
                             <section id="sort" className='me-4'>
                                 <DropdownButton
                                     drop='down'
@@ -90,9 +90,7 @@ export default function ShopPage() {
                     </div>
 
                     <section id="list-book">
-                        <div className="row">
-                            <PaginatesComponent />
-                        </div>
+                        <PaginatesComponent />
                     </section>
                 </div >
 

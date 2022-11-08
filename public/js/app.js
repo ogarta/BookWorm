@@ -15818,7 +15818,7 @@ function PaginatesComponent() {
       className: "row",
       children: listBookFilterAndSort === null || listBookFilterAndSort === void 0 ? void 0 : listBookFilterAndSort.map(function (item, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "col-3 mb-2",
+          className: "col-xs-6 col-sm-6 col-lg-4 col-xl-3 mb-2 d-flex justify-content-center p-0",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_bookCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
             dataBook: item
           })
@@ -16429,7 +16429,7 @@ function ShopPage() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "row",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "col-3",
+        className: "col-xs-12 col-sm-12 col-lg-3 col-xl-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "mb-4",
           children: "Filter by"
@@ -16438,17 +16438,17 @@ function ShopPage() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_shop_fillterComponent_index__WEBPACK_IMPORTED_MODULE_3__["default"], {})
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "col-9",
+        className: "col-xs-12 col-sm-12 col-lg-9 col-xl-9",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "row mb-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "col-6",
+            className: "col-xs-12 col-sm-12 col-lg-6 col-xl-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
               className: "show-item-page",
               children: ["Showing ", paginate.from, " - ", paginate.to, " of ", paginate.total, " books"]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-            className: "col-6 d-flex justify-content-end",
+            className: "col-xs-12 col-sm-12 col-lg-6 col-xl-6 d-flex justify-content-end",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("section", {
               id: "sort",
               className: "me-4",
@@ -16498,10 +16498,7 @@ function ShopPage() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("section", {
           id: "list-book",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_shop_paginatesComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {})
-          })
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_shop_paginatesComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {})
         })]
       })]
     })]
@@ -17279,7 +17276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-item {\n  cursor: pointer;\n  width: 235px;\n  height: 400px;\n  justify-content: center;\n}\n\n.card-image {\n  width: auto;\n  height: 280px;\n  -o-object-fit: fit;\n     object-fit: fit;\n}\n\n.card-title {\n  font-size: 1.2rem;\n  font-weight: 600;\n  margin-top: 1rem;\n  overflow: hidden;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  -webkit-box-orient: vertical;\n}\n\n.card-footer {\n  height: 60px;\n}\n.card-footer .price {\n  font-size: 1.2rem;\n  font-weight: 600;\n}\n\n#book_title {\n  font-weight: bold;\n}\n\n#final_price {\n  font-weight: bold;\n}\n\n.card-item:hover {\n  box-shadow: black 0px 3px 8px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card {\n  width: 95%;\n  cursor: pointer;\n  height: 400px;\n  justify-content: center;\n}\n.card .card-image {\n  width: auto;\n  height: 280px;\n  -o-object-fit: fit;\n     object-fit: fit;\n}\n.card .card-item:hover {\n  box-shadow: black 0px 3px 8px;\n}\n.card .card-title {\n  font-size: 1.2rem;\n  font-weight: 600;\n  margin-top: 1rem;\n  overflow: hidden;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  -webkit-box-orient: vertical;\n}\n.card #book_title {\n  font-weight: bold;\n}\n.card #final_price {\n  font-weight: bold;\n}\n.card .card-footer {\n  height: 60px;\n}\n.card .card-footer .price {\n  font-size: 1.2rem;\n  font-weight: 600;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

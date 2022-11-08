@@ -55,7 +55,7 @@ export default function PaginatesComponent() {
         <>
             <div className="row">
                 {listBookFilterAndSort?.map((item, index) => (
-                    <div className="col-3 mb-2" key={index}>
+                    <div className="col-xs-6 col-sm-6 col-lg-4 col-xl-3 mb-2 d-flex justify-content-center p-0" key={index}>
                         <ItemCardComponent dataBook={item} />
                     </div>
                 ))}
