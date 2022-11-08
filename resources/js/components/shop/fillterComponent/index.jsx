@@ -64,7 +64,7 @@ function FilterComponent() {
     }, [valueStar]);
 
     return (
-        <div>
+        <div className='accordion-filter'>
             <Accordion defaultActiveKey={['1', '2', '0']} alwaysOpen flush>
                 <Accordion.Item eventKey="0" id="accordion-item">
                     <Accordion.Header id="accordion-header">Category</Accordion.Header>

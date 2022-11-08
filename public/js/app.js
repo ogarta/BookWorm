@@ -15640,6 +15640,7 @@ function FilterComponent() {
     }));
   }, [valueStar]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    className: "accordion-filter",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
       defaultActiveKey: ['1', '2', '0'],
       alwaysOpen: true,
@@ -17598,7 +17599,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".category-item:hover, .author-item:hover, .star-item:hover {\n  background-color: #cfcfcf;\n  cursor: pointer;\n}\n\n#accordion-item {\n  margin-bottom: 5px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".category-item:hover, .author-item:hover, .star-item:hover {\n  background-color: #cfcfcf;\n  cursor: pointer;\n}\n\n#accordion-item {\n  margin-bottom: 5px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n}\n\n.accordion-filter .accordion-button:not(.collapsed) {\n  color: #000;\n  background-color: white;\n  border-color: white;\n  font-weight: 700;\n  font-size: 1.2rem;\n  padding-left: 10px;\n}\n.accordion-filter .accordion-button {\n  color: #000;\n  background-color: white;\n  border-color: white;\n  font-weight: 700;\n  font-size: 1.2rem;\n  padding-left: 10px;\n}\n.accordion-filter .accordion-button:not(.collapsed)::after {\n  background-image: none;\n  transform: none;\n  color: #000;\n  background-color: white;\n  border-color: white;\n}\n.accordion-filter .accordion-button::after {\n  background-image: none;\n  transform: none;\n  color: #000;\n  background-color: white;\n  border-color: white;\n}\n.accordion-filter .accordion-button:focus {\n  border-color: #000;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
