@@ -1,4 +1,10 @@
 .body-page{
-    padding-top: ̀50px;
-    min-height: calc(100vh - 160px);
+    padding-top: 50px;
+    min-height: calc(100vh - 120px);
+    // set container in the middle of the page
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }

@@ -37,7 +37,7 @@ export default function Feature() {
         const rows = listFeature.data ? listFeature.data : listRecommend.data;
         return rows && rows.map((item, index) => {
             return (
-                <div className="col-lg-3 col-xl-3 my-3 d-flex justify-content-center" key={index}>
+                <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3 d-flex justify-content-center" key={index}>
                     <ItemCardComponent dataBook={item} />
                 </div>
             );

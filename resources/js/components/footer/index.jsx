@@ -10,9 +10,9 @@ export default function FooterComponent() {
                 </Col>
                 <Col xs lg="3">
                     <div className="info-footer">
-                        <h1>Bookworm</h1>
-                        <h5>Address: Etown 1, 364 Cong Hoa Street</h5>
-                        <h5>Phone: 0382349463</h5>
+                        <p className="title-footer">Bookworm</p>
+                        <p>Address: Etown 1, 364 Cong Hoa Street</p>
+                        <p>Phone: 0382349463</p>
                     </div>
                 </Col>
             </Row>

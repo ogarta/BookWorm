@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import CarouselListDiscount from '../components/home/carouselComponent/index';
 import '../../css/homePage.scss';
 import Feature from '../components/home/featureComponent/index';
+import { Container } from 'react-bootstrap';
 
 function HomePage() {
 
     return (
         <>
-            <div className="container mt-3">
+            <Container className="mt-3">
                 <section id="on-sale">
                     <div className="row justify-content-between p-0">
                         <div className="col-4 p-0">
@@ -33,7 +34,7 @@ function HomePage() {
                 <section>
                     <Feature />
                 </section>
-            </div>
+            </Container>
 
         </>
     );

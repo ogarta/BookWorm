@@ -13410,7 +13410,7 @@ var IMAGE = {
   Empty: (__webpack_require__(/*! ./bookcover/empty.jpg */ "./resources/assets/bookcover/empty.jpg")["default"]),
   Error404: (__webpack_require__(/*! ./error/Error404.jpg */ "./resources/assets/error/Error404.jpg")["default"]),
   EmptyListBook: (__webpack_require__(/*! ./error/EmptyListBook.jpg */ "./resources/assets/error/EmptyListBook.jpg")["default"]),
-  logo: (__webpack_require__(/*! ./logo.png */ "./resources/assets/logo.png")["default"])
+  logo: (__webpack_require__(/*! ./logo.svg */ "./resources/assets/logo.svg")["default"])
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IMAGE);
 
@@ -14012,11 +14012,12 @@ function FooterComponent() {
         lg: "3",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "info-footer",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "title-footer",
             children: "Bookworm"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: "Address: Etown 1, 364 Cong Hoa Street"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: "Phone: 0382349463"
           })]
         })
@@ -14192,14 +14193,14 @@ function CarouselListDiscount() {
         max: 1024,
         min: 464
       },
-      items: 3
+      items: 2
     },
     mobile: {
       breakpoint: {
         max: 464,
         min: 0
       },
-      items: 2
+      items: 1
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -14338,7 +14339,7 @@ function Feature() {
     var rows = listFeature.data ? listFeature.data : listRecommend.data;
     return rows && rows.map(function (item, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "col-lg-3 col-xl-3 my-3 d-flex justify-content-center",
+        className: "col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3 d-flex justify-content-center",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_bookCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
           dataBook: item
         })
@@ -16163,11 +16164,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _components_home_carouselComponent_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/home/carouselComponent/index */ "./resources/js/components/home/carouselComponent/index.jsx");
 /* harmony import */ var _css_homePage_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css/homePage.scss */ "./resources/css/homePage.scss");
 /* harmony import */ var _components_home_featureComponent_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/home/featureComponent/index */ "./resources/js/components/home/featureComponent/index.jsx");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -16178,8 +16181,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function HomePage() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "container mt-3",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      className: "mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("section", {
         id: "on-sale",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -16196,7 +16199,7 @@ function HomePage() {
               className: "d-flex justify-content-end p-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "col-auto",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
                   to: '/shop',
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                     type: "button",
@@ -17324,7 +17327,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "footer img {\n  height: 150px;\n  width: 150px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "footer .row {\n  margin: 0;\n}\nfooter .row .col {\n  height: 100px;\n}\nfooter .row .col img {\n  width: auto;\n  height: 100%;\n}\nfooter .row .col .info-footer .title-footer {\n  font-weight: 700;\n  font-size: 1.5rem;\n  margin: 0;\n}\nfooter .row .col .info-footer p {\n  font-weight: 500;\n  font-size: 1.2rem;\n  margin: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17588,7 +17591,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.body-page {\n  padding-top: ̀50px;\n  min-height: calc(100vh - 160px);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".body-page {\n  padding-top: 50px;\n  min-height: calc(100vh - 120px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding-left: 10px;\n  padding-right: 10px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18580,9 +18583,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/logo.png":
+/***/ "./resources/assets/logo.svg":
 /*!***********************************!*\
-  !*** ./resources/assets/logo.png ***!
+  !*** ./resources/assets/logo.svg ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18591,7 +18594,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.png?c82531cc223ee5d1cb358f6e1c74fbb3");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.svg?090e25b84db16b0e8fddb39f33f6d851");
 
 /***/ }),
 

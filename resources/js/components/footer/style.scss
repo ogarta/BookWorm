@@ -1,8 +1,26 @@
 
 footer{
-
-    img{
-        height: 150px;
-        width: 150px;
+    .row{
+        margin: 0;
+        .col{
+            height: 100px;
+            img{
+                width: auto;
+                height: 100%;
+            }
+            .info-footer{
+                .title-footer{
+                    font-weight: 700;
+                    font-size: 1.5rem;
+                    margin: 0;
+                }
+                p{  
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                    margin: 0;
+                }
+                
+            }
+        }
     }
 }
