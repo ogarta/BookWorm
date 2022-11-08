@@ -4,10 +4,34 @@
             font-weight: 700;
             font-size: 1.1rem;
         }
+        @media only screen and (max-width: 780px){
+            .parmas-book-cart{
+                div{
+                    //set center for col
+                    text-align: center;
+                }
+            }
+        }
     }
     .list-group-item{
         margin-top: 10px;
         margin-bottom: 10px;
+        @media only screen and (max-width: 780px){
+            .row-cart{
+                .col-item{
+                    p {
+                        text-align: center;
+                    }
+                    .box-control-book-quantity-cart{
+                        width: 100%;
+                        padding: 0;
+                        #box-label{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
         .row-cart{
             align-items: center;
             .info-book{

@@ -94,14 +94,14 @@ export default function CartPage() {
 
     return (
         <>
-            <Container>
+            <Container className="container-cart">
                 <h2 className="title-cart mt-2">Your cart: {dataListBook.length} items</h2>
                 <hr />
                 <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mb-2">
                         <CartComponent dataListBook={dataListBook} />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-xs-12 col-sm-12 col-lg-4 col-xl-4 mb-2">
                         {
                             showAlert ? AlertComponent(alertParams) : ''
                         }
