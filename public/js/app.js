@@ -14375,7 +14375,7 @@ function Feature() {
                 variant: "outline-secondary",
                 name: "radio",
                 style: {
-                  fontSize: "1.5rem",
+                  fontSize: "1.3rem",
                   fontWeight: "bold"
                 },
                 value: radio.value,
@@ -15884,6 +15884,7 @@ __webpack_require__.r(__webpack_exports__);
 function AboutPage() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      className: "container-about",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
           className: "title-about mt-2",
@@ -17169,7 +17170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".title-about {\n  font-size: 1.8rem;\n  font-weight: 700;\n}\n\n.about-welcome {\n  padding-left: 150px;\n  padding-right: 150px;\n}\n.about-welcome h3 {\n  font-size: 2.5rem;\n  font-weight: 700;\n  color: #000;\n  margin-bottom: 1rem;\n  text-align: center;\n}\n.about-welcome p {\n  font-size: 1.5rem;\n  font-weight: 400;\n  color: #000;\n  margin-bottom: 1rem;\n}\n\n.about-story-vision {\n  padding-left: 150px;\n  padding-right: 150px;\n}\n.about-story-vision h3 {\n  font-size: 2.2rem;\n  font-weight: 700;\n  color: #000;\n  margin-bottom: 1rem;\n}\n.about-story-vision p {\n  font-size: 1.2rem;\n  font-weight: 400;\n  color: #000;\n  margin-bottom: 1rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".title-about {\n  font-size: 1.8rem;\n  font-weight: 700;\n}\n\n.container-about {\n  min-height: calc(100vh - 200px);\n}\n.container-about .about-welcome {\n  padding-left: 150px;\n  padding-right: 150px;\n}\n.container-about .about-welcome h3 {\n  font-size: 2.5rem;\n  font-weight: 700;\n  color: #000;\n  margin-bottom: 1rem;\n  text-align: center;\n}\n.container-about .about-welcome p {\n  font-size: 1.5rem;\n  font-weight: 400;\n  color: #000;\n  margin-bottom: 1rem;\n}\n.container-about .about-story-vision {\n  padding-left: 150px;\n  padding-right: 150px;\n}\n.container-about .about-story-vision h3 {\n  font-size: 2.2rem;\n  font-weight: 700;\n  color: #000;\n  margin-bottom: 1rem;\n}\n.container-about .about-story-vision p {\n  font-size: 1.2rem;\n  font-weight: 400;\n  color: #000;\n  margin-bottom: 1rem;\n}\n@media only screen and (max-width: 960px) {\n  .container-about .about-welcome {\n    padding-left: 0px;\n    padding-right: 0px;\n  }\n  .container-about .about-welcome h3 {\n    font-size: 1.8rem;\n    font-weight: 700;\n    color: #000;\n    margin-bottom: 1rem;\n    text-align: center;\n  }\n  .container-about .about-welcome p {\n    font-size: 1rem;\n    font-weight: 400;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n  .container-about .about-story-vision {\n    padding-left: 0px;\n    padding-right: 0px;\n  }\n  .container-about .about-story-vision h3 {\n    font-size: 1.6rem;\n    font-weight: 700;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n  .container-about .about-story-vision p {\n    font-size: 1rem;\n    font-weight: 400;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n}\n@media only screen and (max-width: 500px) {\n  .container-about .about-welcome {\n    padding-left: 0px;\n    padding-right: 0px;\n  }\n  .container-about .about-welcome h3 {\n    font-size: 1.5rem;\n    font-weight: 700;\n    color: #000;\n    margin-bottom: 1rem;\n    text-align: center;\n  }\n  .container-about .about-welcome p {\n    font-size: 0.9rem;\n    font-weight: 400;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n  .container-about .about-story-vision {\n    padding-left: 0px;\n    padding-right: 0px;\n  }\n  .container-about .about-story-vision h3 {\n    font-size: 1.3rem;\n    font-weight: 700;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n  .container-about .about-story-vision p {\n    font-size: 0.9rem;\n    font-weight: 400;\n    color: #000;\n    margin-bottom: 1rem;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

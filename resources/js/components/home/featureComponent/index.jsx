@@ -57,7 +57,7 @@ export default function Feature() {
                                     type="radio"
                                     variant="outline-secondary"
                                     name="radio"
-                                    style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                                    style={{ fontSize: "1.3rem", fontWeight: "bold" }}
                                     value={radio.value}
                                     checked={statusFeature === radio.value}
                                     onChange={(e) => setStatusFeature(e.currentTarget.value)}

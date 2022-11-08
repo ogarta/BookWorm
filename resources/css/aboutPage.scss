@@ -2,38 +2,111 @@
     font-size: 1.8rem;
     font-weight: 700;
 }
-.about-welcome{
-    h3{
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #000;
-        margin-bottom: 1rem;
-        text-align: center;
+.container-about{
+    min-height: calc(100vh - 200px);
+    .about-welcome{
+        h3{
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        p{
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        padding-left: 150px;
+        padding-right: 150px;
     }
-    p{
-        font-size: 1.5rem;
-        font-weight: 400;
-        color: #000;
-        margin-bottom: 1rem;
+    .about-story-vision{
+        padding-left: 150px;
+        padding-right: 150px;
+        h3{
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        p{
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 1rem;
+        }
     }
-    padding-left: 150px;
-    padding-right: 150px;
+    @media only screen and (max-width: 960px){
+    .about-welcome{
+        h3{
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        p{
+            font-size: 1.0rem;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        padding-left: 0px;
+        padding-right: 0px;
+        }
+        .about-story-vision{
+            padding-left: 0px;
+            padding-right: 0px;
+            h3{
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: #000;
+                margin-bottom: 1rem;
+            }
+            p{
+                font-size: 1.0rem;
+                font-weight: 400;
+                color: #000;
+                margin-bottom: 1rem;
+            }
+        }
     }
-.about-story-vision{
-    padding-left: 150px;
-    padding-right: 150px;
-    h3{
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #000;
-        margin-bottom: 1rem;
-    }
-    p{
-        font-size: 1.2rem;
-        font-weight: 400;
-        color: #000;
-        margin-bottom: 1rem;
-    }
+    @media only screen and (max-width: 500px){
+        .about-welcome{
+            h3{
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #000;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+            p{
+                font-size: 0.9rem;
+                font-weight: 400;
+                color: #000;
+                margin-bottom: 1rem;
+            }
+            padding-left: 0px;
+            padding-right: 0px;
+            }
+            .about-story-vision{
+                padding-left: 0px;
+                padding-right: 0px;
+                h3{
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                    color: #000;
+                    margin-bottom: 1rem;
+                }
+                p{
+                    font-size: 0.9rem;
+                    font-weight: 400;
+                    color: #000;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
 }
 
 

@@ -3,7 +3,7 @@ import '../../css/aboutPage.scss';
 export default function AboutPage() {
     return (
         <>
-            <Container>
+            <Container className="container-about">
                 <div>
                     <h3 className="title-about mt-2">About Us</h3>
                     <hr />
