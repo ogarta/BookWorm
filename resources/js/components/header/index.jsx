@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useSelector } from 'react-redux';
 import LoginComponent from '../login';
 import { NavLink } from 'react-router-dom';
+import IMAGE from '../../../assets';
 import './style.scss';
 
 function HeaderComponent() {
@@ -13,7 +14,10 @@ function HeaderComponent() {
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
                 <Container>
-                    <Navbar.Brand href="/home">BOOKWORM</Navbar.Brand>
+                    <Navbar.Brand href="/home">
+                        <img src={IMAGE['logo']}></img>
+                        <span>BOOKWORM</span>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
