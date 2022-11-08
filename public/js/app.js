@@ -17357,7 +17357,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".footer-web {\n  margin: 0;\n}\n.footer-web div {\n  height: 90px;\n  display: inline-block;\n}\n.footer-web div img {\n  width: auto;\n  height: 100%;\n  vertical-align: 0;\n}\n.footer-web .info-footer {\n  height: 90px;\n}\n.footer-web .info-footer .title-footer {\n  font-weight: 700;\n  font-size: 1.5rem;\n  margin: 0;\n}\n.footer-web .info-footer p {\n  font-weight: 500;\n  font-size: 1.2rem;\n  margin: 0;\n}\n@media only screen and (max-width: 700px) {\n  .footer-web div {\n    height: 60px;\n    display: inline-block;\n  }\n  .footer-web div img {\n    width: auto;\n    height: 100%;\n    vertical-align: 0;\n  }\n  .footer-web .info-footer {\n    height: 60px;\n  }\n  .footer-web .info-footer .title-footer {\n    font-weight: 700;\n    font-size: 1.2rem;\n    margin: 0;\n  }\n  .footer-web .info-footer p {\n    font-weight: 500;\n    font-size: 0.8rem;\n    margin: 0;\n  }\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".footer-web {\n  margin: 0;\n  background-color: black;\n  color: white;\n  padding-top: 10px;\n}\n.footer-web div {\n  height: 90px;\n  display: inline-block;\n}\n.footer-web div img {\n  width: auto;\n  height: 100%;\n  vertical-align: 0;\n}\n.footer-web .info-footer {\n  height: 90px;\n  margin-left: 10px;\n}\n.footer-web .info-footer .title-footer {\n  font-weight: 700;\n  font-size: 1.5rem;\n}\n.footer-web .info-footer p {\n  font-weight: 500;\n  font-size: 1.2rem;\n  margin: 0;\n}\n@media only screen and (max-width: 700px) {\n  .footer-web div {\n    height: 60px;\n    display: inline-block;\n  }\n  .footer-web div img {\n    width: auto;\n    height: 100%;\n    vertical-align: 0;\n  }\n  .footer-web .info-footer {\n    height: 60px;\n  }\n  .footer-web .info-footer .title-footer {\n    font-weight: 700;\n    font-size: 1.2rem;\n    margin: 0;\n  }\n  .footer-web .info-footer p {\n    font-weight: 500;\n    font-size: 0.8rem;\n    margin: 0;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17645,7 +17645,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".body-page {\n  padding-top: 50px;\n  min-height: calc(100vh - 120px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding-left: 10px;\n  padding-right: 10px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".body-page {\n  padding-top: 50px;\n  min-height: calc(100vh - 100px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

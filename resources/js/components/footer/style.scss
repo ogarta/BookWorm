@@ -1,6 +1,9 @@
 
 .footer-web{
     margin: 0;
+    background-color: black;
+    color: white;
+    padding-top: 10px;
     div{
         height: 90px;
         display: inline-block;
@@ -13,10 +16,10 @@
     }
     .info-footer{
         height: 90px;
+        margin-left: 10px;
         .title-footer{
         font-weight: 700;
         font-size: 1.5rem;
-        margin: 0;
         }
         p{  
             font-weight: 500;
