@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// All path will be call reactjs.blade.php
+// All path will be call reactjs
 Route::get('{path?}', function () {
     return view('reactjs');
 })->where('path', '[a-zA-Z0-9-/]+');

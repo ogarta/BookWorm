@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import './index.scss';
 import IMAGE from '../../../assets/index';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ItemCardComponent(props) {
     let navigate = useNavigate();

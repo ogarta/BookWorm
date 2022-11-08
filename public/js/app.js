@@ -13456,9 +13456,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constant_baseUrl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constant/baseUrl */ "./resources/js/constant/baseUrl.jsx");
+
 
 var axiosClient = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: _constant_baseUrl__WEBPACK_IMPORTED_MODULE_1__["default"],
   headers: {
     "Content-Type": "application/json",
     "Authorization": "Bearer " + (JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")).token : "")
@@ -15860,6 +15862,22 @@ function PaginatesComponent() {
     })]
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/constant/baseUrl.jsx":
+/*!*******************************************!*\
+  !*** ./resources/js/constant/baseUrl.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var BASE_URL = "http://127.0.0.1:8000";
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BASE_URL);
 
 /***/ }),
 
