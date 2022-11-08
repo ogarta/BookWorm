@@ -14817,12 +14817,12 @@ function AddCartComponent(_ref) {
   var handleAddToCart = function handleAddToCart() {
     // get cart from local storage
     var cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart) {
+    if (cart != null) {
       // check if book is already in cart
       var bookInCart = cart.find(function (book) {
-        return book.book_id == dataBook.book_id;
+        return book.book_id == dataBook.id;
       });
-      if (bookInCart) {
+      if (bookInCart != null) {
         // check if quantity plus quantity in cart is greater than max quantity
         if (bookInCart.quantity + quantity > maxQuantity) {
           setAlertParams({
