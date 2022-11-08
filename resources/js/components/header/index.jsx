@@ -13,7 +13,7 @@ function HeaderComponent() {
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-                <Container>
+                <Container className='container-header'>
                     <Navbar.Brand href="/home">
                         <img src={IMAGE['logo']}></img>
                         <span>BOOKWORM</span>

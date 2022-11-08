@@ -14076,6 +14076,7 @@ function HeaderComponent() {
       expand: "lg",
       fixed: "top",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        className: "container-header",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6__["default"].Brand, {
           href: "/home",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
@@ -17381,7 +17382,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".container .navbar-brand {\n  height: 40px;\n  display: flex;\n  justify-content: center;\n}\n.container .navbar-brand img {\n  height: 100%;\n  width: auto;\n  vertical-align: 0;\n}\n.container .navbar-brand span {\n  font-size: 1.2rem;\n  margin-left: 10px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".container-header {\n  font-weight: 600;\n}\n.container-header .navbar-brand {\n  height: 40px;\n  display: flex;\n  justify-content: center;\n}\n.container-header .navbar-brand img {\n  height: 100%;\n  width: auto;\n  vertical-align: 0;\n}\n.container-header .navbar-brand span {\n  font-size: 1.2rem;\n  margin-left: 10px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

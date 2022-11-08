@@ -1,16 +1,17 @@
-.container{
+.container-header{
+    font-weight: 600;
     .navbar-brand{
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    img{
-        height: 100%;
-        width: auto;
-        vertical-align: 0;
-    }
-    span{
-        font-size: 1.2rem;
-        margin-left: 10px;
-    }
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        img{
+            height: 100%;
+            width: auto;
+            vertical-align: 0;
+        }
+        span{
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
 }
 }
