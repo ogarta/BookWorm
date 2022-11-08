@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import shopApi from "../../../adapters/shopPageAdapter";
 import ReactPaginate from 'react-paginate';
 import ItemCardComponent from "../../bookCard";
-import { setPagination, setCurentPage, setPage } from "../../../reducers/filterReducer";
+import { setPagination, setPage } from "../../../reducers/filterReducer";
 import IMAGE from "../../../../assets";
+import './style.scss';
 
 export default function PaginatesComponent() {
     const dispatch = useDispatch();
@@ -74,12 +75,12 @@ export default function PaginatesComponent() {
                     containerClassName="pagination"
                     activeClassName="active"
                     breakLabel="..."
-                    nextLabel=">"
+                    nextLabel="Next"
                     forcePage={paggination.current_page - 1}
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={paggination.last_page}
-                    previousLabel="<"
+                    previousLabel="Previous"
                     renderOnZeroPageCount={null}
                 />
             </div>
