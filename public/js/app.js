@@ -14820,9 +14820,9 @@ function AddCartComponent(_ref) {
     if (cart != null) {
       // check if book is already in cart
       var bookInCart = cart.find(function (book) {
-        return book.book_id == dataBook.id;
+        return book.id == dataBook.id;
       });
-      if (bookInCart != null) {
+      if (bookInCart) {
         // check if quantity plus quantity in cart is greater than max quantity
         if (bookInCart.quantity + quantity > maxQuantity) {
           setAlertParams({
