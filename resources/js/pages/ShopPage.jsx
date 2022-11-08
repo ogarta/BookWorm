@@ -46,7 +46,7 @@ export default function ShopPage() {
             <hr></hr>
             <div className="row">
                 <div className='col-xs-12 col-sm-12 col-lg-3 col-xl-3'>
-                    <p className='mb-4'>Filter by</p>
+                    <p className='mb-4' style={{ fontWeight: "700" }}>Filter by</p>
                     <section id="filter">
                         <FilterComponent />
                     </section>
@@ -89,7 +89,7 @@ export default function ShopPage() {
                         </div>
                     </div>
 
-                    <section id="list-book">
+                    <section id="list-book" className='pt-4'>
                         <PaginatesComponent />
                     </section>
                 </div >

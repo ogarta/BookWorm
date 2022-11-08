@@ -16467,6 +16467,9 @@ function ShopPage() {
         className: "col-xs-12 col-sm-12 col-lg-3 col-xl-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "mb-4",
+          style: {
+            fontWeight: "700"
+          },
           children: "Filter by"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("section", {
           id: "filter",
@@ -16533,6 +16536,7 @@ function ShopPage() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("section", {
           id: "list-book",
+          className: "pt-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_shop_paginatesComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {})
         })]
       })]
