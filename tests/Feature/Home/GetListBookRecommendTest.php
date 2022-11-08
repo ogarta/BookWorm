@@ -55,7 +55,12 @@ class GetListBookRecommendTest extends TestCase
         }
         $response = $this->getJson(route('home.top-recommend'));
 
-        $response->assertStatus(404);
+        $response->assertStatus(202);
+
+        // check data response
+        $response->assertJson([
+            'data' => [],
+        ]);
     }
 
     /** @test */

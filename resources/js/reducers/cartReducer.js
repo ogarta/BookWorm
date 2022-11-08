@@ -15,7 +15,10 @@ export const cartSlice = createSlice({
             if (index !== -1) {
                 if (state.cart[index].quantity < state.maxQuantity) {
                     state.cart[index].quantity += action.payload.quantity;
-                    //  If quantity parmas is -1, quantity will be decrease
+                    //  If quantity parmas is higher than maxQuantity, set this quantity to before this quantity
+                    if (state.cart[index].quantity > state.maxQuantity) {
+                        state.cart[index].quantity -= action.payload.quantity;
+                    }
                     cartList = state.cart;
                 } else {
                     cartList = [...state.cart];

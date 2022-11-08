@@ -22,9 +22,7 @@ class AuthorController extends Controller
     public function index()
     {
         $listAuthor = $this->authorRepository->getAuthor();
-        return $listAuthor !== null ? 
-            response()->json(new AuthorCollection($listAuthor),200): 
-            response()->json(['message' => 'Not Found'], 404);
+        return response()->json(new AuthorCollection($listAuthor),200);
     }
 
     /**

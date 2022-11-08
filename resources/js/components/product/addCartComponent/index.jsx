@@ -33,6 +33,25 @@ export default function AddCartComponent({ dataBook }) {
     }
 
     const handleAddToCart = () => {
+        // get cart from local storage
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        if (cart) {
+            // check if book is already in cart
+            let bookInCart = cart.find(book => book.book_id == dataBook.book_id);
+            if (bookInCart) {
+                // check if quantity plus quantity in cart is greater than max quantity
+                if (bookInCart.quantity + quantity > maxQuantity) {
+                    setAlertParams({
+                        title: 'Error',
+                        message: `You can only add ${maxQuantity} books to cart`,
+                        variant: 'danger'
+                    });
+                    setShowAlert(true);
+                    handleHideAlert();
+                    return;
+                }
+            }
+        }
         const data = {
             id: dataBook.id,
             book_title: dataBook.book_title,

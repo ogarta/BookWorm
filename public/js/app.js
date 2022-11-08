@@ -14815,6 +14815,27 @@ function AddCartComponent(_ref) {
     };
   };
   var handleAddToCart = function handleAddToCart() {
+    // get cart from local storage
+    var cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart) {
+      // check if book is already in cart
+      var bookInCart = cart.find(function (book) {
+        return book.book_id == dataBook.book_id;
+      });
+      if (bookInCart) {
+        // check if quantity plus quantity in cart is greater than max quantity
+        if (bookInCart.quantity + quantity > maxQuantity) {
+          setAlertParams({
+            title: 'Error',
+            message: "You can only add ".concat(maxQuantity, " books to cart"),
+            variant: 'danger'
+          });
+          setShowAlert(true);
+          handleHideAlert();
+          return;
+        }
+      }
+    }
     var data = {
       id: dataBook.id,
       book_title: dataBook.book_title,
@@ -16689,7 +16710,10 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       if (index !== -1) {
         if (state.cart[index].quantity < state.maxQuantity) {
           state.cart[index].quantity += action.payload.quantity;
-          //  If quantity parmas is -1, quantity will be decrease
+          //  If quantity parmas is higher than maxQuantity, set this quantity to before this quantity
+          if (state.cart[index].quantity > state.maxQuantity) {
+            state.cart[index].quantity -= action.payload.quantity;
+          }
           cartList = state.cart;
         } else {
           cartList = _toConsumableArray(state.cart);

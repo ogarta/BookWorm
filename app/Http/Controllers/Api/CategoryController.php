@@ -22,9 +22,7 @@ class CategoryController extends Controller
     public function index()
     {
         $listCategory = $this->categoryRepository->getCategory();
-        return $listCategory !== null ? 
-            response()->json(new CategoryCollection($listCategory),200): 
-            response()->json(['message' => 'Not Found'], 404);
+        return response()->json(new CategoryCollection($listCategory),200);
     }
 
     /**
