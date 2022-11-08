@@ -16052,14 +16052,14 @@ function CartPage() {
   var handleHideAlert = function handleHideAlert() {
     var timer = setTimeout(function () {
       setShowAlert(false);
-    }, 2000);
+    }, 5000);
     return function () {
       return clearTimeout(timer);
     };
   };
   var handleOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var itemsOreder, params, response;
+      var itemsOreder, params, response, cart, bookTitle;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -16108,22 +16108,35 @@ function CartPage() {
               });
               setShowAlert(true);
               goHomePage();
-              _context.next = 27;
+              _context.next = 29;
               break;
             case 21:
               _context.prev = 21;
               _context.t0 = _context["catch"](11);
-              _context.t0.response.data.errors.items_order.map(function (item) {
-                dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeItemCart)(item[0]));
-              });
+              // get cart from local storage
+              cart = JSON.parse(localStorage.getItem('cart'));
+              bookTitle = '';
+              if (cart != null) {
+                // check if book is already in cart
+                _context.t0.response.data.errors.items_order.map(function (item) {
+                  var bookInCart = cart.find(function (book) {
+                    return book.id == item;
+                  });
+                  if (bookInCart) {
+                    // set alert params
+                    bookTitle += " " + bookInCart.book_title;
+                  }
+                  dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_5__.removeItemCart)(item[0]));
+                });
+              }
               setAlertParams({
-                type: "fail",
-                title: "Order fail",
-                message: "Book is not exits. We removed it from your cart"
+                type: 'fail',
+                title: 'Order fail',
+                message: 'Book' + bookTitle + ' is not exist'
               });
               setShowAlert(true);
               handleHideAlert();
-            case 27:
+            case 29:
             case "end":
               return _context.stop();
           }

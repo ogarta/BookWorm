@@ -35,7 +35,7 @@ export default function CartPage() {
     const handleHideAlert = () => {
         const timer = setTimeout(() => {
             setShowAlert(false);
-        }, 2000);
+        }, 5000);
         return () => clearTimeout(timer);
     }
 
@@ -79,13 +79,24 @@ export default function CartPage() {
             setShowAlert(true);
             goHomePage();
         } catch (error) {
-            error.response.data.errors.items_order.map((item) => {
-                dispatch(removeItemCart(item[0]));
-            })
+            // get cart from local storage
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            let bookTitle = '';
+            if (cart != null) {
+                // check if book is already in cart
+                error.response.data.errors.items_order.map((item) => {
+                    let bookInCart = cart.find(book => book.id == item);
+                    if (bookInCart) {
+                        // set alert params
+                        bookTitle += " " + bookInCart.book_title;
+                    }
+                    dispatch(removeItemCart(item[0]));
+                })
+            }
             setAlertParams({
-                type: "fail",
-                title: "Order fail",
-                message: "Book is not exits. We removed it from your cart",
+                type: 'fail',
+                title: 'Order fail',
+                message: 'Book' + bookTitle + ' is not exist'
             });
             setShowAlert(true);
             handleHideAlert();
