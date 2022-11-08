@@ -16358,6 +16358,11 @@ function ProductPage() {
       };
     }();
     fetchDataBook();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
   }, []);
   if (Object.keys(book).length === 0) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
