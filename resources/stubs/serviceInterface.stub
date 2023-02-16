@@ -1,0 +1,9 @@
+<?php
+
+namespace App\Services\{{name}};
+
+use App\Services\ServiceInterface;
+
+interface {{name}}ServiceInterface extends ServiceInterface
+{
+}
