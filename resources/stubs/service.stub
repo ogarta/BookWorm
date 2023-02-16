@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Services\{{name}};
+
+use App\Services\Service;
+use App\Repositories\{{name}}\{{name}}Repository;
+use App\Services\{{name}}\{{name}}ServiceInterface;
+
+class {{name}}Service extends Service implements {{name}}ServiceInterface
+{
+    protected ${{nameVariable}}Repository;
+    public function __construct({{name}}Repository ${{nameVariable}}Repository)
+    {
+        $this->{{nameVariable}}Repository = ${{nameVariable}}Repository;
+    }
+}

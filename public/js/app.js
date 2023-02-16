@@ -13463,7 +13463,7 @@ var axiosClient = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: _constant_baseUrl__WEBPACK_IMPORTED_MODULE_1__["default"],
   headers: {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + (JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")).token : "")
+    Authorization: "Bearer " + (JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")).token : "")
   }
 });
 axiosClient.interceptors.response.use(function (response) {
@@ -13650,7 +13650,7 @@ __webpack_require__.r(__webpack_exports__);
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_7__.Provider, {
   store: _reducers_store__WEBPACK_IMPORTED_MODULE_6__["default"],
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_pages_index__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-}), document.getElementById('root'));
+}), document.getElementById("root"));
 
 /***/ }),
 
@@ -16267,7 +16267,7 @@ function HomePage() {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "col-auto",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-                  to: '/shop',
+                  to: "/shop",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                     type: "button",
                     className: "btn btn-secondary btn-view-all",
