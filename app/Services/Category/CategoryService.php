@@ -9,8 +9,10 @@ use App\Services\Category\CategoryServiceInterface;
 class CategoryService extends Service implements CategoryServiceInterface
 {
     protected $categoryRepository;
+
     public function __construct(CategoryRepository $categoryRepository)
     {
+        parent::__construct($categoryRepository);
         $this->categoryRepository = $categoryRepository;
     }
 }

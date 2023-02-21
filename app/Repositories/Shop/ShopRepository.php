@@ -1,16 +1,23 @@
 <?php
-namespace App\Repositories;
 
-use App\Http\Requests\FillterAndSortRequest;
+namespace App\Repositories\Shop;
+
 use App\Models\Book;
 use App\Models\Review;
-use DB;
 use App\Helper\Constant;
+use App\Repositories\BaseRepository;
+use App\Repositories\Shop\ShopRepositoryInterface;
 
-class ShopRepository
+class ShopRepository extends BaseRepository implements ShopRepositoryInterface
 {
+    protected $model;
 
-    /**
+    public function getModel()
+    {
+        return Book::class;
+    }
+
+        /**
      * Handle paramester filter and sort book
      *
      * @param  \Illuminate\Http\FillterAndSortRequest  $request

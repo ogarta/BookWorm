@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\AuthorRepository;
+use App\Http\Controllers\Controller;
+use App\Services\Author\AuthorService;
 use App\Http\Resources\Book\AuthorCollection;
 
 class AuthorController extends Controller
 {
-    private AuthorRepository $authorRepository;
+    private AuthorService $authorService;
 
-    public function __construct(AuthorRepository $authorRepository){
-        $this -> authorRepository = $authorRepository;
+    public function __construct(AuthorService $authorService){
+        $this -> authorService = $authorService;
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $listAuthor = $this->authorRepository->getAuthor();
+        $listAuthor = $this->authorService->all();
         return response()->json(new AuthorCollection($listAuthor),200);
     }
 

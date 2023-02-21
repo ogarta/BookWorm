@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
-use App\Repositories\OrderRepository;
+use App\Services\Order\OrderService;
 
 class OrderController extends Controller
 {
-    private OrderRepository $orderRepository;
-    function __construct(OrderRepository $orderRepository)
+    private OrderService $orderService;
+    function __construct(OrderService $orderService)
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderService = $orderService;
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        return $this->orderRepository->createOrder($request);
+        return $this->orderService->createOrder($request);
     }
 
     /**

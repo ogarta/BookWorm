@@ -12,7 +12,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function getModel()
     {
-        return new Category();
+        return Category::class;
     }
 
     // Add your custom database methods here

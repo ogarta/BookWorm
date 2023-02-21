@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories\Book;
+namespace App\Services\Book;
+use App\Services\ServiceInterface;
 
-use App\Repositories\RepositoryInterface;
-
-interface BookRepositoryInterface extends RepositoryInterface{
+interface BookServiceInterface extends ServiceInterface
+{
     public function getTopDiscount();
     public function getTopRecommend();
     public function getTopPopular();

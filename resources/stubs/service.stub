@@ -11,6 +11,7 @@ class {{name}}Service extends Service implements {{name}}ServiceInterface
     protected ${{nameVariable}}Repository;
     public function __construct({{name}}Repository ${{nameVariable}}Repository)
     {
+        parent::__construct(${{nameVariable}}Repository);
         $this->{{nameVariable}}Repository = ${{nameVariable}}Repository;
     }
 }

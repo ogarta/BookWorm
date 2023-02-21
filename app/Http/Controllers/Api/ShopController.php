@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\ShopRepository;
 use App\Http\Requests\FillterAndSortRequest;
 use App\Http\Resources\Shop\FilterSortCollection;
+use App\Services\Shop\ShopService;
 
 class ShopController extends Controller
 {
-    private ShopRepository $shopRepository;
+    private ShopService $shopService;
 
-    public function __construct(ShopRepository $shopRepository){
-        $this -> shopRepository = $shopRepository;
+    public function __construct(ShopService $shopService){
+        $this -> shopService = $shopService;
     }
 
     public function filterAndSortBookBy(FillterAndSortRequest $request){
-        $listBook = $this->shopRepository->handleFilterAndSort($request);
+        $listBook = $this->shopService->handleFilterAndSort($request);
         return new FilterSortCollection($listBook);
     }
 

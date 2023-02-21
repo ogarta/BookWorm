@@ -12,7 +12,7 @@ class AuthorRepository extends BaseRepository implements AuthorRepositoryInterfa
 
     public function getModel()
     {
-        return new Author();
+        return Author::class;
     }
 
     // Add your custom database methods here

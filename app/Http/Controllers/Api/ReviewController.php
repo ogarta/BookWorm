@@ -10,25 +10,26 @@ use App\Http\Requests\CreateReviewRequest;
 use App\Repositories\ReviewRepository;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\RatingCollection;
+use App\Services\Review\ReviewService;
 
 class ReviewController extends Controller
 {
-    private ReviewRepository $reviewRepository;
-    public function __construct(ReviewRepository $reviewRepository){
-        $this->reviewRepository=$reviewRepository;
+    private ReviewService $reviewService;
+    public function __construct(ReviewService $reviewService){
+        $this->reviewService=$reviewService;
     }
     
     public function getDetailRating(IdBookRequest $request){
-        $listDetailRating =  $this->reviewRepository->getDetailRating($request->id);
+        $listDetailRating =  $this->reviewService->getDetailRating($request->id);
         return response()->json(new RatingCollection($listDetailRating), 200);
     }
 
     public function getDetailReview(ReviewRequest $request){
-        $listDetailReview =  $this->reviewRepository->getDetailReview($request);
+        $listDetailReview =  $this->reviewService->getDetailReview($request);
         return response()->json(new ReviewCollection($listDetailReview), 200);
     }
 
     public function createReview(CreateReviewRequest $request){
-        return $this->reviewRepository->createReview($request);
+        return $this->reviewService->create($request);
     }
 }

@@ -11,6 +11,12 @@ class OrderService extends Service implements OrderServiceInterface
     protected $orderRepository;
     public function __construct(OrderRepository $orderRepository)
     {
+        parent::__construct($orderRepository);
         $this->orderRepository = $orderRepository;
+    }
+
+    public function createOrder($data)
+    {
+        return $this->orderRepository->createOrder($data);
     }
 }

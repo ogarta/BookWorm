@@ -4,16 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\BookRepository;
-use App\Http\Resources\Book\BookCollection;
 use App\Http\Resources\Book\BookResource;
+use App\Services\Book\BookService;
 
 class BookController extends Controller
 {
-    private BookRepository $bookRepository;
+    private BookService $bookService;
 
-    public function __construct(BookRepository $bookRepository){
-        $this -> bookRepository = $bookRepository;
+    public function __construct(BookService $bookService){
+        $this -> bookService = $bookService;
     }
 
     /**
@@ -23,7 +22,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return "get all";
+        //
     }
 
     /**
@@ -45,7 +44,7 @@ class BookController extends Controller
      */
     public function show($id)
     {   
-        $detailBook = $this->bookRepository->detailBook($id)->first();
+        $detailBook = $this->bookService->detailBook($id)->first();
         return $detailBook ? new BookResource($detailBook) : response()->json(['message' => 'Book not found'], 404);
     }
 
@@ -73,17 +72,17 @@ class BookController extends Controller
     }
     
     public function getTopDiscount(){   
-        $listTopDiscount =  $this->bookRepository->getTopDiscount();
+        $listTopDiscount =  $this->bookService->getTopDiscount();
         return response()->json($listTopDiscount, 200);
     }
 
     public function getTopRecommend(){
-        $listTopRecommend =  $this->bookRepository->getTopRecommend();
+        $listTopRecommend =  $this->bookService->getTopRecommend();
         return  response()->json($listTopRecommend, 200);
     }
 
     public function getTopPopular(){
-        $listTopPopular =  $this->bookRepository->getTopPopular();
+        $listTopPopular =  $this->bookService->getTopPopular();
         return response()->json($listTopPopular, 200);
     }
 }

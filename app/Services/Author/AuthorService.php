@@ -11,6 +11,7 @@ class AuthorService extends Service implements AuthorServiceInterface
     protected $authorRepository;
     public function __construct(AuthorRepository $authorRepository)
     {
+        parent::__construct($authorRepository);
         $this->authorRepository = $authorRepository;
     }
 }
