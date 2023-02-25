@@ -45,4 +45,22 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
     {
         return Auth::user()->tokens()->delete();
     }
+
+    public function signUpUser($request)
+    {
+        $user = $this->model->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        $token = $user->createToken('API_TOKEN')->plainTextToken;
+        return response(
+            [
+                'message' => 'Sign up successful',
+                'user' => $user,
+                'token' => $token,
+            ],
+            200
+        );
+    }
 }

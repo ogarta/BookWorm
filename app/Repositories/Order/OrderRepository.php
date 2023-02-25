@@ -23,7 +23,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $userId = $request->user()->id;
         DB::beginTransaction();
         try {
-            $order = Order::create([
+            $order = $this->model->create([
                 'user_id' => $userId,
                 'order_amount' => count($request->items_order),
                 'order_date' => date('Y-m-d H:i:s'),
@@ -43,5 +43,13 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             return $e;
         }
 
+    }
+
+    public function getHistoryOrder($idAuth)
+    {
+        return $this->model->whereHas('itemOrder', function ($query) use ($idAuth) {
+                $query->where('user_id', $idAuth);
+            })->with('itemOrder.BookOrder')
+        ->where('user_id', $idAuth)->get();
     }
 }

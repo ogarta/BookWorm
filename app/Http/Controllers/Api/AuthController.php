@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Services\Auth\AuthService;
+use GuzzleHttp\Psr7\Request;
 
 class AuthController extends Controller
 {
@@ -23,5 +24,7 @@ class AuthController extends Controller
         return $this->authService->logoutUser();
     }
 
-
+    public function signUp(Request $request){
+        return $this->authService->signUpUser($request);
+    }
 }

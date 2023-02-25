@@ -26,4 +26,9 @@ class AuthService extends Service implements AuthServiceInterface
     {
         return $this->authRepository->logoutUser();
     }
+
+    public function signUpUser($request)
+    {
+        return $this->authRepository->signUpUser($request);
+    }
 }

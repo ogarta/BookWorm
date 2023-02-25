@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Book;
+namespace App\Services\Books;
 use App\Services\ServiceInterface;
 
 interface BookServiceInterface extends ServiceInterface

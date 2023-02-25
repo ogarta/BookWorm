@@ -6,4 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface OrderRepositoryInterface extends RepositoryInterface{
     public function createOrder($data);
+    public function getHistoryOrder($idAuth);
 }

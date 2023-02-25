@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Book;
+namespace App\Services\Books;
 
 use App\Repositories\Book\BookRepository;
 use App\Services\Service;
-use App\Services\Book\BookServiceInterface;
+use App\Services\Books\BookServiceInterface;
 
 class BookService extends Service implements BookServiceInterface
 {
@@ -12,6 +12,7 @@ class BookService extends Service implements BookServiceInterface
 
     public function __construct(BookRepository $bookRepository)
     {
+        parent::__construct($bookRepository);
         $this->bookRepository = $bookRepository;
     }
 

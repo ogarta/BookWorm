@@ -19,4 +19,9 @@ class ItemOrder extends Model
         'quantity',
         'price'
     ];
+
+    public function BookOrder()
+    {
+        return $this->belongsTo(Book::class, 'book_id', 'id');
+    }
 }

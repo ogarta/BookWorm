@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\Book\BookResource;
-use App\Services\Book\BookService;
+use App\Services\Books\BookService;
 
 class BookController extends Controller
 {
-    private BookService $bookService;
+    private $bookService;
 
     public function __construct(BookService $bookService){
         $this -> bookService = $bookService;
@@ -71,7 +71,7 @@ class BookController extends Controller
         //
     }
     
-    public function getTopDiscount(){   
+    public function getTopDiscount(){
         $listTopDiscount =  $this->bookService->getTopDiscount();
         return response()->json($listTopDiscount, 200);
     }
