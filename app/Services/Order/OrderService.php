@@ -5,6 +5,7 @@ namespace App\Services\Order;
 use App\Services\Service;
 use App\Repositories\Order\OrderRepository;
 use App\Services\Order\OrderServiceInterface;
+use App\Http\Resources\Order\HistoryOrderCollection;
 
 class OrderService extends Service implements OrderServiceInterface
 {
@@ -18,5 +19,11 @@ class OrderService extends Service implements OrderServiceInterface
     public function createOrder($data)
     {
         return $this->orderRepository->createOrder($data);
+    }
+
+    public function getHistoryOrder()
+    {
+        $idAuth = auth()->user()->id;
+        return $this->orderRepository->getHistoryOrder($idAuth);
     }
 }

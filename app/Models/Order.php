@@ -23,4 +23,10 @@ class Order extends Model
     {
         return $this->hasMany(ItemOrder::class);
     }
+
+    public function bookOrderDetail()
+    {
+        // use id of order table as foreign key of item_order table get quantity and use 
+        return $this->hasManyThrough(Book::class, ItemOrder::class, 'order_id', 'id', 'id', 'book_id');
+    }
 }

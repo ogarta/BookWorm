@@ -57,7 +57,7 @@ Route::prefix('product')->group(function () {
 
 // Cart Page
 Route::middleware('auth:sanctum')->prefix('cart')->group(function () {
-	Route::apiResource('order', OrderController::class)->only('store');
+	Route::apiResource('order', OrderController::class);
 });
 
 
