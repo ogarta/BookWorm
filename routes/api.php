@@ -28,6 +28,8 @@ Route::prefix('auth')->group(function () {
 	->name('login');
 	Route::middleware('auth:sanctum')->get('logout', [AuthController::class, 'logout'])
 	->name('logout');
+	Route::post('sign-up', [AuthController::class, 'signUp']);
+	Route::middleware('auth:sanctum')->get('/', [AuthController::class, 'user']);
 });
 
 // Home Page

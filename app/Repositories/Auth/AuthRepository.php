@@ -49,7 +49,8 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
     public function signUpUser($request)
     {
         $user = $this->model->create([
-            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
@@ -62,5 +63,10 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
             ],
             200
         );
+    }
+
+    public function getUser()
+    {
+        return Auth::user();
     }
 }

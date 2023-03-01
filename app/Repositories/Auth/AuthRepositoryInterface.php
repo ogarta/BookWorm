@@ -8,4 +8,5 @@ interface AuthRepositoryInterface extends RepositoryInterface{
     public function loginUser($email, $password);
     public function logoutUser();
     public function signUpUser($request);
+    public function getUser();
 }
