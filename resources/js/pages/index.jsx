@@ -1,10 +1,5 @@
 import Reat from "react";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-    Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HeaderComponent from "../components/header/index";
 import HomePage from "./HomePage";
 import ShopPage from "./ShopPage";
@@ -14,7 +9,7 @@ import ErrorPage from "./ErrorPage";
 import AboutPage from "./AboutPage";
 import FooterComponent from "../components/footer";
 import "./style.scss";
-import ProfilePage from "./ProfilePage";
+import LayoutProfile from "./profile";
 
 function Index() {
     return (
@@ -28,7 +23,7 @@ function Index() {
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile/*" element={<LayoutProfile />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </div>

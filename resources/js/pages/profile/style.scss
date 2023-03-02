@@ -1,0 +1,30 @@
+.container__profile {
+    .title {
+        text-transform: capitalize;
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+    .container-content {
+        display: flex;
+        margin-right: 50px;
+        margin-left: 50px;
+        .NavProfile {
+            display: flex;
+            flex-direction: column;
+            .btn {
+                margin-top: 10px;
+            }
+        }
+        .container-profile {
+            margin-left: 30px;
+            padding-top: 20px;
+            padding-left: 80px;
+            padding-right: 80px;
+            width: 100%;
+            height: 60vh;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        }
+    }
+}
