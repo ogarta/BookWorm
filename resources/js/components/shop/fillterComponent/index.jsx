@@ -29,10 +29,13 @@ function FilterComponent() {
     ];
     useEffect(() => {
         const fetchAll = async () => {
-            const responseAuthor = await shopApi.getAllAuthor();
-            setListAuthor(responseAuthor);
-            const responseCategory = await shopApi.getAllCategory();
-            setListCategory(responseCategory);
+            const response = await Promise.all([
+                shopApi.getAllAuthor(),
+                shopApi.getAllCategory(),
+            ]);
+            console.log(Response);
+            setListAuthor(response[0]);
+            setListCategory(response[1]);
         };
         fetchAll();
     }, []);

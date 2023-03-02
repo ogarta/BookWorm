@@ -2,16 +2,18 @@ import React from "react";
 import authAdapter from "../../../../adapters/authAdapter";
 import { NavDropdown } from "react-bootstrap";
 import "./style.scss";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../../../reducers/userResducer";
 
 export default function LogOut(props) {
-    const { setUser, setToastMessage, setShowToast } = props;
-
+    const { setToastMessage, setShowToast } = props;
+    const dispatch = useDispatch();
     const handleClickLogOut = () => {
         const logoutUser = async () => {
             try {
                 await authAdapter.getLogOut();
                 localStorage.removeItem("token");
-                setUser(null);
+                dispatch(removeUser());
                 setToastMessage({
                     title: "Success",
                     message: "Logout success",

@@ -6,35 +6,45 @@ import { NavDropdown } from "react-bootstrap";
 import SignUpComponent from "./SignUp";
 import authAdapter from "../../../adapters/authAdapter";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser, setUser } from "../../../reducers/userResducer";
 
 export default function AuthComponent(props) {
     const { setToastMessage, setShowToast } = props;
-    const [user, setUser] = useState(null);
-
+    const dishpath = useDispatch();
+    const user = useSelector((state) => state.userResducer.user);
+    const [isLoad, setIsLoad] = useState(true);
     useEffect(() => {
-        const getUser = async () => {
+        setIsLoad(true);
+        const fetchUser = async () => {
             try {
                 const response = await authAdapter.getUser();
-                setUser(response.data);
+                dishpath(setUser(response.data));
             } catch (error) {
-                setUser(null);
+                console.log(error);
+                dishpath(removeUser());
             }
+            setIsLoad(false);
         };
-        getUser();
+        fetchUser();
     }, []);
+
+    if (isLoad) {
+        return <></>;
+    }
 
     if (user) {
         return (
             <>
                 <NavDropdown title={user.first_name + " " + user.last_name}>
+                    <Link to="/profile" className="dropdown-item">
+                        Profile
+                    </Link>
                     <LogOut
                         setUser={setUser}
                         setShowToast={setShowToast}
                         setToastMessage={setToastMessage}
                     />
-                    <Link to="/profile" className="dropdown-item">
-                        Profile
-                    </Link>
                 </NavDropdown>
             </>
         );
@@ -43,13 +53,11 @@ export default function AuthComponent(props) {
     return (
         <>
             <LoginComponent
-                setUser={setUser}
                 setShowToast={setShowToast}
                 setToastMessage={setToastMessage}
             />
 
             <SignUpComponent
-                setUser={setUser}
                 setShowToast={setShowToast}
                 setToastMessage={setToastMessage}
             />

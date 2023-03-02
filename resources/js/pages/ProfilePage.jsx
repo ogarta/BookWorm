@@ -1,7 +1,9 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 export default function ProfilePage() {
+    const user = useSelector((state) => state.userResducer.user);
     return (
         <>
             <Nav

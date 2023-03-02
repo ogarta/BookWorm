@@ -7,9 +7,10 @@ import { Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { showPopupLogin } from "../../../../reducers/popupLoginReducer";
 import "./style.scss";
+import { removeUser, setUser } from "../../../../reducers/userResducer";
 
 export default function LoginComponent(props) {
-    const { setUser, setToastMessage, setShowToast } = props;
+    const { setToastMessage, setShowToast } = props;
     const show = useSelector((state) => state.popupLoginReducer.isShow);
     const dispatch = useDispatch();
     const {
@@ -30,7 +31,7 @@ export default function LoginComponent(props) {
             try {
                 const response = await authAdapter.postLogin(params);
                 localStorage.setItem("token", JSON.stringify(response));
-                setUser(response.user);
+                dispatch(setUser(response.user));
                 dispatch(showPopupLogin(false));
                 setToastMessage({
                     title: "Success",
@@ -41,7 +42,7 @@ export default function LoginComponent(props) {
                     title: "Error",
                     message: error.response.data.message,
                 });
-                setUser(null);
+                dispatch(removeUser());
             }
             setShowToast(true);
         };

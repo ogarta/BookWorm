@@ -7,7 +7,7 @@ import { Nav } from "react-bootstrap";
 import "./style.scss";
 
 export default function SignUpComponent(props) {
-    const { setUser, setToastMessage, setShowToast } = props;
+    const { setToastMessage, setShowToast } = props;
     const [show, setShow] = useState(false);
     const {
         register,
@@ -32,7 +32,6 @@ export default function SignUpComponent(props) {
                     message: "Sign up successfully",
                 });
             } catch (error) {
-                // console.log(error.response.data.errors);
                 const errors = error.response.data.errors;
                 for (const key in errors) {
                     setError(key, {
