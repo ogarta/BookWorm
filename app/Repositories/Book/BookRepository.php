@@ -83,4 +83,18 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
         $listTopPopular = new BookCollection($listTopPopular);
         return $listTopPopular;
     }
+
+    public function getBookDetail($id)
+    {
+        $bookDetail = $this->model->JoinReviewTable(
+            $id,
+            'all'
+        )->JoinDiscountTable()
+            ->FinalPrice()
+            ->SubPrice()
+            ->countReview()
+            ->avgRatingStar()
+            ->first();
+        return $bookDetail;
+    }
 }

@@ -16018,25 +16018,25 @@ function FilterComponent() {
     setValueStart = _useState10[1];
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
   var listStar = [{
-    name: 'Star 1',
-    value: '1'
+    name: "Star 1",
+    value: "1"
   }, {
-    name: 'Star 2',
-    value: '2'
+    name: "Star 2",
+    value: "2"
   }, {
-    name: 'Star 3',
-    value: '3'
+    name: "Star 3",
+    value: "3"
   }, {
-    name: 'Star 4',
-    value: '4'
+    name: "Star 4",
+    value: "4"
   }, {
-    name: 'Star 5',
-    value: '5'
+    name: "Star 5",
+    value: "5"
   }];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var fetchAllAuthor = /*#__PURE__*/function () {
+    var fetchAll = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+        var responseAuthor, responseCategory;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -16044,44 +16044,25 @@ function FilterComponent() {
                 _context.next = 2;
                 return _adapters_shopPageAdapter__WEBPACK_IMPORTED_MODULE_0__["default"].getAllAuthor();
               case 2:
-                response = _context.sent;
-                setListAuthor(response);
-              case 4:
+                responseAuthor = _context.sent;
+                setListAuthor(responseAuthor);
+                _context.next = 6;
+                return _adapters_shopPageAdapter__WEBPACK_IMPORTED_MODULE_0__["default"].getAllCategory();
+              case 6:
+                responseCategory = _context.sent;
+                setListCategory(responseCategory);
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }));
-      return function fetchAllAuthor() {
+      return function fetchAll() {
         return _ref.apply(this, arguments);
       };
     }();
-    var fetchAllCategory = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _adapters_shopPageAdapter__WEBPACK_IMPORTED_MODULE_0__["default"].getAllCategory();
-              case 2:
-                response = _context2.sent;
-                setListCategory(response);
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-      return function fetchAllCategory() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-    fetchAllCategory();
-    fetchAllAuthor();
+    fetchAll();
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     dispatch((0,_reducers_filterReducer__WEBPACK_IMPORTED_MODULE_2__.setAuthor)(valueAuthor.id));
@@ -16110,7 +16091,7 @@ function FilterComponent() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "accordion-filter",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      defaultActiveKey: ['1', '2', '0'],
+      defaultActiveKey: ["1", "2", "0"],
       alwaysOpen: true,
       flush: true,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {

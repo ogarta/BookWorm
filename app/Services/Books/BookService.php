@@ -31,8 +31,8 @@ class BookService extends Service implements BookServiceInterface
         return $this->bookRepository->getTopPopular();
     }
 
-    public function detailBook($id = null)
+    public function getBookDetail($id = null)
     {
-        return $this->bookRepository->detailBook($id);
+        return $this->bookRepository->getBookDetail($id);
     }
 }

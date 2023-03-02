@@ -44,7 +44,7 @@ class BookController extends Controller
      */
     public function show($id)
     {   
-        $detailBook = $this->bookService->detailBook($id)->first();
+        $detailBook = $this->bookService->getBookDetail($id);
         return $detailBook ? new BookResource($detailBook) : response()->json(['message' => 'Book not found'], 404);
     }
 

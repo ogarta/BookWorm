@@ -8,4 +8,5 @@ interface BookRepositoryInterface extends RepositoryInterface{
     public function getTopDiscount();
     public function getTopRecommend();
     public function getTopPopular();
+    public function getBookDetail($id);
 }
