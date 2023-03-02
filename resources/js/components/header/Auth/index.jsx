@@ -5,6 +5,7 @@ import LogOut from "./LogOut";
 import { NavDropdown } from "react-bootstrap";
 import SignUpComponent from "./SignUp";
 import authAdapter from "../../../adapters/authAdapter";
+import { Link } from "react-router-dom";
 
 export default function AuthComponent(props) {
     const { setToastMessage, setShowToast } = props;
@@ -31,6 +32,9 @@ export default function AuthComponent(props) {
                         setShowToast={setShowToast}
                         setToastMessage={setToastMessage}
                     />
+                    <Link to="/profile" className="dropdown-item">
+                        Profile
+                    </Link>
                 </NavDropdown>
             </>
         );

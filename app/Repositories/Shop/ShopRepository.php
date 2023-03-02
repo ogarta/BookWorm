@@ -79,13 +79,11 @@ class ShopRepository extends BaseRepository implements ShopRepositoryInterface
         }
 
         // Handle join discount table
-        $detailBook = Book::joinDiscountTable($query);
-        
-        // Handle Select specific field
-        $query = Book::selecFinalPrice($query);
-        $query = Review::selectAvgRatingStar($query);
-        $query = Review::selectCountReview($query);
-        $query = Book::selectSubPrice($query);
+        $query = $query->joinDiscountTable()
+        ->FinalPrice()
+        ->AvgRatingStar()
+        ->CountReview()
+        ->SubPrice();
 
         return $query->paginate($num_item);
     }
