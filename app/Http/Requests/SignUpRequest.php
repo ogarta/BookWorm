@@ -26,6 +26,7 @@ class SignUpRequest extends FormRequest
         return [
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:11|min:9',
             'email' => 'required|string|email|max:255|unique:user',
             'password' => 'required|string|min:8|confirmed',
         ];

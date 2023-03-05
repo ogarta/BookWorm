@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ShopController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ReciverController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +25,7 @@ use App\Http\Controllers\Api\CategoryController;
 |
 */
 
-// login User
+// User Auth
 Route::prefix('auth')->group(function () {
 	Route::post('login', [AuthController::class, 'login'])
 	->name('login');
@@ -30,6 +33,13 @@ Route::prefix('auth')->group(function () {
 	->name('logout');
 	Route::post('sign-up', [AuthController::class, 'signUp']);
 	Route::middleware('auth:sanctum')->get('/', [AuthController::class, 'user']);
+});
+
+// User
+Route::prefix('user')->middleware('auth:sanctum')->group(function() {
+	Route::apiResource('address', AddressController::class);
+	Route::apiResource('reciver', ReciverController::class);
+	Route::get('/reciver-default', [ReciverController::class, 'getReciverDefault']);
 });
 
 // Home Page

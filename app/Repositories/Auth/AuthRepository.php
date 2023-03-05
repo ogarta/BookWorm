@@ -52,6 +52,7 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
             'email' => $request->email,
+            'phone_number' => $request->phone_number,
             'password' => bcrypt($request->password),
         ]);
         $token = $user->createToken('API_TOKEN')->plainTextToken;

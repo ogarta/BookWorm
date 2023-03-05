@@ -25,8 +25,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         try {
             $order = $this->model->create([
                 'user_id' => $userId,
+                'reciver_id' => $request->reciver_id,
                 'order_amount' => count($request->items_order),
                 'order_date' => date('Y-m-d H:i:s'),
+                'order_status' => 1,
+                'payment_method' => $request->payment_method,
             ]);
             foreach ($request->items_order as $item) {
                 ItemOrder::create([

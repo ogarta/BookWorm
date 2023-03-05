@@ -11,4 +11,7 @@ class Constant{
     const PRICE_LOW_TO_HIGH = 'price_low_to_high';
     const PRICE_HIGH_TO_LOW = 'price_high_to_low';
 
+
+    const PAYMENT_METHOD_SHIP = 0;
+    const PAYMENT_METHOD_AT_STORE = 1;
 }

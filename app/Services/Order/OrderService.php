@@ -2,6 +2,7 @@
 
 namespace App\Services\Order;
 
+use App\Helper\Constant;
 use App\Services\Service;
 use App\Repositories\Order\OrderRepository;
 use App\Services\Order\OrderServiceInterface;

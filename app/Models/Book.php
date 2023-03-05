@@ -64,6 +64,22 @@ class Book extends Model
             else discount.discount_price
             end as final_price');
     }
+
+    public static function selectFinalPrice($query){
+        return $query->
+        selectRaw('case
+            when discount.discount_price is null then book.book_price 
+            else discount.discount_price
+            end as final_price');
+    }
+
+    public static function getFinalBookPrice($bookId){
+        $finalBookPrice = Book::leftJoin('discount', 'discount.book_id', '=', 'book.id')
+        ->where('book.id', '=', $bookId);
+        $finalBookPrice = Book::selectFinalPrice($finalBookPrice);
+        return $finalBookPrice->first()->final_price;
+    }
+
     public function scopeSubPrice($query){
         return $query->
             selectRaw('case
@@ -76,7 +92,7 @@ class Book extends Model
 
         $finalBookPrice = Book::leftJoin('discount', 'discount.book_id', '=', 'book.id')
         ->where('book.id', '=', $bookId);
-        $finalBookPrice = Book::selecFinalPrice($finalBookPrice);
+        $finalBookPrice = Book::selectFinalPrice($finalBookPrice);
         return $finalBookPrice->first()->final_price;
     }
 

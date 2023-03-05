@@ -16,7 +16,10 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'order_amount',
-        'order_date'
+        'order_date',
+        'order_status',
+        'payment_method',
+        'reciver_id',
     ];
 
     public function itemOrder()
