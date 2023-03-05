@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email',70)->unique();
             $table->string('password');
             $table->boolean('admin')->default(false);
+            $table->string('phone_number');
         });
     }
 
@@ -30,6 +31,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('reciver');
+        Schema::dropIfExists('order_item');
+        Schema::dropIfExists('order');
         Schema::dropIfExists('user');
     }
 }

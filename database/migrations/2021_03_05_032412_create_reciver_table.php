@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('reciver', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('user');
-            $table->string('street');
-            $table->string('city');
-            $table->string('state');
-            $table->string('default');
+            $table->string('name');
+            $table->string('phone');
+            $table->foreignId('address_id')->nullable()->constrained('addresses');
+            $table->boolean('is_default')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('reciver');
     }
 };
