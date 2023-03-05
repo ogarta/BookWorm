@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
+use App\Services\Address\AddressService;
 
 class AddressController extends Controller
 {
+    private $addressService;
+
+    public function __construct(AddressService $addressService)
+    {
+        $this->addressService = $addressService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $response = $this->addressService->all();
+        return response()->json([
+            'data' => $response
+        ]);
     }
 
     /**
@@ -33,9 +45,10 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAddressRequest $request)
     {
-        //
+        $response = $this->addressService->createAddress($request);
+        return $response;
     }
 
     /**
@@ -46,7 +59,10 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        //
+        $response = $this->addressService->show($id);
+        return response()->json([
+            'data' => $response
+        ]);
     }
 
     /**
@@ -67,9 +83,10 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAddressRequest $request, $id)
     {
-        //
+        $response = $this->addressService->updateAddress($request, $id);
+        return response()->json($response);
     }
 
     /**
@@ -80,6 +97,7 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $response = $this->addressService->delete($id);
+        return response()->json($response);
     }
 }
