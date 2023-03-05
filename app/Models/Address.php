@@ -14,6 +14,7 @@ class Address extends Model
         'street',
         'city',
         'state',
-        'default'
     ];
+
+    public $timestamps = true;
 }
