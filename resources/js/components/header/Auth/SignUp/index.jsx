@@ -17,9 +17,11 @@ export default function SignUpComponent(props) {
     } = useForm();
 
     const onSubmit = (data) => {
+        console.log(data);
         const params = {
             email: data.email,
             password: data.password,
+            phone_number: data.phone,
             password_confirmation: data.passwordConfirm,
             first_name: data.firstName,
             last_name: data.lastName,
@@ -106,6 +108,40 @@ export default function SignUpComponent(props) {
                         {errors.email?.type === "custom" && (
                             <p role="alert" style={{ color: "red" }}>
                                 {errors.email.message}
+                            </p>
+                        )}
+                        <label htmlFor="exampleInputPhone">Phone</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="exampleInputPhone"
+                            name="phone"
+                            {...register("phone", {
+                                required: true,
+                                minLength: 10,
+                                maxLength: 10,
+                                // validate just number
+                                pattern: /^\d+$/,
+                            })}
+                        />
+                        {errors.phone?.type === "required" && (
+                            <p role="alert" style={{ color: "red" }}>
+                                Phone is required
+                            </p>
+                        )}
+                        {errors.phone?.type === "pattern" && (
+                            <p role="alert" style={{ color: "red" }}>
+                                Phone must be number
+                            </p>
+                        )}
+                        {errors.phone?.type === "minLength" && (
+                            <p role="alert" style={{ color: "red" }}>
+                                Phone must be at least 10 characters
+                            </p>
+                        )}
+                        {errors.phone?.type === "maxLength" && (
+                            <p role="alert" style={{ color: "red" }}>
+                                Phone must be at most 10 characters
                             </p>
                         )}
                         <label htmlFor="exampleInputPassword1">Password</label>

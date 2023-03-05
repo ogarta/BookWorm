@@ -10,6 +10,7 @@ import AboutPage from "./AboutPage";
 import FooterComponent from "../components/footer";
 import "./style.scss";
 import LayoutProfile from "./profile";
+import ConfirmOrderPage from "./ConfirmOrderPage";
 
 function Index() {
     return (
@@ -22,6 +23,10 @@ function Index() {
                     <Route path="/shop" element={<ShopPage />} />
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/cart" element={<CartPage />} />
+                    <Route
+                        path="/confirm-order"
+                        element={<ConfirmOrderPage />}
+                    />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/profile/*" element={<LayoutProfile />} />
                     <Route path="*" element={<ErrorPage />} />

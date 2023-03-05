@@ -1,0 +1,85 @@
+.card {
+    margin-bottom: 30px;
+    .card-header {
+        .parmas-book-cart {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        @media only screen and (max-width: 780px) {
+            .parmas-book-cart {
+                div {
+                    //set center for col
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .card-body {
+        padding-left: 30px;
+    }
+    .list-group-item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        @media only screen and (max-width: 780px) {
+            .row-cart {
+                .col-item {
+                    p {
+                        text-align: center;
+                    }
+                    .box-control-book-quantity-cart {
+                        width: 100%;
+                        padding: 0;
+                        #box-label {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .row-cart {
+            align-items: center;
+            .info-book {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .title-book {
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+            .price-book {
+                font-weight: bold;
+                font-size: 1.3rem;
+            }
+            .total-price {
+                font-weight: bold;
+                font-size: 1.3rem;
+                margin: 0;
+            }
+            .box-control-book-quantity-cart {
+                height: 35px;
+                padding-right: 40px;
+                #box-label {
+                    width: 60%;
+                    background-color: rgb(188, 188, 188);
+                    align-items: center;
+                    label {
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                    }
+                }
+                #btn-quantity {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 0;
+                    border: 1px solid rgb(94, 94, 94);
+                    border: 1px solid rgb(94, 94, 94);
+                    color: rgb(121, 121, 121);
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+}

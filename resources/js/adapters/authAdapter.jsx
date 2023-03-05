@@ -13,6 +13,10 @@ const authAdapter = {
         const url = "/api/auth";
         return axiosClient.get(url);
     },
+    postSignUp: (data) => {
+        const url = "/api/auth/sign-up";
+        return axiosClient.post(url, data);
+    },
 };
 
 export default authAdapter;
