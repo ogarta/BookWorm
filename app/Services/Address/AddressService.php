@@ -19,6 +19,10 @@ class AddressService extends Service implements AddressServiceInterface
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+        if ($data['default'] == 1){
+            $this->addressRepository->updateDefaultAddress($data['user_id']);
+        }
+
         $address = $this->addressRepository->create($data);
         if ($address){
             return response()->json([
@@ -33,7 +37,21 @@ class AddressService extends Service implements AddressServiceInterface
     {
         $request->request->remove('id_address');
         $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        if ($data['default'] == 1){
+            $this->addressRepository->updateDefaultAddress($data['user_id']);
+        }
         $address = $this->addressRepository->update($id,$data);
+        return $address;
+    }
+
+    public function deleteAddress($id)
+    {
+        $address = $this->addressRepository->find($id);
+        if ($address->default == 1){
+            return ['message' => 'Address default not delete'];
+        }
+        $address = $this->addressRepository->delete($id);
         return $address;
     }
 }

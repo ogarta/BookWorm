@@ -17,7 +17,9 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
 
     public function all()
     {
-        $listAddress = $this->model->where('user_id', auth()->user()->id)->get();
+        $listAddress = $this->model->where('user_id', auth()->user()->id)
+        ->where('deleted_at', null)
+        ->get();
         return $listAddress;
     }
 
@@ -26,4 +28,11 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
         $result = $this->model->where('user_id', $id)->update($attributes);
         return $result;
     }
+
+    public function updateDefaultAddress($id)
+    {
+        $result = $this->model->where('user_id', $id)->update(['default' => 0]);
+        return $result;
+    }
+
 }

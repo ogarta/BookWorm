@@ -32,7 +32,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('addresses');
-        Schema::dropIfExists('reciver');
         Schema::dropIfExists('order_item');
         Schema::dropIfExists('order');
         Schema::dropIfExists('user');

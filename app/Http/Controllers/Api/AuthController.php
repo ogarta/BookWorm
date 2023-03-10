@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Services\Auth\AuthService;
 use GuzzleHttp\Psr7\Request;
 
@@ -31,5 +32,9 @@ class AuthController extends Controller
 
     public function user(){
         return $this->authService->getUser();
+    }
+
+    public function editPassword(UpdatePasswordRequest $request){
+        return $this->authService->editPassword($request);
     }
 }

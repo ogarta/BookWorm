@@ -16,9 +16,15 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('user');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('type_address');
+            $table->string('number_address');
             $table->string('street');
+            $table->string('district');
             $table->string('city');
-            $table->string('state');
+            $table->boolean('default')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,7 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reciver');
         Schema::dropIfExists('address');
     }
 };

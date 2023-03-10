@@ -24,10 +24,14 @@ class CreateAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'city' => 'required|string',
-            'street' => 'required|string',
-            'state' => 'required|string',
-            'default' => 'nullable|boolean',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'type_address' => 'required|string|max:255',
+            'number_address' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'default' => 'required|boolean',
         ];
     }
 }
