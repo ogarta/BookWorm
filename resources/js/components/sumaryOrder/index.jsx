@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 export default function SumaryOrderComponent(props) {
-    const { dataListBook, formRef, shippingCost, reciver } = props;
+    const { dataListBook, formRef, shippingCost, address } = props;
     const [totalPrice, setTotalPrice] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
     const [alertParams, setAlertParams] = useState({});
@@ -153,9 +153,9 @@ export default function SumaryOrderComponent(props) {
             ).value,
             order_amount: totalPrice,
             items_order: itemsOreder,
-            reciver_id: reciver.id,
+            address_id: address.id,
         };
-        console.log(params);
+
         const order = async () => {
             try {
                 await cartAdapter.postOrder(params);

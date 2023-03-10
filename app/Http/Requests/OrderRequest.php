@@ -24,7 +24,7 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'reciver_id' => 'required|integer|exists:reciver,id',
+            'address_id' => 'required|integer|exists:addresses,id',
             'payment_method' => 'required|in:0,1',
             'items_order' => 'required|array',
             'items_order.*.book_id' => 'required|integer|exists:book,id',

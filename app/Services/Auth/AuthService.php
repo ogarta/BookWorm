@@ -38,4 +38,9 @@ class AuthService extends Service implements AuthServiceInterface
             'data' => $this->authRepository->getUser(),
         ]);
     }
+
+    public function editPassword($request)
+    {
+        return $this->authRepository->editPassword($request);
+    }
 }

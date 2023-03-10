@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListBookIdRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\Book\BookResource;
 use App\Services\Books\BookService;
@@ -84,5 +85,10 @@ class BookController extends Controller
     public function getTopPopular(){
         $listTopPopular =  $this->bookService->getTopPopular();
         return response()->json($listTopPopular, 200);
+    }
+
+    public function getListBook(ListBookIdRequest $request){
+        $listBook = $this->bookService->getListBook($request);
+        return $listBook;
     }
 }

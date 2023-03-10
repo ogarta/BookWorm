@@ -25,10 +25,14 @@ class UpdateAddressRequest extends FormRequest
     {
         return [
             'id_address' => 'required|integer|exists:addresses,id',
-            'city' => 'nullable|string',
-            'street' => 'nullable|string',
-            'state' => 'nullable|integer|in:0,1',
-            'default' => 'nullable|boolean',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'type_address' => 'required|string|max:255',
+            'number_address' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'default' => 'required|boolean',
         ];
     }
 

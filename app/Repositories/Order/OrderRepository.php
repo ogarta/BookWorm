@@ -25,7 +25,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         try {
             $order = $this->model->create([
                 'user_id' => $userId,
-                'reciver_id' => $request->reciver_id,
+                'address_id' => $request->address_id,
                 'order_amount' => count($request->items_order),
                 'order_date' => date('Y-m-d H:i:s'),
                 'order_status' => 1,
@@ -50,9 +50,17 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function getHistoryOrder($idAuth)
     {
-        return $this->model->whereHas('itemOrder', function ($query) use ($idAuth) {
-                $query->where('user_id', $idAuth);
-            })->with('itemOrder.BookOrder')
-        ->where('user_id', $idAuth)->get();
+        return $this->model
+        ->select(
+            'order.id',
+            'order.order_amount',
+            'order.order_date',
+            'order.order_status',
+            'order.payment_method',
+            'order.address_id')
+        ->with('addressOrderDetail','itemOrder')
+        ->where('user_id', $idAuth)
+        ->groupBy('order.id')
+        ->get();  
     }
 }

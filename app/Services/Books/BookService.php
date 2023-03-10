@@ -35,4 +35,11 @@ class BookService extends Service implements BookServiceInterface
     {
         return $this->bookRepository->getBookDetail($id);
     }
+
+    public function getListBook($request){
+        return response()->json([
+            'data' => $this->bookRepository->getListBook($request),
+        ]);
+
+    }
 }

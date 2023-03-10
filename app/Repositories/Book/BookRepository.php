@@ -97,4 +97,12 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
             ->first();
         return $bookDetail;
     }
+
+    public function getListBook($request)
+    {
+        $listBook = $this->model->whereIn('id', $request->book_id)
+        ->with('author')
+            ->get();
+        return $listBook;
+    }
 }

@@ -33,13 +33,12 @@ Route::prefix('auth')->group(function () {
 	->name('logout');
 	Route::post('sign-up', [AuthController::class, 'signUp']);
 	Route::middleware('auth:sanctum')->get('/', [AuthController::class, 'user']);
+	Route::middleware('auth:sanctum')->post('/edit-pass', [AuthController::class, 'editPassword']);
 });
 
 // User
 Route::prefix('user')->middleware('auth:sanctum')->group(function() {
 	Route::apiResource('address', AddressController::class);
-	Route::apiResource('reciver', ReciverController::class);
-	Route::get('/reciver-default', [ReciverController::class, 'getReciverDefault']);
 });
 
 // Home Page
@@ -59,6 +58,7 @@ Route::prefix('shop')->group(function () {
 
 //Product Page
 Route::prefix('product')->group(function () {
+	Route::post('/book/list',[BookController::class,'getListBook']);
 	Route::apiResource('book', BookController::class)->only('show');
 	Route::prefix('/review')->group(function () {
 		Route::get('/rating/{id?}',[ReviewController::class,'getDetailRating']);

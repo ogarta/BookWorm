@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\StatusOrderResquest;
 use App\Services\Order\OrderService;
 
 class OrderController extends Controller
@@ -43,7 +44,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+    //    
     }
 
     /**
@@ -53,9 +54,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StatusOrderResquest $request, $id)
     {
-        //
+        return $this->orderService->update($request, $id);
     }
 
     /**

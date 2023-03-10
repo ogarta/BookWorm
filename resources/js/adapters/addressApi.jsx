@@ -13,6 +13,14 @@ const addressApi = {
         const url = "/api/user/address";
         return axiosClient.post(url, params);
     },
+    updateAddress: (params) => {
+        const url = `/api/user/address/${params.id}`;
+        return axiosClient.put(url, params);
+    },
+    deleteAddress: (id) => {
+        const url = `/api/user/address/${id}`;
+        return axiosClient.delete(url);
+    },
 };
 
 export default addressApi;

@@ -17,6 +17,10 @@ const authAdapter = {
         const url = "/api/auth/sign-up";
         return axiosClient.post(url, data);
     },
+    editPassword: (data) => {
+        const url = "/api/auth/edit-pass";
+        return axiosClient.post(url, data);
+    },
 };
 
 export default authAdapter;

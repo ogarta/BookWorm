@@ -14,4 +14,13 @@ class Constant{
 
     const PAYMENT_METHOD_SHIP = 0;
     const PAYMENT_METHOD_AT_STORE = 1;
+
+    const ORDER_STATUS = [
+        'pending' => 1,
+        'shipping' => 2,
+        'delivered' => 3,
+        'cancel' => 4,
+        'return' => 5,
+        'ready'=> 6,
+    ];
 }

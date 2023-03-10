@@ -4,13 +4,13 @@ import { Button, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import CartComponent from "../components/cart";
-import InformationOrder from "../components/infOrder";
+import InformationOrderComponet from "../components/infOrder";
 import ListOrderComponent from "../components/listOrder";
 import SumaryOrderComponent from "../components/sumaryOrder";
 
 export default function ConfirmOrderPage() {
     const [shippingCost, setShippingCost] = useState(0);
-    const [reciver, setReciver] = useState(null);
+    const [address, setAddress] = useState(null);
     const dataListBook = useSelector((state) => state.cartReducer.cart);
     const formRef = useRef();
 
@@ -24,13 +24,13 @@ export default function ConfirmOrderPage() {
                 <hr />
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mb-2">
-                        <InformationOrder
+                        <InformationOrderComponet
                             formRef={formRef}
                             shippingCost={shippingCost}
                             setShippingCost={setShippingCost}
                             isDisable={true}
-                            reciver={reciver}
-                            setReciver={setReciver}
+                            address={address}
+                            setAddress={setAddress}
                         />
                         <h3
                             className="mt-2"
@@ -54,7 +54,7 @@ export default function ConfirmOrderPage() {
                             dataListBook={dataListBook}
                             formRef={formRef}
                             shippingCost={shippingCost}
-                            reciver={reciver}
+                            address={address}
                         />
                     </div>
                 </div>

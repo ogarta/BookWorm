@@ -25,6 +25,17 @@ class OrderService extends Service implements OrderServiceInterface
     public function getHistoryOrder()
     {
         $idAuth = auth()->user()->id;
-        return $this->orderRepository->getHistoryOrder($idAuth);
+        return response()->json([
+            "data" => $this->orderRepository->getHistoryOrder($idAuth),
+        ]);
     }
+
+    public function update($request, $id)
+    {
+        $data = [
+            'order_status' => $request->order_status,
+        ];
+        return $this->orderRepository->update($id , $data);
+    }
+
 }

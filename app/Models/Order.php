@@ -19,7 +19,7 @@ class Order extends Model
         'order_date',
         'order_status',
         'payment_method',
-        'reciver_id',
+        'address_id',
     ];
 
     public function itemOrder()
@@ -29,7 +29,11 @@ class Order extends Model
 
     public function bookOrderDetail()
     {
-        // use id of order table as foreign key of item_order table get quantity and use 
         return $this->hasManyThrough(Book::class, ItemOrder::class, 'order_id', 'id', 'id', 'book_id');
+    }
+
+    public function addressOrderDetail()
+    {
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 }
