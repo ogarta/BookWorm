@@ -2,8 +2,9 @@ import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import cartAdapter from "../../adapters/cartAdapter";
+import SpinerWaiting from "../spinerWaiting";
 import CardOrderComponent from "./cardOrder";
 
 export default function ListHistoryComponent(porps) {
@@ -36,19 +37,43 @@ export default function ListHistoryComponent(porps) {
 
     return (
         <>
-            <div className="history__order__list">
-                {listOrder &&
-                    listOrder.map((item, index) => {
-                        return (
-                            <CardOrderComponent
-                                idOrderRef={idOrderRef}
-                                key={index}
-                                item={item}
-                                setChoosen={setChoosen}
-                            />
-                        );
-                    })}
-            </div>
+            {listOrder === null ? (
+                <SpinerWaiting type="border" />
+            ) : (
+                <div className="history__order__list">
+                    {listOrder.length > 0 ? (
+                        listOrder.map((item, index) => {
+                            return (
+                                <CardOrderComponent
+                                    idOrderRef={idOrderRef}
+                                    key={index}
+                                    item={item}
+                                    setChoosen={setChoosen}
+                                />
+                            );
+                        })
+                    ) : (
+                        <Card
+                            className="card__empty"
+                            style={{
+                                margin: "auto",
+                                marginTop: "20px",
+                            }}
+                        >
+                            <Card.Body>
+                                <Card.Title
+                                    style={{
+                                        margin: 0,
+                                    }}
+                                >
+                                    Empty
+                                </Card.Title>
+                                <Card.Text>You have no order history</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    )}
+                </div>
+            )}
         </>
     );
 }

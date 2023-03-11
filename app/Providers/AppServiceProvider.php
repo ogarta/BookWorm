@@ -2,15 +2,23 @@
 
 namespace App\Providers;
 
-use App\Services\Address\AddressService;
-use App\Services\Address\AddressServiceInterface;
-use App\Services\Author\AuthorService;
-use App\Services\Author\AuthorServiceInterface;
+use App\Services\Auth\AuthService;
+use App\Services\Shop\ShopService;
 use App\Services\Books\BookService;
-use App\Services\Books\BookServiceInterface;
+use App\Services\Order\OrderService;
+use App\Services\Author\AuthorService;
 use App\Services\Review\ReviewService;
-use App\Services\Review\ReviewServiceInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Services\Address\AddressService;
+use App\Services\Category\CategoryService;
+use App\Services\Auth\AuthServiceInterface;
+use App\Services\Shop\ShopServiceInterface;
+use App\Services\Books\BookServiceInterface;
+use App\Services\Order\OrderServiceInterface;
+use App\Services\Author\AuthorServiceInterface;
+use App\Services\Review\ReviewServiceInterface;
+use App\Services\Address\AddressServiceInterface;
+use App\Services\Category\CategoryServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -5,9 +5,9 @@ import ListHistoryComponent from "../../../components/listHistoryOrder";
 import ModalDetailOrderComponent from "../../../components/modal/detailOrder";
 import cartAdapter from "../../../adapters/cartAdapter";
 
-export default function HistoryOrder() {
-    console.log("HistoryOrder");
-    const [listOrder, setListOrder] = useState([]);
+export default function HistoryOrder(props) {
+    const { setToast } = props;
+    const [listOrder, setListOrder] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showModalConfirm, setShowModalConfirm] = useState(false);
 
@@ -42,8 +42,17 @@ export default function HistoryOrder() {
                     return item;
                 })
             );
+            setToast({
+                show: true,
+                message: "Cancel order success",
+                type: "success",
+            });
         } catch (error) {
-            console.log(error);
+            setToast({
+                show: true,
+                message: "Cancel order fail",
+                type: "danger",
+            });
         }
     };
 

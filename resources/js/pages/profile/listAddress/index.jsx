@@ -5,6 +5,7 @@ import addressApi from "../../../adapters/addressApi";
 import ListAddressComponent from "../../../components/listReciver";
 import ModalCreateAddressComponent from "../../../components/modal/createAddress";
 import ModalEditAddressComponent from "../../../components/modal/editAddress";
+import SpinerWaiting from "../../../components/spinerWaiting";
 
 import "./style.scss";
 
@@ -112,18 +113,7 @@ export default function ListAddressPage(props) {
                 </div>
                 <div className="list_addresses__content">
                     {isLoad ? (
-                        <Spinner
-                            animation="border"
-                            role="status"
-                            style={{
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                display: "block",
-                                marginTop: "100px",
-                            }}
-                        >
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
+                        <SpinerWaiting />
                     ) : (
                         <ListAddressComponent
                             listAddress={listAddress}
