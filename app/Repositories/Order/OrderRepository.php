@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Order;
 
+use App\Events\OrderPayment;
 use App\Models\Book;
 use App\Models\Order;
 use App\Models\ItemOrder;
@@ -20,11 +21,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function createOrder($request)
     {
-        $userId = $request->user()->id;
+        $user = $request->user();
         DB::beginTransaction();
         try {
             $order = $this->model->create([
-                'user_id' => $userId,
+                'user_id' => $user->id,
                 'address_id' => $request->address_id,
                 'order_amount' => count($request->items_order),
                 'order_date' => date('Y-m-d H:i:s'),
@@ -41,6 +42,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                 ]);
             }
             DB::commit();
+            OrderPayment::dispatch($order, $user);
             return $order;
         } catch (\Exception$e) {
             DB::rollback();

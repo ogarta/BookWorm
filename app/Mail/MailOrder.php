@@ -16,15 +16,16 @@ class MailOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $detals;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct( $detals)
     {
+        $this->detals = $detals;
     }
-
 
     /**
      * Get the message envelope.
@@ -48,7 +49,10 @@ class MailOrder extends Mailable
         return new Content(
             view: 'mail',
             with: [
-                'nameCustomer'=> Auth::user()->first_name.' '.Auth::user()->last_name,
+                'nameCustomer'=> $this->detals['customer']->name,
+                'orderAmount'=> $this->detals['order']->amount,
+                'orderDate'=> $this->detals['order']->created_at,
+                'orderPayment'=> $this->detals['order']->payment_method == Constant::PAYMENT_METHOD_SHIP ? 'At the Store' : 'COD',
             ],
         );
     }

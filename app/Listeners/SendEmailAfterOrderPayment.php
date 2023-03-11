@@ -3,15 +3,16 @@
 namespace App\Listeners;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Order;
 use App\Mail\MailOrder;
 use App\Models\Address;
 use App\Models\ItemOrder;
 use App\Events\OrderPayment;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Auth;
 
 class SendEmailAfterOrderPayment implements ShouldQueue
 {
@@ -33,7 +34,10 @@ class SendEmailAfterOrderPayment implements ShouldQueue
      */
     public function handle(OrderPayment $event)
     {   
-
-        Mail::to(Auth::user()->email)->send(new MailOrder());
+        $detals = [
+            'customer' => $event->user,
+            'order' => $event->order,
+        ];
+        Mail::to('ogatabookworm@gmail.com')->send(new MailOrder($detals));
     }
 }
