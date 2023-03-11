@@ -2,6 +2,7 @@
 
 namespace App\Services\Order;
 
+use App\Events\OrderPayment;
 use App\Helper\Constant;
 use App\Services\Service;
 use App\Repositories\Order\OrderRepository;

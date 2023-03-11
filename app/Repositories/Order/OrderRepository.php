@@ -31,6 +31,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                 'order_status' => 1,
                 'payment_method' => $request->payment_method,
             ]);
+            
             foreach ($request->items_order as $item) {
                 ItemOrder::create([
                     'order_id' => $order->id,
