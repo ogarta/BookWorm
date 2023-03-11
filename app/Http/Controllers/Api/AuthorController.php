@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\Author\AuthorService;
+use App\Services\Author\AuthorServiceInterface;
 use App\Http\Resources\Book\AuthorCollection;
 
 class AuthorController extends Controller
 {
-    private AuthorService $authorService;
+    private $authorServiceInterface;
 
-    public function __construct(AuthorService $authorService){
-        $this -> authorService = $authorService;
+    public function __construct(AuthorServiceInterface $authorServiceInterface){
+        $this -> authorServiceInterface = $authorServiceInterface;
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $listAuthor = $this->authorService->all();
+        $listAuthor = $this->authorServiceInterface->all();
         return response()->json(new AuthorCollection($listAuthor),200);
     }
 

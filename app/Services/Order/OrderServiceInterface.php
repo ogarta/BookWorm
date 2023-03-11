@@ -6,6 +6,7 @@ use App\Services\ServiceInterface;
 
 interface OrderServiceInterface extends ServiceInterface
 {
+    public function update($request, $id);
     public function createOrder($data);
     public function getHistoryOrder();
 }

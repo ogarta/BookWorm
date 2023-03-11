@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Services\Address\AddressService;
+use App\Services\Address\AddressServiceInterface;
+use App\Services\Author\AuthorService;
+use App\Services\Author\AuthorServiceInterface;
+use App\Services\Books\BookService;
+use App\Services\Books\BookServiceInterface;
+use App\Services\Review\ReviewService;
+use App\Services\Review\ReviewServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +21,38 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            AddressServiceInterface::class,
+            AddressService::class
+        );
+        $this->app->bind(
+            AuthServiceInterface::class,
+            AuthService::class
+        );
+        $this->app->bind(
+            ReviewServiceInterface::class,
+            ReviewService::class
+        );
+        $this->app->bind(
+            AuthorServiceInterface::class,
+            AuthorService::class
+        );
+        $this->app->bind(
+            CategoryServiceInterface::class,
+            CategoryService::class
+        );
+        $this->app->bind(
+            BookServiceInterface::class,
+            BookService::class
+        );
+        $this->app->bind(
+            ShopServiceInterface::class,
+            ShopService::class
+        );
+        $this->app->bind(
+            OrderServiceInterface::class,
+            OrderService::class
+        );
     }
 
     /**

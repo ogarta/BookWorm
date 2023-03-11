@@ -6,35 +6,35 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UpdatePasswordRequest;
-use App\Services\Auth\AuthService;
+use App\Services\Auth\AuthServiceInterface;
 use GuzzleHttp\Psr7\Request;
 
 class AuthController extends Controller
 {
-    private $authService;
+    private $authServiceInterface;
 
-	public function __construct(AuthService $authService)
+	public function __construct(AuthServiceInterface $authServiceInterface)
 	{
-		$this->authService = $authService;
+		$this->authServiceInterface = $authServiceInterface;
 	}
 
     public function login(LoginRequest $request){
-        return $this->authService->loginUser($request->email, $request->password);
+        return $this->authServiceInterface->loginUser($request->email, $request->password);
     }
 
     public function logout(){
-        return $this->authService->logoutUser();
+        return $this->authServiceInterface->logoutUser();
     }
 
     public function signUp(SignUpRequest $request){
-        return $this->authService->signUpUser($request);
+        return $this->authServiceInterface->signUpUser($request);
     }
 
     public function user(){
-        return $this->authService->getUser();
+        return $this->authServiceInterface->getUser();
     }
 
     public function editPassword(UpdatePasswordRequest $request){
-        return $this->authService->editPassword($request);
+        return $this->authServiceInterface->editPassword($request);
     }
 }

@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\StatusOrderResquest;
-use App\Services\Order\OrderService;
+use App\Services\Order\OrderServiceInterface;
 
 class OrderController extends Controller
 {
-    private OrderService $orderService;
-    function __construct(OrderService $orderService)
+    private $orderServiceInterface;
+    function __construct(OrderServiceInterface $orderServiceInterface)
     {
-        $this->orderService = $orderService;
+        $this->orderServiceInterface = $orderServiceInterface;
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return $this->orderService->getHistoryOrder();
+        return $this->orderServiceInterface->getHistoryOrder();
     }
 
     /**
@@ -33,7 +33,7 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        return $this->orderService->createOrder($request);
+        return $this->orderServiceInterface->createOrder($request);
     }
 
     /**
@@ -56,7 +56,7 @@ class OrderController extends Controller
      */
     public function update(StatusOrderResquest $request, $id)
     {
-        return $this->orderService->update($request, $id);
+        return $this->orderServiceInterface->update($request, $id);
     }
 
     /**

@@ -10,4 +10,5 @@ interface AuthServiceInterface extends ServiceInterface
     public function logoutUser();
     public function signUpUser($request);
     public function getUser();
+    public function editPassword($request);
 }

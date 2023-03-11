@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ListBookIdRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\Book\BookResource;
-use App\Services\Books\BookService;
+use App\Services\Books\BookServiceInterface;
 
 class BookController extends Controller
 {
-    private $bookService;
+    private $bookServiceInterface;
 
-    public function __construct(BookService $bookService){
-        $this -> bookService = $bookService;
+    public function __construct(BookServiceInterface $bookServiceInterface){
+        $this -> bookServiceInterface = $bookServiceInterface;
     }
 
     /**
@@ -45,7 +45,7 @@ class BookController extends Controller
      */
     public function show($id)
     {   
-        $detailBook = $this->bookService->getBookDetail($id);
+        $detailBook = $this->bookServiceInterface->getBookDetail($id);
         return $detailBook ? new BookResource($detailBook) : response()->json(['message' => 'Book not found'], 404);
     }
 
@@ -73,22 +73,22 @@ class BookController extends Controller
     }
     
     public function getTopDiscount(){
-        $listTopDiscount =  $this->bookService->getTopDiscount();
+        $listTopDiscount =  $this->bookServiceInterface->getTopDiscount();
         return response()->json($listTopDiscount, 200);
     }
 
     public function getTopRecommend(){
-        $listTopRecommend =  $this->bookService->getTopRecommend();
+        $listTopRecommend =  $this->bookServiceInterface->getTopRecommend();
         return  response()->json($listTopRecommend, 200);
     }
 
     public function getTopPopular(){
-        $listTopPopular =  $this->bookService->getTopPopular();
+        $listTopPopular =  $this->bookServiceInterface->getTopPopular();
         return response()->json($listTopPopular, 200);
     }
 
-    public function getListBook(ListBookIdRequest $request){
-        $listBook = $this->bookService->getListBook($request);
+    public function getListBook(ListBookIdRequest $arrIdBook){
+        $listBook = $this->bookServiceInterface->getListBook($arrIdBook);
         return $listBook;
     }
 }

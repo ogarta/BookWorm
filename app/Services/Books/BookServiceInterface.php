@@ -9,4 +9,5 @@ interface BookServiceInterface extends ServiceInterface
     public function getTopRecommend();
     public function getTopPopular();
     public function getBookDetail($id = null);
+    public function getListBook($arrIdBook);
 }

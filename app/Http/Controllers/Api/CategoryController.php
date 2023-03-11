@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Http\Resources\Book\CategoryCollection;
-use App\Services\Category\CategoryService;
+use App\Services\Category\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
+    private $categoryServiceInterface;
 
-    public function __construct(CategoryService $categoryService){
-        $this -> categoryService = $categoryService;
+    public function __construct(CategoryServiceInterface $categoryServiceInterface){
+        $this -> categoryServiceInterface = $categoryServiceInterface;
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $listCategory = $this->categoryService->all();
+        $listCategory = $this->categoryServiceInterface->all();
         return response()->json(new CategoryCollection($listCategory),200);
     }
 

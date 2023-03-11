@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
-use App\Services\Address\AddressService;
+use App\Services\Address\AddressServiceInterface;
 
 class AddressController extends Controller
 {
-    private $addressService;
+    private $addressServiceInterface;
 
-    public function __construct(AddressService $addressService)
+    public function __construct(AddressServiceInterface $addressServiceInterface)
     {
-        $this->addressService = $addressService;
+        $this->addressServiceInterface = $addressServiceInterface;
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $response = $this->addressService->all();
+        $response = $this->addressServiceInterface->all();
         return response()->json([
             'data' => $response
         ]);
@@ -47,7 +47,7 @@ class AddressController extends Controller
      */
     public function store(CreateAddressRequest $request)
     {
-        $response = $this->addressService->createAddress($request);
+        $response = $this->addressServiceInterface->createAddress($request);
         return $response;
     }
 
@@ -59,7 +59,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        $response = $this->addressService->show($id);
+        $response = $this->addressServiceInterface->show($id);
         return response()->json([
             'data' => $response
         ]);
@@ -85,7 +85,7 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, $id)
     {
-        $response = $this->addressService->updateAddress($request, $id);
+        $response = $this->addressServiceInterface->updateAddress($request, $id);
         return response()->json($response);
     }
 
@@ -97,7 +97,7 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $response = $this->addressService->delete($id);
+        $response = $this->addressServiceInterface->delete($id);
         return response()->json($response);
     }
 }
