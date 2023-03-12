@@ -24,11 +24,6 @@ npm i
 .env.example to .env
 ```
 
-**Change base URL in .env**
-```console
-MIX_BASE_URL = <URL_APP>
-```
-
 **Generate KEY**
 ```console
 php artisan key:generate
