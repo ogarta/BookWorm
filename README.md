@@ -1,6 +1,12 @@
 # **BOOKWORM PROJECT**
 
-**Description:** Bookworm - Bookstore using Laravel and ReactJs with database is PostgreSQL.
+**Description:** Bookworm - E-Commerce website
+</br>
+Technology in use:
+- Frontend: HTML, CSS, JavaScript, ReactJS, Boostraps
+- Backend: Laravel Framework, PostgreSQL
+- Architecture: MVC
+- Design pattern: Service and repository
 ## **Usage**
 
 **Install packages composer**
@@ -28,7 +34,7 @@ MIX_BASE_URL = <URL_APP>
 php artisan key:generate
 ```
 
-**MIGRARE database**
+**MIGRARE database and seed data**
 ```console
 php artisan migrate:fresh --seed
 ```
@@ -43,4 +49,7 @@ npm run production
 php artisan serve
 ```
 
-
+**Run Queue**
+```console
+php artisan queue:work
+```
