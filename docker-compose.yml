@@ -1,58 +1,40 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3.8"
+
 services:
-    laravel.test:
-        build:
-            context: ./vendor/laravel/sail/runtimes/7.4
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-7.4/app
-        ports:
-            - '${APP_PORT:-80}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
-        depends_on:
-            - pgsql
-#    mysql:
-#        image: 'mysql:8.0'
-#        ports:
-#            - '${FORWARD_DB_PORT:-3306}:3306'
-#        environment:
-#            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-#            MYSQL_DATABASE: '${DB_DATABASE}'
-#            MYSQL_USER: '${DB_USERNAME}'
-#            MYSQL_PASSWORD: '${DB_PASSWORD}'
-#            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-#        volumes:
-#            - 'sailmysql:/var/lib/mysql'
-#        networks:
-#            - sail
-#        healthcheck:
-#          test: ["CMD", "mysqladmin", "ping"]
-    pgsql:
-      image: 'postgres:13'
-      ports:
-        - '${FORWARD_DB_PORT:-5432}:5432'
-      environment:
-        PGPASSWORD: '${DB_PASSWORD:-secret}'
-        POSTGRES_DB: '${DB_DATABASE}'
-        POSTGRES_USER: '${DB_USERNAME}'
-        POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-      volumes:
-        - 'sailpgsql:/var/lib/postgresql/data'
-      networks:
-        - sail
-      healthcheck:
-        test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
-networks:
-    sail:
-        driver: bridge
-volumes:
-    sailpgsql:
-        driver: local
+  # Web Server Service
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - app
+      - db
+
+  #Database Service
+  db:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: book_worm
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+
+  # Application Service
+  app:
+    container_name: book_worm
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www
+    ports:
+      - "9000:9000"
+    working_dir: /var/www
