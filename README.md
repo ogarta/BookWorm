@@ -29,9 +29,12 @@ npm i
 php artisan key:generate
 ```
 
-**Build Docker**
+**Build Image Docker**
 ```console
 docker-compose build
+```
+**Run Docker**
+```console
 docker compose up -d
 ```
 
