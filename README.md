@@ -7,6 +7,7 @@ Technology in use:
 - Backend: Laravel Framework, PostgreSQL
 - Architecture: MVC
 - Design pattern: Service and repository
+- Tool: Docker ( PHP and PostgreSQL)
 ## **Usage**
 
 **Install packages composer**
