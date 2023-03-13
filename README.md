@@ -29,6 +29,12 @@ npm i
 php artisan key:generate
 ```
 
+**Build Docker**
+```console
+docker-compose build
+docker compose up -d
+```
+
 **MIGRARE database and seed data**
 ```console
 php artisan migrate:fresh --seed
