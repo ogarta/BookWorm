@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Auth;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\Auth\AuthRepositoryInterface;
