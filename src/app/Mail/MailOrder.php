@@ -49,9 +49,9 @@ class MailOrder extends Mailable
         return new Content(
             view: 'mail',
             with: [
-                'nameCustomer'=> $this->detals['customer']->name,
-                'orderAmount'=> $this->detals['order']->amount,
-                'orderDate'=> $this->detals['order']->created_at,
+                'nameCustomer'=> $this->detals['customer']->first_name . ' ' . $this->detals['customer']->last_name,
+                'orderAmount'=> $this->detals['order']->order_amount,
+                'orderDate'=> $this->detals['order']->order_date,
                 'orderPayment'=> $this->detals['order']->payment_method == Constant::PAYMENT_METHOD_SHIP ? 'At the Store' : 'COD',
             ],
         );

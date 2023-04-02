@@ -38,6 +38,6 @@ class SendEmailAfterOrderPayment implements ShouldQueue
             'customer' => $event->user,
             'order' => $event->order,
         ];
-        Mail::to('ogatabookworm@gmail.com')->send(new MailOrder($detals));
+        Mail::to($event->user->email)->send(new MailOrder($detals));
     }
 }
