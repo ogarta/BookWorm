@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'first_name' => 'test',
             'email' => 'test@gmail.com',
             'admin' => false,
-            'password' => bcrypt('123456'),
+            'password' => bcrypt('password'),
             'phone_number' => '0123456789',
         ]);
     }

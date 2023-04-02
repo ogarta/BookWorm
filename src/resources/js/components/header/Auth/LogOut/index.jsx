@@ -4,6 +4,7 @@ import { NavDropdown } from "react-bootstrap";
 import "./style.scss";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../../../reducers/userResducer";
+import { redirect } from "react-router-dom";
 
 export default function LogOut(props) {
     const { setToastMessage, setShowToast } = props;
@@ -18,6 +19,7 @@ export default function LogOut(props) {
                     title: "Success",
                     message: "Logout success",
                 });
+                window.location.reload();
             } catch (error) {
                 setToastMessage({
                     title: "Error",

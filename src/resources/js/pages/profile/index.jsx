@@ -18,6 +18,10 @@ export default function LayoutProfile() {
         title: "",
         status: "",
     });
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return <ErrorPage />;
+    }
 
     useEffect(() => {
         if (toast.show) {
@@ -38,17 +42,33 @@ export default function LayoutProfile() {
                 <h1 className="title">{title[0] ? title[0] : "Profile"}</h1>
                 <div className="container-content">
                     <div className="NavProfile">
-                        <Button>
+                        <Button
+                            variant={
+                                !title[0] ? "secondary" : "outline-secondary"
+                            }
+                        >
                             <Link className="nav-link" to="/profile">
                                 Profile
                             </Link>
                         </Button>
-                        <Button>
+                        <Button
+                            variant={
+                                title[0] === "address"
+                                    ? "secondary"
+                                    : "outline-secondary"
+                            }
+                        >
                             <Link className="nav-link" to="/profile/address">
                                 Address
                             </Link>
                         </Button>
-                        <Button>
+                        <Button
+                            variant={
+                                title[0] === "orders"
+                                    ? "secondary"
+                                    : "outline-secondary"
+                            }
+                        >
                             <Link className="nav-link" to="/profile/orders">
                                 Order
                             </Link>

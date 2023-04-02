@@ -91,7 +91,13 @@ export default function HistoryOrder(props) {
                 }}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Are you sure cancle this order</Modal.Title>
+                    <Modal.Title
+                        style={{
+                            marginLeft: "30px",
+                        }}
+                    >
+                        Are you sure cancle this order
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body
                     style={{

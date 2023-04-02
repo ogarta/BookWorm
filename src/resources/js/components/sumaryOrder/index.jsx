@@ -49,6 +49,17 @@ export default function SumaryOrderComponent(props) {
     };
 
     const handleOrder = (e) => {
+        if (address == null) {
+            setAlertParams({
+                title: "Error",
+                message: "Please choose address",
+                type: "danger",
+            });
+            setShowAlert(true);
+            handleHideAlert();
+            return;
+        }
+
         e.preventDefault();
 
         // check form valid
@@ -162,7 +173,8 @@ export default function SumaryOrderComponent(props) {
                 setAlertParams({
                     type: "success",
                     title: "Order success",
-                    message: "Please wait for 10s to redirect to home page",
+                    message:
+                        "We sent email order to you and will contact you soon.\n Please wait for 10s to go home page.\n Thank you",
                 });
                 setShowAlert(true);
                 goHomePage();

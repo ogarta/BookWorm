@@ -14,6 +14,11 @@ export default function ConfirmOrderPage() {
     const dataListBook = useSelector((state) => state.cartReducer.cart);
     const formRef = useRef();
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return <ErrorPage />;
+    }
+
     return (
         <>
             <Container

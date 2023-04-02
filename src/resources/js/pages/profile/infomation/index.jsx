@@ -75,6 +75,7 @@ export default function ProfilePage(props) {
                                 <Form.Control
                                     type="text"
                                     defaultValue={user.first_name}
+                                    disabled
                                 />
                             </Form.Group>
                         </Form>
@@ -84,6 +85,7 @@ export default function ProfilePage(props) {
                                 <Form.Control
                                     type="text"
                                     defaultValue={user.last_name}
+                                    disabled
                                 />
                             </Form.Group>
                         </Form>
@@ -94,6 +96,7 @@ export default function ProfilePage(props) {
                             <Form.Control
                                 type="text"
                                 defaultValue={user.phone_number}
+                                disabled
                             />
                         </Form.Group>
                     </Form>
@@ -103,13 +106,14 @@ export default function ProfilePage(props) {
                             <Form.Control
                                 type="text"
                                 defaultValue={user.email}
+                                disabled
                             />
                         </Form.Group>
                     </Form>
                 </div>
                 <hr />
                 <Button
-                    variant="primary"
+                    variant="secondary"
                     className="profile__btn"
                     onClick={() => setShow(true)}
                 >

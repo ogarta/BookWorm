@@ -17,7 +17,6 @@ export default function SignUpComponent(props) {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
         const params = {
             email: data.email,
             password: data.password,
@@ -33,6 +32,7 @@ export default function SignUpComponent(props) {
                     title: "Success",
                     message: "Sign up successfully",
                 });
+                setShow(false);
             } catch (error) {
                 const errors = error.response.data.errors;
                 for (const key in errors) {

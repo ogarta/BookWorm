@@ -7,6 +7,7 @@ import FormReciver from "../formAddress";
 import ListAddressComponent from "../listReciver";
 import ModalCreateAddressComponent from "../modal/createAddress";
 import "./style.scss";
+import SpinerWaiting from "../spinerWaiting";
 
 export default function InformationOrderComponet(props) {
     const {
@@ -35,7 +36,6 @@ export default function InformationOrderComponet(props) {
                     }
                 });
                 setListAddress(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.log(error);
             }
@@ -62,23 +62,47 @@ export default function InformationOrderComponet(props) {
             <Card className="information__order__card">
                 <Card.Header>Information of address</Card.Header>
                 <Card.Body>
-                    {address && (
-                        <FormAddressComponent
-                            isDisable={isDisable}
-                            formRef={formRef}
-                            address={address}
-                            setShippingCost={setShippingCost}
-                            shippingCost={shippingCost}
-                        />
-                    )}
+                    {listAddress === null ? (
+                        <SpinerWaiting type="grow" number={3} />
+                    ) : (
+                        <>
+                            {listAddress.length === 0 ? (
+                                <div className="information__order__card__no__address">
+                                    <p>
+                                        You have not added any address yet.
+                                        Please add your address
+                                    </p>
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => setShowAddAddress(true)}
+                                        className="button__choose__reciver"
+                                    >
+                                        Add address
+                                    </Button>
+                                </div>
+                            ) : (
+                                <>
+                                    {address && (
+                                        <FormAddressComponent
+                                            isDisable={isDisable}
+                                            formRef={formRef}
+                                            address={address}
+                                            setShippingCost={setShippingCost}
+                                            shippingCost={shippingCost}
+                                        />
+                                    )}
 
-                    <Button
-                        variant="secondary"
-                        onClick={() => setShow(true)}
-                        className="button__choose__reciver"
-                    >
-                        Choose another address
-                    </Button>
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => setShow(true)}
+                                        className="button__choose__reciver"
+                                    >
+                                        Choose another address
+                                    </Button>
+                                </>
+                            )}
+                        </>
+                    )}
                 </Card.Body>
             </Card>
 
