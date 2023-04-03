@@ -15,7 +15,7 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
         return Address::class;
     }
 
-    public function all()
+    public function getAll()
     {
         $listAddress = $this->model->where('user_id', auth()->user()->id)
         ->where('deleted_at', null)
