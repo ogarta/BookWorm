@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import cartApi from "../../api/cartApi";
-import { removeAllCart, removeItemCart } from "../../reducers/cartReducer";
+import {
+    removeAllCart,
+    removeItemCart,
+    removeTokenCart,
+} from "../../reducers/cartReducer";
 import { useNavigate } from "react-router-dom";
 import { showPopupLogin } from "../../reducers/popupLoginReducer";
 import AlertComponent from "../alert";
@@ -36,7 +40,6 @@ export default function SumaryOrderComponent(props) {
     const goHomePage = () => {
         const timer = setTimeout(() => {
             navigate("/home");
-            dispatch(removeAllCart());
         }, 10000);
         return () => clearTimeout(timer);
     };
@@ -170,6 +173,8 @@ export default function SumaryOrderComponent(props) {
         const order = async () => {
             try {
                 await cartApi.postOrder(params);
+                dispatch(removeAllCart());
+                dispatch(removeTokenCart());
                 setAlertParams({
                     type: "success",
                     title: "Order success",

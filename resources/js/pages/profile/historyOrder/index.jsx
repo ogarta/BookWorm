@@ -19,8 +19,6 @@ export default function HistoryOrder(props) {
     };
 
     const handleCancelOrder = (id) => {
-        console.log(id);
-        console.log(listOrder.find((item) => item.id === id).order_status);
         if (listOrder.find((item) => item.id === id).order_status === 1) {
             setShowModalConfirm(true);
             idOrderRef.current = id;
@@ -45,13 +43,15 @@ export default function HistoryOrder(props) {
             setToast({
                 show: true,
                 message: "Cancel order success",
-                type: "success",
+                title: "Success",
+                status: "success",
             });
         } catch (error) {
             setToast({
                 show: true,
                 message: "Cancel order fail",
-                type: "danger",
+                title: "Error",
+                status: "danger",
             });
         }
     };

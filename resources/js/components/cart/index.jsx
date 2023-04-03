@@ -6,6 +6,7 @@ import AlertComponent from "../alert";
 import "./style.scss";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
+import { setTokenCart } from "../../reducers/cartReducer";
 
 export default function CartComponent({ dataListBook }) {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -45,7 +46,12 @@ export default function CartComponent({ dataListBook }) {
             setShowAlert(true);
             return;
         }
-        return navigate("/confirm-order");
+        let token_cart = localStorage.getItem("token_cart");
+        if (!token_cart) {
+            dispatch(setTokenCart());
+        }
+        token_cart = localStorage.getItem("token_cart");
+        return navigate("/confirm-order/" + token_cart);
     };
 
     return (

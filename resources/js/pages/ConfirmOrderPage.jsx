@@ -7,15 +7,23 @@ import CartComponent from "../components/cart";
 import InformationOrderComponet from "../components/infOrder";
 import ListOrderComponent from "../components/listOrder";
 import SumaryOrderComponent from "../components/sumaryOrder";
+import { redirect } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 export default function ConfirmOrderPage() {
     const [shippingCost, setShippingCost] = useState(0);
     const [address, setAddress] = useState(null);
     const dataListBook = useSelector((state) => state.cartReducer.cart);
+    const tokenCart = useSelector((state) => state.cartReducer.token_cart);
     const formRef = useRef();
 
     const token = localStorage.getItem("token");
     if (!token) {
+        return <ErrorPage />;
+    }
+
+    const tokenCartLocal = localStorage.getItem("token_cart");
+    if (tokenCartLocal != tokenCart) {
         return <ErrorPage />;
     }
 

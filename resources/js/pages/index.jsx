@@ -24,7 +24,7 @@ function Index() {
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route
-                        path="/confirm-order"
+                        path="/confirm-order/*"
                         element={<ConfirmOrderPage />}
                     />
                     <Route path="/about" element={<AboutPage />} />

@@ -18,7 +18,7 @@ class AddressService extends Service implements AddressServiceInterface
     public function createAddress($request)
     {
         $data = $request->all();
-        $listAddress = $this->addressRepository->all();
+        $listAddress = $this->addressRepository->getAll();
         $data['user_id'] = auth()->user()->id;
         if (count($listAddress) == 0){
             $data['default'] = 1;

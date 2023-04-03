@@ -6,6 +6,7 @@ export const cartSlice = createSlice({
         cart: localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : [],
+        token_cart: localStorage.getItem("token_cart") ?? "",
         maxQuantity: 8,
     },
     reducers: {
@@ -82,6 +83,33 @@ export const cartSlice = createSlice({
             //  Update cart in localStorage
             localStorage.setItem("cart", JSON.stringify(state.cart));
         },
+        setTokenCart: (state, action) => {
+            if (
+                localStorage.getItem("cart") !== null &&
+                localStorage.getItem("token_cart") === null
+            ) {
+                const length = 10;
+                let result = "";
+                const characters =
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                const charactersLength = characters.length;
+                let counter = 0;
+                while (counter < length) {
+                    result += characters.charAt(
+                        Math.floor(Math.random() * charactersLength)
+                    );
+                    counter += 1;
+                }
+                localStorage.setItem("token_cart", result);
+                state.token_cart = result;
+            }
+        },
+        removeTokenCart: (state, action) => {
+            if (localStorage.getItem("cart") === []) {
+                localStorage.removeItem("");
+                state.token_cart = "";
+            }
+        },
     },
 });
 
@@ -91,5 +119,7 @@ export const {
     plusQuantity,
     removeAllCart,
     removeItemCart,
+    setTokenCart,
+    removeTokenCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
