@@ -28,10 +28,10 @@ class ReviewService extends Service implements ReviewServiceInterface
     public function create($request)
     {
         $createReview = [
-            'book_id' => $request->id,
-            'review_title' => $request->title,
-            'review_details' => $request->details,
-            'rating_start' => $request->rating_start,
+            'book_id' => $request['id'],
+            'review_title' => $request['title'],
+            'review_details' => $request['details'],
+            'rating_start' => $request['rating_start'],
             'review_date' => date('Y-m-d H:i:s'),
         ];
 
