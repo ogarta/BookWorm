@@ -36,5 +36,5 @@ services:
     volumes:
       - ./src:/var/www
     ports:
-      - "9000:9000"
+      - "8000:8000"
     working_dir: /var/www
