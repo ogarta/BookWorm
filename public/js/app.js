@@ -18240,7 +18240,8 @@ function SumaryOrderComponent(props) {
   var goHomePage = function goHomePage() {
     var timer = setTimeout(function () {
       navigate("/home");
-    }, 10000);
+      dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_2__.removeAllCart)());
+    }, 5000);
     return function () {
       return clearTimeout(timer);
     };
@@ -18368,19 +18369,17 @@ function SumaryOrderComponent(props) {
                 _context.next = 3;
                 return _api_cartApi__WEBPACK_IMPORTED_MODULE_1__["default"].postOrder(params);
               case 3:
-                dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_2__.removeAllCart)());
-                dispatch((0,_reducers_cartReducer__WEBPACK_IMPORTED_MODULE_2__.removeTokenCart)());
                 setAlertParams({
                   type: "success",
                   title: "Order success",
-                  message: "We sent email order to you and will contact you soon.\n Please wait for 10s to go home page.\n Thank you"
+                  message: "We sent email order to you and will contact you soon.\n Please wait for 5s to go home page.\n Thank you"
                 });
                 setShowAlert(true);
                 goHomePage();
-                _context.next = 18;
+                _context.next = 16;
                 break;
-              case 10:
-                _context.prev = 10;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 // get cart from local storage
                 cart = JSON.parse(localStorage.getItem("cart"));
@@ -18405,12 +18404,12 @@ function SumaryOrderComponent(props) {
                 });
                 setShowAlert(true);
                 handleHideAlert();
-              case 18:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee, null, [[0, 8]]);
       }));
       return function order() {
         return _ref.apply(this, arguments);
@@ -20222,7 +20221,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "plusQuantity": () => (/* binding */ plusQuantity),
 /* harmony export */   "removeAllCart": () => (/* binding */ removeAllCart),
 /* harmony export */   "removeItemCart": () => (/* binding */ removeItemCart),
-/* harmony export */   "removeTokenCart": () => (/* binding */ removeTokenCart),
 /* harmony export */   "setCart": () => (/* binding */ setCart),
 /* harmony export */   "setTokenCart": () => (/* binding */ setTokenCart)
 /* harmony export */ });
@@ -20302,6 +20300,7 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       //  remove cart in localStorage
       localStorage.setItem("cart", JSON.stringify([]));
       //  remove cart in state
+      localStorage.setItem("token_cart", "");
       state.cart = [];
     },
     removeItemCart: function removeItemCart(state, action) {
@@ -20317,7 +20316,7 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     setTokenCart: function setTokenCart(state, action) {
-      if (localStorage.getItem("cart") !== null && localStorage.getItem("token_cart") === null) {
+      if (localStorage.getItem("cart") !== [] && localStorage.getItem("token_cart") === "") {
         var length = 10;
         var result = "";
         var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -20330,12 +20329,6 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
         localStorage.setItem("token_cart", result);
         state.token_cart = result;
       }
-    },
-    removeTokenCart: function removeTokenCart(state, action) {
-      if (localStorage.getItem("cart") === []) {
-        localStorage.removeItem("");
-        state.token_cart = "";
-      }
     }
   }
 });
@@ -20345,8 +20338,7 @@ var _cartSlice$actions = cartSlice.actions,
   plusQuantity = _cartSlice$actions.plusQuantity,
   removeAllCart = _cartSlice$actions.removeAllCart,
   removeItemCart = _cartSlice$actions.removeItemCart,
-  setTokenCart = _cartSlice$actions.setTokenCart,
-  removeTokenCart = _cartSlice$actions.removeTokenCart;
+  setTokenCart = _cartSlice$actions.setTokenCart;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cartSlice.reducer);
 

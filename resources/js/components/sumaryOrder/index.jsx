@@ -6,7 +6,7 @@ import {
     removeItemCart,
     removeTokenCart,
 } from "../../reducers/cartReducer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { showPopupLogin } from "../../reducers/popupLoginReducer";
 import AlertComponent from "../alert";
 import "./style.scss";
@@ -40,7 +40,8 @@ export default function SumaryOrderComponent(props) {
     const goHomePage = () => {
         const timer = setTimeout(() => {
             navigate("/home");
-        }, 10000);
+            dispatch(removeAllCart());
+        }, 5000);
         return () => clearTimeout(timer);
     };
 
@@ -173,13 +174,11 @@ export default function SumaryOrderComponent(props) {
         const order = async () => {
             try {
                 await cartApi.postOrder(params);
-                dispatch(removeAllCart());
-                dispatch(removeTokenCart());
                 setAlertParams({
                     type: "success",
                     title: "Order success",
                     message:
-                        "We sent email order to you and will contact you soon.\n Please wait for 10s to go home page.\n Thank you",
+                        "We sent email order to you and will contact you soon.\n Please wait for 5s to go home page.\n Thank you",
                 });
                 setShowAlert(true);
                 goHomePage();

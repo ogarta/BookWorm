@@ -69,6 +69,7 @@ export const cartSlice = createSlice({
             //  remove cart in localStorage
             localStorage.setItem("cart", JSON.stringify([]));
             //  remove cart in state
+            localStorage.setItem("token_cart", "");
             state.cart = [];
         },
         removeItemCart: (state, action) => {
@@ -85,8 +86,8 @@ export const cartSlice = createSlice({
         },
         setTokenCart: (state, action) => {
             if (
-                localStorage.getItem("cart") !== null &&
-                localStorage.getItem("token_cart") === null
+                localStorage.getItem("cart") !== [] &&
+                localStorage.getItem("token_cart") === ""
             ) {
                 const length = 10;
                 let result = "";
@@ -104,12 +105,6 @@ export const cartSlice = createSlice({
                 state.token_cart = result;
             }
         },
-        removeTokenCart: (state, action) => {
-            if (localStorage.getItem("cart") === []) {
-                localStorage.removeItem("");
-                state.token_cart = "";
-            }
-        },
     },
 });
 
@@ -120,6 +115,5 @@ export const {
     removeAllCart,
     removeItemCart,
     setTokenCart,
-    removeTokenCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
