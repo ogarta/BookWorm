@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import shopApi from "../../../adapters/shopPageAdapter";
+import shopApi from "../../../api/shopPageApi";
 import ReactPaginate from "react-paginate";
 import ItemCardComponent from "../../bookCard";
 import { setPagination, setPage } from "../../../reducers/filterReducer";

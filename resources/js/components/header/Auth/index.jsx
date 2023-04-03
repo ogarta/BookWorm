@@ -4,7 +4,7 @@ import "./style.scss";
 import LogOut from "./LogOut";
 import { NavDropdown } from "react-bootstrap";
 import SignUpComponent from "./SignUp";
-import authAdapter from "../../../adapters/authAdapter";
+import authApi from "../../../api/authApi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser, setUser } from "../../../reducers/userResducer";
@@ -18,7 +18,7 @@ export default function AuthComponent(props) {
         setIsLoad(true);
         const fetchUser = async () => {
             try {
-                const response = await authAdapter.getUser();
+                const response = await authApi.getUser();
                 dishpath(setUser(response.data));
             } catch (error) {
                 console.log(error);

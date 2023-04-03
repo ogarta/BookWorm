@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { Button, Modal } from "react-bootstrap";
 import ListHistoryComponent from "../../../components/listHistoryOrder";
 import ModalDetailOrderComponent from "../../../components/modal/detailOrder";
-import cartAdapter from "../../../adapters/cartAdapter";
+import cartApi from "../../../api/cartApi";
 
 export default function HistoryOrder(props) {
     const { setToast } = props;
@@ -29,7 +29,7 @@ export default function HistoryOrder(props) {
 
     const handleConfirmCancelOrder = async () => {
         try {
-            await cartAdapter.cancelOrder({
+            await cartApi.cancelOrder({
                 id: idOrderRef.current,
                 order_status: 4,
             });

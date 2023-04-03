@@ -1,5 +1,5 @@
 import React from "react";
-import authAdapter from "../../../../adapters/authAdapter";
+import authApi from "../../../../api/authApi";
 import { NavDropdown } from "react-bootstrap";
 import "./style.scss";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ export default function LogOut(props) {
     const handleClickLogOut = () => {
         const logoutUser = async () => {
             try {
-                await authAdapter.getLogOut();
+                await authApi.getLogOut();
                 localStorage.removeItem("token");
                 dispatch(removeUser());
                 setToastMessage({

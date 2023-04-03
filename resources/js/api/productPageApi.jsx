@@ -1,6 +1,6 @@
 import axiosClient from "./axiosClient";
 
-const ProductPageAdapter = {
+const ProductPageApi = {
     getProductDetail(id) {
         const url = `/api/product/book/${id}`;
         return axiosClient.get(url);
@@ -35,4 +35,4 @@ const ProductPageAdapter = {
         return axiosClient.post(url, listBook);
     },
 };
-export default ProductPageAdapter;
+export default ProductPageApi;

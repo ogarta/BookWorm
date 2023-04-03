@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import { Button, Modal } from "react-bootstrap";
-import addressApi from "../../../adapters/addressApi";
+import addressApi from "../../../api/addressApi";
 import FormAddressComponent from "../../formAddress";
 
 export default function ModalEditAddressComponent(props) {

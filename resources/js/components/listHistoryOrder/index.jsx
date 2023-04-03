@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Card, Modal } from "react-bootstrap";
-import cartAdapter from "../../adapters/cartAdapter";
+import cartApi from "../../api/cartApi";
 import SpinerWaiting from "../spinerWaiting";
 import CardOrderComponent from "./cardOrder";
 
@@ -16,7 +16,7 @@ export default function ListHistoryComponent(porps) {
     useEffect(() => {
         const getListOrder = async () => {
             try {
-                const response = await cartAdapter.getList();
+                const response = await cartApi.getList();
                 console.log(response.data);
                 setListOrder(response.data);
             } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardProduct from "../components/product/productDetailComponent/idex";
 import ReviewProduct from "../components/product/reviewComponent/displayReviewComponent/index";
-import ProductPageAdapter from "../adapters/productPageAdapter";
+import ProductPageApi from "../api/productPageApi";
 import { useParams } from "react-router-dom";
 import AddReviewComponen from "../components/product/reviewComponent/addRevewComponent";
 import AddCartComponent from "../components/product/addCartComponent";
@@ -17,7 +17,7 @@ export default function ProductPage() {
 
     useEffect(() => {
         const fetchDataBook = async () => {
-            const response = await ProductPageAdapter.getProductDetail(id);
+            const response = await ProductPageApi.getProductDetail(id);
             setBook(response.data);
         };
         fetchDataBook();

@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-const cartAdapter = {
+const cartApi = {
     postOrder(params) {
         const url = "/api/cart/order";
         return axiosClient.post(url, params);
@@ -13,4 +13,4 @@ const cartAdapter = {
         return axiosClient.put(url, params);
     },
 };
-export default cartAdapter;
+export default cartApi;

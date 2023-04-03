@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import cartAdapter from "../../adapters/cartAdapter";
-import { removeAllCart, removeItemCart } from "../../reducers/cartReducer";
 import { useNavigate } from "react-router-dom";
 import { showPopupLogin } from "../../reducers/popupLoginReducer";
 import AlertComponent from "../alert";

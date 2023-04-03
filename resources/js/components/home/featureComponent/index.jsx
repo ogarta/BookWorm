@@ -2,7 +2,7 @@ import { isEmpty } from "lodash";
 import React from "react";
 import { useEffect, useState } from "react";
 import { ToggleButton, ButtonGroup } from "react-bootstrap";
-import homeApi from "../../../adapters/homePageAdapter";
+import homeApi from "../../../api/homePageApi";
 import ItemCardComponent from "../../bookCard";
 import SpinerWaiting from "../../spinerWaiting";
 import "./style.scss";

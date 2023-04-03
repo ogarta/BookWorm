@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import addressApi from "../../adapters/addressApi";
+import addressApi from "../../api/addressApi";
 import { Col, Form, Row } from "react-bootstrap";
 import "./style.scss";
 import { columnFormAddress } from "../../constant/column.constant";

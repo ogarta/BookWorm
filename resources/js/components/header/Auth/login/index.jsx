@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import authAdapter from "../../../../adapters/authAdapter";
+import authApi from "../../../../api/authApi";
 import { useForm } from "react-hook-form";
 import { Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,7 +29,7 @@ export default function LoginComponent(props) {
         };
         const login = async () => {
             try {
-                const response = await authAdapter.postLogin(params);
+                const response = await authApi.postLogin(params);
                 localStorage.setItem("token", JSON.stringify(response));
                 dispatch(setUser(response.user));
                 dispatch(showPopupLogin(false));

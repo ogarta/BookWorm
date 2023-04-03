@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import homeApi from "../../../adapters/homePageAdapter";
+import homeApi from "../../../api/homePageApi";
 import ItemCardComponent from "../../bookCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card, Spinner } from "react-bootstrap";
-import addressApi from "../../adapters/addressApi";
+import addressApi from "../../api/addressApi";
 import CardaddressComponent from "./cardAddress";
 import "./style.scss";
 

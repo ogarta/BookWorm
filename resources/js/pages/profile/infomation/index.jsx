@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import authAdapter from "../../../adapters/authAdapter";
+import authApi from "../../../api/authApi";
 import "./style.scss";
 export default function ProfilePage(props) {
     const { setToast } = props;
@@ -29,7 +29,7 @@ export default function ProfilePage(props) {
         };
         const signUp = async () => {
             try {
-                await authAdapter.editPassword(params);
+                await authApi.editPassword(params);
                 setToast({
                     show: true,
                     message: "Change password successfully",

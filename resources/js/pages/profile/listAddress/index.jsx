@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Spinner } from "react-bootstrap";
-import addressApi from "../../../adapters/addressApi";
+import addressApi from "../../../api/addressApi";
 import ListAddressComponent from "../../../components/listReciver";
 import ModalCreateAddressComponent from "../../../components/modal/createAddress";
 import ModalEditAddressComponent from "../../../components/modal/editAddress";

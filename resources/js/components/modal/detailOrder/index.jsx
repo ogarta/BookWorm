@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import { Card, Col, Modal, Row } from "react-bootstrap";
-import ProductPageAdapter from "../../../adapters/productPageAdapter";
+import ProductPageApi from "../../../api/productPageApi";
 import "./style.scss";
 export default function ModalDetailOrderComponent(porps) {
     const { showModal, setShowModal, item } = porps;
@@ -42,7 +42,7 @@ export default function ModalDetailOrderComponent(porps) {
     useEffect(() => {
         const getDetailBook = async () => {
             try {
-                const response = await ProductPageAdapter.getListDetailBook({
+                const response = await ProductPageApi.getListDetailBook({
                     book_id: item.item_order.map((item) => item.book_id),
                 });
                 setListDetailBook(response.data);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import authAdapter from "../../../../adapters/authAdapter";
+import authApi from "../../../../api/authApi";
 import { useForm } from "react-hook-form";
 import { Nav } from "react-bootstrap";
 import "./style.scss";
@@ -27,7 +27,7 @@ export default function SignUpComponent(props) {
         };
         const signUp = async () => {
             try {
-                await authAdapter.postSignUp(params);
+                await authApi.postSignUp(params);
                 setToastMessage({
                     title: "Success",
                     message: "Sign up successfully",

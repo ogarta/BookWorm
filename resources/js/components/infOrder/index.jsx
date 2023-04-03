@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
-import addressApi from "../../adapters/addressApi";
+import addressApi from "../../api/addressApi";
 import FormAddressComponent from "../formAddress";
-import FormReciver from "../formAddress";
 import ListAddressComponent from "../listReciver";
 import ModalCreateAddressComponent from "../modal/createAddress";
 import "./style.scss";

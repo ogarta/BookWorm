@@ -1,4 +1,4 @@
-import shopApi from "../../../adapters/shopPageAdapter";
+import shopApi from "../../../api/shopPageApi";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import {

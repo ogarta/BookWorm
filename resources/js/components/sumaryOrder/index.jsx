@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Card } from "react-bootstrap";
-import cartAdapter from "../../adapters/cartAdapter";
+import cartApi from "../../api/cartApi";
 import { removeAllCart, removeItemCart } from "../../reducers/cartReducer";
 import { useNavigate } from "react-router-dom";
 import { showPopupLogin } from "../../reducers/popupLoginReducer";
@@ -169,7 +169,7 @@ export default function SumaryOrderComponent(props) {
 
         const order = async () => {
             try {
-                await cartAdapter.postOrder(params);
+                await cartApi.postOrder(params);
                 setAlertParams({
                     type: "success",
                     title: "Order success",
