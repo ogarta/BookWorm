@@ -2,7 +2,8 @@
 
 **Description:** </br>
 - Bookworm - E-commerce website of books for end users. </br>
-**Description:** </br>
+
+**Technology:** </br>
 - Frontend: HTML, CSS, JavaScript, ReactJs and Redux. </br>
 - Backend: Laravel framework. </br>
 - Database use PostgreSQL. </br>
