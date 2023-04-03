@@ -75,7 +75,7 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
     {
         $user = Auth::user();
         if (password_verify($request->old_password, $user->password)) {
-            $user->password = bcrypt($request->new_password);
+            $user->password = bcrypt($request->password);
             $user->save();
             return response([
                 'message' => 'Change password successful',
